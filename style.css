@@ -624,5 +624,8 @@ h3 {
 .contact br {
     display: none;
 }
-   
+ h1, h2, h3, p {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}  
 }
