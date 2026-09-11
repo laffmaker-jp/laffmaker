@@ -1,0 +1,611 @@
+body {background-color: #080B12; }
+
+h1{text-align: center;
+font-size: 50px;color: rgb(249, 217, 15);}
+.about {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.about h3 {
+    color: #ff1493;
+    font-size: 28px;
+}
+
+.about p {
+    color: white;
+    line-height: 1.8;
+}
+.hero {
+    width: 100%;
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+h2 {
+    text-align: center;
+    color: white;
+    font-size: 32px;
+}
+.services {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.services h2 {
+    color: white;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.services > h3 {
+    color: #ff1493;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.services p {
+    color: white;
+    line-height: 1.8;
+}
+
+.main-service {
+    max-width: 700px;
+    margin: 40px auto 25px;
+    padding: 30px;
+    border: 2px solid #ff1493;
+    border-radius: 20px;
+}
+
+.main-service h3 {
+    color: #ff1493;
+    font-size: 26px;
+}
+
+.sub-service {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.sub-service h3 {
+    color: #ffd700;
+    font-size: 22px;
+}
+.works-intro {
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    margin-top: 20px;
+}
+.work-card {
+    width: 320px;
+    margin: 40px auto;
+    padding: 25px;
+    text-align: center;
+    border: 2px solid #ff1493;
+    border-radius: 20px;
+}
+
+.work-card img {
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+}
+
+.work-card h3 {
+    color: #ffd700;
+    font-size: 24px;
+    margin: 20px 0 10px;
+}
+
+.work-card p {
+    color: white;
+    font-size: 16px;
+    line-height: 1.7;
+}
+.stamp-examples {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.stamp-examples img {
+    width: 175px;
+    height: auto;
+}
+.works-grid {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.works-grid .work-card {
+    margin: 40px 0;
+}
+.work-card h3 {
+    font-size: 22px;
+}
+.work-card h3.long-title {
+    font-size: 20px;
+    white-space: nowrap;
+}
+/* =========================
+   料金
+========================= */
+
+.price {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.price h2 {
+    font-size: 36px;
+    color: white;
+    margin-bottom: 50px;
+}
+
+.price-card {
+    width: 500px;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 40px;
+    border: 2px solid #ff1493;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.price-card h3 {
+    color: #ffd700;
+    font-size: 28px;
+    margin-top: 0;
+}
+
+.price-note {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.price-list {
+    max-width: 350px;
+    margin: 0 auto 30px;
+}
+
+.price-list p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    padding: 12px 15px;
+    margin: 5px 0;
+    border-bottom: 1px solid #444;
+}
+
+.price-list strong {
+    color: white;
+}
+
+/* 16個おすすめ */
+.price-list .recommended {
+    position: relative;
+    color: #ffd700;
+    border: 2px solid #ff1493;
+    border-radius: 12px;
+    background: rgba(255, 20, 147, 0.08);
+    margin: 12px 0;
+}
+
+.price-list .recommended strong {
+    color: #ffd700;
+}
+
+
+
+.price-info {
+    border-top: 1px solid #444;
+    padding-top: 20px;
+}
+
+.price-info p {
+    color: white;
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 7px 0;
+}
+
+.price-info p:first-child {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 17px;
+}
+.price-count {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.recommend-crown {
+    width: 55px;
+    height: auto;
+    object-fit: contain;
+
+    position: absolute;
+    left: 70px;
+}
+.recommended {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.recommended strong {
+    margin-left: auto;
+}
+
+.recommend-crown {
+    width: 70px;
+    height: auto;
+    object-fit: contain;
+    position: absolute;
+    left: 70px;
+}
+/* =========================
+   キャラクター制作
+========================= */
+
+.character-card {
+    width: 500px;
+    max-width: 90%;
+    margin: 40px auto 0;
+    padding: 40px;
+    border: 2px solid #ff1493;
+    border-radius: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.character-card h3 {
+    color: #ffd700;
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.character-intro {
+    color: white;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.character-included {
+    color: white;
+    font-size: 16px;
+    line-height: 1.8;
+    padding: 20px 0;
+    margin: 0;
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+}
+
+.character-note {
+    color: #ffd700;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 1.7;
+    margin-top: 25px;
+}
+.character-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    margin-bottom: 5px;
+    border-top: 1px solid #444;
+}
+
+.character-price span {
+    color: white;
+    font-size: 24px;
+}
+
+.character-price strong {
+    color: white;
+    font-size: 24px;
+}
+/* =========================
+   SNS素材制作
+========================= */
+
+.sns-card {
+    width: 500px;
+    max-width: 90%;
+    margin: 40px auto 0;
+    padding: 40px;
+    border: 2px solid #ff1493;
+    border-radius: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.sns-card h3 {
+    color: #ffd700;
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.sns-intro {
+    color: white;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 0;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #444;
+}
+
+.sns-plan {
+    padding: 18px 0;
+}
+
+/* 2つ目のプランの上だけ線を入れる */
+.sns-plan + .sns-plan {
+    border-top: 1px solid #444;
+}
+
+.sns-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.sns-price span {
+    color: white;
+    font-size: 18px;
+}
+
+.sns-price strong {
+    color: white;
+    font-size: 24px;
+}
+
+.sns-description {
+    color: white;
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0;
+}
+/* =========================
+   ご依頼の流れ
+========================= */
+
+.flow {
+    width: 900px;
+    max-width: 90%;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.flow h2 {
+    color: #ffd700;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.flow-intro {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+
+.flow-list {
+    width: 650px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.flow-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 25px 0;
+    border-bottom: 1px solid #444;
+    text-align: left;
+}
+
+.flow-item:first-child {
+    border-top: 1px solid #444;
+}
+
+.flow-number {
+    color: #ff1493;
+    font-size: 30px;
+    font-weight: bold;
+    min-width: 55px;
+}
+
+.flow-item h3 {
+    color: white;
+    font-size: 20px;
+    margin: 0 0 8px;
+}
+
+.flow-item p {
+    color: #ddd;
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0;
+}
+/* =========================
+   お問い合わせ・ご依頼
+========================= */
+
+.contact {
+    width: 900px;
+    max-width: 90%;
+    margin: 120px auto 100px;
+    text-align: center;
+}
+
+.contact h2 {
+    color: #ffd700;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.contact-intro {
+    color: white;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 45px;
+}
+
+.contact-box {
+    width: 600px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 45px 30px;
+    border: 2px solid #ff1493;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.contact-message {
+    color: white;
+    font-size: 18px;
+    margin: 0 0 30px;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 15px 50px;
+    background: #ff1493;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: 0.2s;
+}
+
+.contact-button:hover {
+    transform: translateY(-3px);
+    opacity: 0.85;
+}
+/* =========================
+   フッター
+========================= */
+
+.footer {
+    margin-top: 100px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.footer-visual {
+    width: 100%;
+}
+
+.footer-visual img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.footer-copy {
+    color: #777;
+    font-size: 12px;
+    margin: 0;
+    padding: 18px;
+    background: #000;
+}
+/* =========================
+   フォント
+========================= */
+
+/* 本文 */
+body {
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+/* 見出し */
+h1,
+h2,
+h3 {
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-weight: 800;
+}
+.sns-description-material {
+    border-top: 1px solid #444;
+    padding-top: 20px;
+}
+.powaton-animation {
+    position: relative;
+    height: 0;
+    z-index: 10;
+}
+
+.powaton-animation img {
+    position: absolute;
+    width: 180px;
+    height: auto;
+
+    right: 8%;
+    top: -40px;
+
+    pointer-events: none;
+}
+.laffboy-animation {
+  position: relative;
+}
+
+.laffboy-animation img {
+  position: absolute;
+  width: 220px;
+  height: auto;
+
+  right: calc(50% + 370px);
+  top: -50px;
+
+  pointer-events: none;
+  z-index: 2;
+}
+.laffgirl-animation {
+    position: relative;
+}
+
+.laffgirl-animation img {
+    position: absolute;
+    width: 180px;
+    height: auto;
+
+    left: calc(50% + 380px);
+    top: 80px;
+
+    pointer-events: none;
+    z-index: 2;
+}
+.work-card img[src="lp-work.png"] {
+  transform: translateY(40px);
+}
+.work-card:has(img[src="lp-work.png"]) h3,
+.work-card:has(img[src="lp-work.png"]) p {
+  transform: translateY(35px);
+}
+
+.work-card img[src="simeji-work.jpeg"] {
+  width: 190px !important;
+  height: auto !important;
+  object-fit: contain;
+}
