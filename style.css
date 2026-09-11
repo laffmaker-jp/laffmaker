@@ -609,3 +609,11 @@ h3 {
   height: auto !important;
   object-fit: contain;
 }
+@media (max-width: 768px) {
+    .laffboy-animation img {
+        width: 150px;
+        right: auto;
+        left: 10px;
+        top: -20px;
+    }
+}
