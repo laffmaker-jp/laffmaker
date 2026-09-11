@@ -612,6 +612,6 @@ h3 {
 @media (max-width: 768px) {
     .laffboy-animation img {
         right: auto;
-        left: 40px;
+        left: 0;
     }
 }
