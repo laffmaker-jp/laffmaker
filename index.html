@@ -304,7 +304,11 @@
     </p>
 
 </footer>
+
 <script>
+  // =========================
+  // ぽわとん
+  // =========================
   const powatonFrames = [
     "powaton_01_ikuyo.png",
     "powaton_02_ikuyo.png",
@@ -317,57 +321,85 @@
   ];
 
   const powaton = document.getElementById("powaton-frame");
-  let powatonIndex = 0;
 
-  const powatonTimer = setInterval(() => {
-    powatonIndex++;
+  function playPowaton() {
+    let index = 0;
 
-    if (powatonIndex >= powatonFrames.length) {
-      clearInterval(powatonTimer);
+    powaton.style.display = "";
+    powaton.src = powatonFrames[0];
 
-      setTimeout(() => {
-        powaton.style.display = "none";
-      }, 180);
+    const timer = setInterval(() => {
+      index++;
 
-      return;
-    }
+      if (index >= powatonFrames.length) {
+        clearInterval(timer);
 
-    powaton.src = powatonFrames[powatonIndex];
-  }, 300);
+        setTimeout(() => {
+          powaton.style.display = "none";
 
-  const laffboyFrames = [
-  "LAFFBOY_01_PK.png",
-  "LAFFBOY_02_PK.png",
-  "LAFFBOY_03_PK.png",
-  "LAFFBOY_04_PK.png",
-  "LAFFBOY_05_PK.png",
-  "LAFFBOY_06_PK.png",
-  "LAFFBOY_07_PK.png",
-  "LAFFBOY_08_PK.png",
-  "LAFFBOY_09_PK.png",
-  "LAFFBOY_10_PK.png"
-];
+          setTimeout(() => {
+            playPowaton();
+          }, 2500);
+        }, 180);
 
-const laffboy = document.getElementById("laffboy-frame");
+        return;
+      }
 
-let laffboyIndex = 0;
-
-const laffboyTimer = setInterval(() => {
-  laffboyIndex++;
-
-  if (laffboyIndex >= laffboyFrames.length) {
-    clearInterval(laffboyTimer);
-
-    setTimeout(() => {
-      laffboy.style.display = "none";
-    }, 180);
-
-    return;
+      powaton.src = powatonFrames[index];
+    }, 300);
   }
 
-  laffboy.src = laffboyFrames[laffboyIndex];
-}, 250);
-const laffgirlFrames = [
+
+  // =========================
+  // LAFFBOY
+  // =========================
+  const laffboyFrames = [
+    "LAFFBOY_01_PK.png",
+    "LAFFBOY_02_PK.png",
+    "LAFFBOY_03_PK.png",
+    "LAFFBOY_04_PK.png",
+    "LAFFBOY_05_PK.png",
+    "LAFFBOY_06_PK.png",
+    "LAFFBOY_07_PK.png",
+    "LAFFBOY_08_PK.png",
+    "LAFFBOY_09_PK.png",
+    "LAFFBOY_10_PK.png"
+  ];
+
+  const laffboy = document.getElementById("laffboy-frame");
+
+  function playLaffboy() {
+    let index = 0;
+
+    laffboy.style.display = "";
+    laffboy.src = laffboyFrames[0];
+
+    const timer = setInterval(() => {
+      index++;
+
+      if (index >= laffboyFrames.length) {
+        clearInterval(timer);
+
+        setTimeout(() => {
+          laffboy.style.display = "none";
+
+          setTimeout(() => {
+            playLaffboy();
+          }, 2500);
+        }, 180);
+
+        return;
+      }
+
+      laffboy.src = laffboyFrames[index];
+    }, 250);
+  }
+
+
+  // =========================
+  // LAFFGIRL
+  // =========================
+  const laffgirlFrames = [
     "LAFFGIRL_01_kakure.png",
     "LAFFGIRL_02_kakure.png",
     "LAFFGIRL_03_kakure.png",
@@ -377,27 +409,61 @@ const laffgirlFrames = [
     "LAFFGIRL_07_kakure.png",
     "LAFFGIRL_02_kakure.png",
     "LAFFGIRL_01_kakure.png"
-];
+  ];
 
-const laffgirl = document.getElementById("laffgirl-frame");
+  const laffgirl = document.getElementById("laffgirl-frame");
 
-let laffgirlIndex = 0;
+  function playLaffgirl() {
+    let index = 0;
 
-const laffgirlTimer = setInterval(() => {
-    laffgirlIndex++;
+    laffgirl.style.display = "";
+    laffgirl.src = laffgirlFrames[0];
 
-    if (laffgirlIndex >= laffgirlFrames.length) {
-        clearInterval(laffgirlTimer);
+    const timer = setInterval(() => {
+      index++;
+
+      if (index >= laffgirlFrames.length) {
+        clearInterval(timer);
 
         setTimeout(() => {
-            laffgirl.style.display = "none";
+          laffgirl.style.display = "none";
+
+          setTimeout(() => {
+            playLaffgirl();
+          }, 2500);
         }, 200);
 
         return;
-    }
+      }
 
-    laffgirl.src = laffgirlFrames[laffgirlIndex];
-}, 250);
+      laffgirl.src = laffgirlFrames[index];
+    }, 250);
+  }
+
+
+  // =========================
+  // 画面に入ったら初回スタート
+  // =========================
+  function startWhenVisible(element, playFunction) {
+    if (!element) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          observer.unobserve(element);
+          playFunction();
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    observer.observe(element);
+  }
+
+  startWhenVisible(powaton, playPowaton);
+  startWhenVisible(laffboy, playLaffboy);
+  startWhenVisible(laffgirl, playLaffgirl);
 </script>
 </body>
 </html>
