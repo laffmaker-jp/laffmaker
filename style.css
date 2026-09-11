@@ -615,6 +615,14 @@ h3 {
     .laffgirl-animation {
         display: none;
     }
-
+.about br,
+.services br,
+.work-card br,
+.price-info br,
+.character-card br,
+.sns-card br,
+.contact br {
+    display: none;
+}
    
 }
