@@ -609,9 +609,4 @@ h3 {
   height: auto !important;
   object-fit: contain;
 }
-@media (max-width: 768px) {
-    .laffboy-animation img {
-        right: auto;
-        left: 0;
-    }
-}
+
