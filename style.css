@@ -624,5 +624,9 @@ h3 {
 .contact br {
     display: none;
 }
-
+@media (max-width: 768px) {
+    .no-break {
+        white-space: nowrap;
+    }
+}
 }
