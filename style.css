@@ -630,10 +630,11 @@ h3 {
     }
 }
 .about h3 {
-  font-size: 25px;
+  font-size: 20px;
+  white-space: nowrap;
+}
+    .no-break {
   white-space: nowrap;
 }
 }
-.no-break {
-  white-space: nowrap;
-}
+
