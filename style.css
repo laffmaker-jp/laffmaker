@@ -636,21 +636,9 @@ h3 {
     .no-break {
   white-space: nowrap;
 }
-    .sp-br {
-  display: none;
-}
-.sp-br {
-  display: inline;
-}
-@media (max-width: 768px) {
-  .sp-br {
-    display: inline;
-  }
-}
-    @media (max-width: 768px) {
-    .about .sp-br br {
-        display: inline;
-    }
-}
+.about br.sp-br {
+    display: block !important;
+}   
+
 }
 
