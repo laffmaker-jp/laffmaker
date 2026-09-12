@@ -629,6 +629,10 @@ h3 {
         white-space: nowrap;
     }
 }
+.about h3 {
+  font-size: 24px;
+  white-space: nowrap;
+}
 }
 .no-break {
   white-space: nowrap;
