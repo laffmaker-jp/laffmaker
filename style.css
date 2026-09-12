@@ -636,5 +636,14 @@ h3 {
     .no-break {
   white-space: nowrap;
 }
+    .sp-br {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sp-br {
+    display: inline;
+  }
+}
 }
 
