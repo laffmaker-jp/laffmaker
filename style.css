@@ -647,5 +647,10 @@ h3 {
     display: inline;
   }
 }
+    @media (max-width: 768px) {
+    .about .sp-br br {
+        display: inline;
+    }
+}
 }
 
