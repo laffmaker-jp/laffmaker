@@ -639,6 +639,15 @@ h3 {
 .about br.sp-br {
     display: block !important;
 }   
+    .sp-only-break {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sp-only-break {
+        display: block;
+    }
+}
 
 }
 
