@@ -639,7 +639,9 @@ h3 {
     .sp-br {
   display: none;
 }
-
+.sp-br {
+  display: inline;
+}
 @media (max-width: 768px) {
   .sp-br {
     display: inline;
