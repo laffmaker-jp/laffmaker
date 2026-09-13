@@ -648,6 +648,10 @@ h3 {
         display: block;
     }
 }
-
+@media (max-width: 768px) {
+    .recommend-crown {
+        width: 55px;
+    }
+}
 }
 
