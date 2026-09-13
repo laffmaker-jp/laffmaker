@@ -652,5 +652,13 @@ h3 {
         width: 55px;
     }
 }
+  .powaton-animation {
+    text-align: center;
+}
+
+.powaton-animation img {
+    width: 120px;
+    height: auto;
+}  
 }
 
