@@ -610,8 +610,7 @@ h3 {
   object-fit: contain;
 }
 @media (max-width: 768px) {
-　 .laffboy-animation,
-    .laffgirl-animation {
+　  .laffgirl-animation {
         display: none;
     }
 .about br,
