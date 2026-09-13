@@ -659,10 +659,11 @@ h3 {
     width: 120px;
     height: auto;
 }  
-   .laffboy-animation img {
-    width: 120px;
+  .laffboy-animation img {
+    width: 100px;
     right: 50%;
+    top: -100px;
     transform: translateX(50%);
-} 
+}
 }
 
