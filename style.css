@@ -659,5 +659,10 @@ h3 {
     width: 120px;
     height: auto;
 }  
+   .laffboy-animation img {
+    width: 120px;
+    right: 50%;
+    transform: translateX(50%);
+} 
 }
 
