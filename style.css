@@ -610,8 +610,7 @@ h3 {
   object-fit: contain;
 }
 @media (max-width: 768px) {
-    .powaton-animation,
-    .laffboy-animation,
+　 .laffboy-animation,
     .laffgirl-animation {
         display: none;
     }
