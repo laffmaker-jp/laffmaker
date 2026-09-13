@@ -610,9 +610,7 @@ h3 {
   object-fit: contain;
 }
 @media (max-width: 768px) {
-　  .laffgirl-animation {
-        display: none;
-    }
+　  
 .about br,
 .services br,
 .work-card br,
@@ -664,6 +662,12 @@ h3 {
     right: 50%;
     top: -250px;
     transform: translateX(50%);
+}
+    .laffgirl-animation img {
+    width: 85px;
+    left: 12%;
+    right: auto;
+    top: 80px;
 }
 }
 
