@@ -6,6 +6,7 @@
 
 html,
 body {
+  width: 100%;
   min-height: 100%;
 }
 
@@ -20,25 +21,53 @@ button {
   font: inherit;
 }
 
-.start-screen {
+/* =========================
+   アプリ全体
+========================= */
+
+.app {
+  width: 100%;
   min-height: 100svh;
+}
+
+/* =========================
+   全画面共通ブロック
+========================= */
+
+.screen {
+  width: 100%;
+  min-height: 100svh;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   padding: 32px 20px;
 }
 
-.start-content {
+/* =========================
+   各画面の中身
+========================= */
+
+.screen-inner {
   width: 100%;
   max-width: 430px;
+
+  margin: 0 auto;
   text-align: center;
 }
 
+/* =========================
+   トップ画面
+========================= */
+
 .brand {
   margin-bottom: 32px;
+
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.22em;
+
   color: #b8b8b8;
 }
 
@@ -46,6 +75,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+
   line-height: 1;
   white-space: nowrap;
 }
@@ -53,14 +83,18 @@ button {
 .title-saisun {
   font-size: clamp(48px, 15vw, 68px);
   font-weight: 900;
+
   color: #ffffff;
 }
 
 .title-rpg {
   margin-left: 4px;
+
   font-size: clamp(48px, 15vw, 68px);
   font-weight: 900;
+
   color: #65f7ff;
+
   text-shadow:
     0 0 8px rgba(101, 247, 255, 0.8),
     0 0 22px rgba(101, 247, 255, 0.45);
@@ -73,29 +107,43 @@ button {
 
 .by {
   margin-top: 12px;
+
   font-size: 13px;
   letter-spacing: 0.12em;
+
   color: #9d9d9d;
 }
 
 .catch {
   margin-top: 48px;
+
   font-size: 16px;
   font-weight: 600;
   line-height: 1.8;
 }
 
-.start-button {
+/* =========================
+   全画面共通メインボタン
+========================= */
+
+.main-button {
   width: 100%;
+  min-height: 58px;
+
   margin-top: 40px;
-  padding: 18px 20px;
+  padding: 16px 20px;
+
   border: 1px solid #65f7ff;
   border-radius: 14px;
+
   background: #0c0c0c;
   color: #ffffff;
+
   font-size: 17px;
   font-weight: 800;
+
   cursor: pointer;
+
   box-shadow:
     0 0 10px rgba(101, 247, 255, 0.25),
     inset 0 0 12px rgba(101, 247, 255, 0.06);
