@@ -93,11 +93,24 @@ button {
   font-size: clamp(48px, 15vw, 68px);
   font-weight: 900;
 
-  color: #65f7ff;
+  background: linear-gradient(
+    90deg,
+    #ff1493 0%,
+    #ff3b30 15%,
+    #ff9f0a 28%,
+    #ffd60a 40%,
+    #34c759 53%,
+    #00bfff 68%,
+    #0066ff 80%,
+    #8a2be2 90%,
+    #ff1493 100%
+  );
 
-  text-shadow:
-    0 0 8px rgba(101, 247, 255, 0.8),
-    0 0 22px rgba(101, 247, 255, 0.45);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  filter: drop-shadow(0 0 8px rgba(255, 20, 147, 0.28));
 }
 
 .tape {
