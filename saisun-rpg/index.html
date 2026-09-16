@@ -706,8 +706,10 @@ const retakePhotoButton = document.getElementById("retake-photo-button");
 const confirmPhotoButton = document.getElementById("confirm-photo-button");
 const photoProgress = document.getElementById("photo-progress");
 const photoDirection = document.getElementById("photo-direction"); 
-  let photoDB = null;
-  const photoDBRequest = indexedDB.open("saisunRpgDB", 1);
+
+let photoDB = null;
+
+const photoDBRequest = indexedDB.open("saisunRpgDB", 1);
 
 photoDBRequest.onupgradeneeded = function (event) {
   const db = event.target.result;
@@ -718,15 +720,15 @@ photoDBRequest.onupgradeneeded = function (event) {
       autoIncrement: true
     });
   }
+};
+
 photoDBRequest.onsuccess = function (event) {
   photoDB = event.target.result;
 };
 
 photoDBRequest.onerror = function () {
   console.error("写真保存用データベースを開けませんでした。");
-};
-  
-};
+};  
   
 measurementInputs.forEach(function (input) {
   input.addEventListener("input", function () {
