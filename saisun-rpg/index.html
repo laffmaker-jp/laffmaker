@@ -600,6 +600,27 @@ routeNext.addEventListener("click", function () {
   routeScreen.classList.add("hidden");
   washerScreen.classList.remove("hidden");
 });
+washerNext.addEventListener("click", function () {
+  const widthCm = document.getElementById("washer-width-cm").value;
+  const depthCm = document.getElementById("washer-depth-cm").value;
+  const faucetCm = document.getElementById("washer-faucet-cm").value;
+
+  const drainPosition = document.querySelector(
+    'input[name="drain-position"]:checked'
+  );
+
+  if (widthCm === "" || depthCm === "" || faucetCm === "") {
+    alert("勇者よ、洗濯機置場に測り残しがあるぞ📏");
+    return;
+  }
+
+  if (!drainPosition) {
+    alert("勇者よ、排水口の位置を選ぶのだ📏");
+    return;
+  }
+
+  alert("QUEST 04 CLEAR！⚔️");
+});
   
 </script>
 </body>
