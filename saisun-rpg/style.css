@@ -161,6 +161,13 @@ button {
 
   color: #ff1493;
 }
+.quest-character {
+  display: block;
+  width: 180px;
+  height: auto;
+
+  margin: 0 auto 20px;
+}
 
 .check-title {
   font-size: 32px;
