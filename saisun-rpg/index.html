@@ -1146,6 +1146,22 @@ newInputs.forEach(function (input) {
   });
 });
 });
+
+windowNext.addEventListener("click", function () {
+  const windowItems = windowList.querySelectorAll(".window-item");
+
+  for (const item of windowItems) {
+    const widthCm = item.querySelector(".window-width-cm").value;
+    const heightCm = item.querySelector(".window-height-cm").value;
+
+    if (widthCm === "" || heightCm === "") {
+      alert("勇者よ、窓に測り残しがあるぞ📏");
+      return;
+    }
+  }
+
+  alert("窓の採寸、すべて完了！🪟✨");
+});
   
 </script>
 </body>
