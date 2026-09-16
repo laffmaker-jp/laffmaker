@@ -351,6 +351,141 @@
 
   </div>
 </section>   
+<!-- QUEST 04：洗濯機置場 -->
+<section class="screen hidden" id="washer-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">QUEST 04</p>
+
+    <h2 class="check-title">
+      洗濯機置場を攻略せよ！🧺
+    </h2>
+
+    <p class="check-text">
+      洗濯機が置けるかは、ここで決まる。<br>
+      防水パンと蛇口をチェックしよう。
+    </p>
+
+    <img
+      class="measure-guide"
+      src="quest04_washer.png"
+      alt="洗濯機置場の測り方"
+    >
+
+    <div class="measure-fields">
+
+      <label class="measure-field">
+        <span>防水パンの幅</span>
+        <div class="measure-input-wrap">
+          <input
+            type="text"
+            id="washer-width-cm"
+            class="cm-input"
+            inputmode="numeric"
+            maxlength="3"
+            placeholder="0"
+          >
+          <span>cm</span>
+
+          <input
+            type="text"
+            id="washer-width-mm"
+            class="mm-input"
+            inputmode="numeric"
+            maxlength="1"
+            placeholder="0"
+          >
+          <span>mm</span>
+        </div>
+      </label>
+
+      <label class="measure-field">
+        <span>防水パンの奥行</span>
+        <div class="measure-input-wrap">
+          <input
+            type="text"
+            id="washer-depth-cm"
+            class="cm-input"
+            inputmode="numeric"
+            maxlength="3"
+            placeholder="0"
+          >
+          <span>cm</span>
+
+          <input
+            type="text"
+            id="washer-depth-mm"
+            class="mm-input"
+            inputmode="numeric"
+            maxlength="1"
+            placeholder="0"
+          >
+          <span>mm</span>
+        </div>
+      </label>
+
+      <label class="measure-field">
+        <span>蛇口までの高さ</span>
+        <div class="measure-input-wrap">
+          <input
+            type="text"
+            id="washer-faucet-cm"
+            class="cm-input"
+            inputmode="numeric"
+            maxlength="3"
+            placeholder="0"
+          >
+          <span>cm</span>
+
+          <input
+            type="text"
+            id="washer-faucet-mm"
+            class="mm-input"
+            inputmode="numeric"
+            maxlength="1"
+            placeholder="0"
+          >
+          <span>mm</span>
+        </div>
+      </label>
+
+    </div>
+
+    <div class="drain-field">
+      <p class="drain-title">排水口の位置</p>
+
+      <div class="drain-options">
+
+        <label>
+          <input type="radio" name="drain-position" value="left">
+          <span>左</span>
+        </label>
+
+        <label>
+          <input type="radio" name="drain-position" value="center">
+          <span>中央</span>
+        </label>
+
+        <label>
+          <input type="radio" name="drain-position" value="right">
+          <span>右</span>
+        </label>
+
+        <label>
+          <input type="radio" name="drain-position" value="other">
+          <span>その他</span>
+        </label>
+
+      </div>
+    </div>
+
+    <button class="main-button" type="button" id="washer-next">
+      ▶ 次へ
+    </button>
+
+  </div>
+</section>
+    
   </main>
 <script>
   const startButton = document.getElementById("start-button");
