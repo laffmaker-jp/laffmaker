@@ -1067,6 +1067,17 @@ const transaction = photoDB.transaction(
 
 let windowCount = 1;
 
+function updateWindowNumbers() {
+  const windowItems = windowList.querySelectorAll(".window-item");
+
+  windowItems.forEach(function (item, index) {
+    const number = item.querySelector(".window-number");
+    number.textContent = "窓 " + (index + 1);
+  });
+
+  windowCount = windowItems.length;
+}
+  
 addWindowButton.addEventListener("click", function () {
   windowCount++;
 
@@ -1139,6 +1150,7 @@ addWindowButton.addEventListener("click", function () {
 
 removeWindowButton.addEventListener("click", function () {
   windowItem.remove();
+  updateWindowNumbers();
 }); 
 
 const newInputs = windowItem.querySelectorAll(
