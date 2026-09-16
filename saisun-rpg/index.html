@@ -65,6 +65,15 @@
 </section>
 
   </main>
+<script>
+  const startButton = document.getElementById("start-button");
+  const startScreen = document.getElementById("start-screen");
+  const measureCheckScreen = document.getElementById("measure-check-screen");
 
+  startButton.addEventListener("click", function () {
+    startScreen.classList.add("hidden");
+    measureCheckScreen.classList.remove("hidden");
+  });
+</script>
 </body>
 </html>
