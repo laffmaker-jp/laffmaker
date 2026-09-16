@@ -1061,6 +1061,73 @@ const transaction = photoDB.transaction(
   photoDirection.textContent =
     photoDirections[currentPhotoIndex];
 });
+
+let windowCount = 1;
+
+addWindowButton.addEventListener("click", function () {
+  windowCount++;
+
+  const windowItem = document.createElement("div");
+  windowItem.className = "window-item";
+
+  windowItem.innerHTML = `
+    <p class="window-number">窓 ${windowCount}</p>
+
+    <div class="measure-fields">
+
+      <label class="measure-field">
+        <span>カーテンレールの幅</span>
+
+        <div class="measure-input-wrap">
+          <input
+            type="text"
+            class="cm-input window-width-cm"
+            inputmode="numeric"
+            maxlength="3"
+            placeholder="0"
+          >
+          <span>cm</span>
+
+          <input
+            type="text"
+            class="mm-input window-width-mm"
+            inputmode="numeric"
+            maxlength="1"
+            placeholder="0"
+          >
+          <span>mm</span>
+        </div>
+      </label>
+
+      <label class="measure-field">
+        <span>窓枠の下端 → レールまでの高さ</span>
+
+        <div class="measure-input-wrap">
+          <input
+            type="text"
+            class="cm-input window-height-cm"
+            inputmode="numeric"
+            maxlength="3"
+            placeholder="0"
+          >
+          <span>cm</span>
+
+          <input
+            type="text"
+            class="mm-input window-height-mm"
+            inputmode="numeric"
+            maxlength="1"
+            placeholder="0"
+          >
+          <span>mm</span>
+        </div>
+      </label>
+
+    </div>
+  `;
+
+  windowList.appendChild(windowItem);
+});
   
 </script>
 </body>
