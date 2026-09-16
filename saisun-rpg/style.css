@@ -90,8 +90,7 @@ button {
 .title-rpg {
   margin-left: 4px;
 
-  font-family: "Ruach LET", cursive;
-  font-size: 60px;
+  font-size: clamp(48px, 15vw, 68px);
   font-weight: 900;
 
   color: #ff1493;
