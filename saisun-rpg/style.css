@@ -263,3 +263,10 @@ button {
 .route-title {
   font-size: 28px;
 }
+.measure-input-wrap .cm-input {
+  width: 72px;
+}
+
+.measure-input-wrap .mm-input {
+  width: 48px;
+}
