@@ -266,7 +266,9 @@ const measureBorrowed = document.getElementById("measure-borrowed");
 const modeSelectScreen = document.getElementById("mode-select-screen");
   const quickMode = document.getElementById("quick-mode");
 const entranceScreen = document.getElementById("entrance-screen");
-
+const entranceNext = document.getElementById("entrance-next");
+const routeScreen = document.getElementById("route-screen");
+  
   startButton.addEventListener("click", function () {
     startScreen.classList.add("hidden");
     function goToModeSelect() {
@@ -286,6 +288,10 @@ quickMode.addEventListener("click", function () {
   modeSelectScreen.classList.add("hidden");
   entranceScreen.classList.remove("hidden");
 });  
+  entranceNext.addEventListener("click", function () {
+  entranceScreen.classList.add("hidden");
+  routeScreen.classList.remove("hidden");
+});
 </script>
 </body>
 </html>
