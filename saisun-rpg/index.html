@@ -828,6 +828,88 @@ fridgeNext.addEventListener("click", function () {
 
   fridgeScreen.classList.add("hidden");
 roomPhotoScreen.classList.remove("hidden");
+const photoDirections = [
+  "⬆️ 上を撮影",
+  "⬇️ 下を撮影",
+  "➡️ 右を撮影",
+  "⬆️ 前を撮影",
+  "⬅️ 左を撮影",
+  "🔄 くるっと回って後ろを撮影"
+];
+
+let currentPhotoIndex = 0;
+let currentPhotoFile = null;
+
+
+// 「写真を撮る」
+takePhotoButton.addEventListener("click", function () {
+  roomPhotoInput.click();
+});
+
+
+// 写真を選択・撮影したあと
+roomPhotoInput.addEventListener("change", function () {
+  const file = roomPhotoInput.files[0];
+
+  if (!file) {
+    return;
+  }
+
+  currentPhotoFile = file;
+
+  const previewUrl = URL.createObjectURL(file);
+
+  photoPreview.src = previewUrl;
+
+  photoPreviewWrap.classList.remove("hidden");
+  photoConfirmButtons.classList.remove("hidden");
+  takePhotoButton.classList.add("hidden");
+});
+
+
+// 「撮り直す」
+retakePhotoButton.addEventListener("click", function () {
+  currentPhotoFile = null;
+  roomPhotoInput.value = "";
+
+  photoPreview.removeAttribute("src");
+
+  photoPreviewWrap.classList.add("hidden");
+  photoConfirmButtons.classList.add("hidden");
+  takePhotoButton.classList.remove("hidden");
+
+  roomPhotoInput.click();
+});
+
+
+// 「この写真でOK」
+confirmPhotoButton.addEventListener("click", function () {
+  if (!currentPhotoFile) {
+    return;
+  }
+
+  currentPhotoIndex++;
+
+  if (currentPhotoIndex >= photoDirections.length) {
+    alert("部屋の写真、6方向すべて回収完了！📸✨");
+    return;
+  }
+
+  currentPhotoFile = null;
+  roomPhotoInput.value = "";
+
+  photoPreview.removeAttribute("src");
+
+  photoPreviewWrap.classList.add("hidden");
+  photoConfirmButtons.classList.add("hidden");
+  takePhotoButton.classList.remove("hidden");
+
+  photoProgress.textContent =
+    (currentPhotoIndex + 1) + " / " + photoDirections.length;
+
+  photoDirection.textContent =
+    photoDirections[currentPhotoIndex];
+});
   
 </script>
 </body>
