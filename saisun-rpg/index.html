@@ -273,19 +273,19 @@ const cornerFields = document.getElementById("corner-fields");
   
   startButton.addEventListener("click", function () {
     startScreen.classList.add("hidden");
-    function goToModeSelect() {
+ function goToModeSelect() {
   measureCheckScreen.classList.add("hidden");
   modeSelectScreen.classList.remove("hidden");
 }
 
-measureYes.addEventListener("click", goToModeSelect);
-measureBorrowed.addEventListener("click", goToModeSelect);
-    measureCheckScreen.classList.remove("hidden");
-  });
-  measureNo.addEventListener("click", function () {
-  measureQuestion.classList.add("hidden");
-  measureHelp.classList.remove("hidden");
+startButton.addEventListener("click", function () {
+  startScreen.classList.add("hidden");
+  measureCheckScreen.classList.remove("hidden");
 });
+
+measureYes.addEventListener("click", goToModeSelect);
+measureBorrowed.addEventListener("click", goToModeSelect);  
+
 quickMode.addEventListener("click", function () {
   modeSelectScreen.classList.add("hidden");
   entranceScreen.classList.remove("hidden");
