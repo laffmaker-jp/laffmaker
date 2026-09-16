@@ -1127,9 +1127,19 @@ addWindowButton.addEventListener("click", function () {
       </label>
 
     </div>
+   <button class="sub-button remove-window" type="button">
+  ✕ この窓を削除
+</button> 
   `;
 
  windowList.appendChild(windowItem);
+
+ const removeWindowButton =
+  windowItem.querySelector(".remove-window");
+
+removeWindowButton.addEventListener("click", function () {
+  windowItem.remove();
+}); 
 
 const newInputs = windowItem.querySelectorAll(
   ".cm-input, .mm-input"
