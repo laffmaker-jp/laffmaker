@@ -706,6 +706,18 @@ const retakePhotoButton = document.getElementById("retake-photo-button");
 const confirmPhotoButton = document.getElementById("confirm-photo-button");
 const photoProgress = document.getElementById("photo-progress");
 const photoDirection = document.getElementById("photo-direction"); 
+  const photoDBRequest = indexedDB.open("saisunRpgDB", 1);
+
+photoDBRequest.onupgradeneeded = function (event) {
+  const db = event.target.result;
+
+  if (!db.objectStoreNames.contains("roomPhotos")) {
+    db.createObjectStore("roomPhotos", {
+      keyPath: "id",
+      autoIncrement: true
+    });
+  }
+};
   
 measurementInputs.forEach(function (input) {
   input.addEventListener("input", function () {
