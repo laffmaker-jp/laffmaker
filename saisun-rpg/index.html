@@ -591,6 +591,82 @@
 
   </div>
 </section>
+<!-- QUEST 06：部屋の写真 -->
+<section class="screen hidden" id="room-photo-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">QUEST 06</p>
+
+    <h2 class="check-title">
+      部屋を記録せよ！📸
+    </h2>
+
+    <p class="check-text">
+      部屋に入ったら、まずは写真を回収！<br>
+      撮る方向はLAFFMAKERが案内するぞ。
+    </p>
+
+    <div class="photo-quest">
+
+      <p class="photo-progress" id="photo-progress">
+        1 / 6
+      </p>
+
+      <div class="photo-direction" id="photo-direction">
+        ⬆️ 上を撮影
+      </div>
+
+      <div class="photo-preview-wrap hidden" id="photo-preview-wrap">
+        <img
+          id="photo-preview"
+          class="photo-preview"
+          alt="撮影した写真のプレビュー"
+        >
+      </div>
+
+      <input
+        type="file"
+        id="room-photo-input"
+        accept="image/*"
+        capture="environment"
+        hidden
+      >
+
+      <button
+        class="main-button"
+        type="button"
+        id="take-photo-button"
+      >
+        📸 写真を撮る
+      </button>
+
+      <div
+        class="photo-confirm-buttons hidden"
+        id="photo-confirm-buttons"
+      >
+
+        <button
+          class="sub-button"
+          type="button"
+          id="retake-photo-button"
+        >
+          ↩ 撮り直す
+        </button>
+
+        <button
+          class="main-button"
+          type="button"
+          id="confirm-photo-button"
+        >
+          この写真でOK ✨
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
     
   </main>
 <script>
