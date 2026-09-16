@@ -1126,7 +1126,25 @@ addWindowButton.addEventListener("click", function () {
     </div>
   `;
 
-  windowList.appendChild(windowItem);
+ windowList.appendChild(windowItem);
+
+const newInputs = windowItem.querySelectorAll(
+  ".cm-input, .mm-input"
+);
+
+newInputs.forEach(function (input) {
+  input.addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, "");
+
+    if (this.classList.contains("cm-input")) {
+      this.value = this.value.slice(0, 3);
+    }
+
+    if (this.classList.contains("mm-input")) {
+      this.value = this.value.slice(0, 1);
+    }
+  });
+});
 });
   
 </script>
