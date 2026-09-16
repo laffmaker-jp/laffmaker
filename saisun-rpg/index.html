@@ -136,9 +136,19 @@
  const measureNo = document.getElementById("measure-no");
 const measureQuestion = document.getElementById("measure-question");
 const measureHelp = document.getElementById("measure-help");
+  const measureYes = document.getElementById("measure-yes");
+const measureBorrowed = document.getElementById("measure-borrowed");
+const modeSelectScreen = document.getElementById("mode-select-screen");
 
   startButton.addEventListener("click", function () {
     startScreen.classList.add("hidden");
+    function goToModeSelect() {
+  measureCheckScreen.classList.add("hidden");
+  modeSelectScreen.classList.remove("hidden");
+}
+
+measureYes.addEventListener("click", goToModeSelect);
+measureBorrowed.addEventListener("click", goToModeSelect);
     measureCheckScreen.classList.remove("hidden");
   });
   measureNo.addEventListener("click", function () {
