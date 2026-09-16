@@ -900,7 +900,18 @@ confirmPhotoButton.addEventListener("click", function () {
   if (!currentPhotoFile) {
     return;
   }
+  const transaction = photoDBRequest.result.transaction(
+    "roomPhotos",
+    "readwrite"
+  );
 
+  const store = transaction.objectStore("roomPhotos");
+
+  store.add({
+    direction: photoDirections[currentPhotoIndex],
+    photo: currentPhotoFile,
+    createdAt: new Date().toISOString()
+  });
   currentPhotoIndex++;
 
   if (currentPhotoIndex >= photoDirections.length) {
