@@ -268,6 +268,8 @@ const modeSelectScreen = document.getElementById("mode-select-screen");
 const entranceScreen = document.getElementById("entrance-screen");
 const entranceNext = document.getElementById("entrance-next");
 const routeScreen = document.getElementById("route-screen");
+  const noCorner = document.getElementById("no-corner");
+const cornerFields = document.getElementById("corner-fields");
   
   startButton.addEventListener("click", function () {
     startScreen.classList.add("hidden");
@@ -292,6 +294,13 @@ quickMode.addEventListener("click", function () {
   entranceScreen.classList.add("hidden");
   routeScreen.classList.remove("hidden");
 });
+noCorner.addEventListener("change", function () {
+  if (noCorner.checked) {
+    cornerFields.classList.add("hidden");
+  } else {
+    cornerFields.classList.remove("hidden");
+  }
+});  
 </script>
 </body>
 </html>
