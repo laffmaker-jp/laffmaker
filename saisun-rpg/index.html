@@ -300,7 +300,23 @@
   const routeScreen = document.getElementById("route-screen");
   const noCorner = document.getElementById("no-corner");
   const cornerFields = document.getElementById("corner-fields");
+const measurementInputs = document.querySelectorAll(
+  ".cm-input, .mm-input"
+);
 
+measurementInputs.forEach(function (input) {
+  input.addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, "");
+
+    if (this.classList.contains("cm-input")) {
+      this.value = this.value.slice(0, 3);
+    }
+
+    if (this.classList.contains("mm-input")) {
+      this.value = this.value.slice(0, 1);
+    }
+  });
+});
 
   function goToModeSelect() {
     measureCheckScreen.classList.add("hidden");
@@ -329,11 +345,19 @@
     entranceScreen.classList.remove("hidden");
   });
 
+entranceNext.addEventListener("click", function () {
+  const widthCm = document.getElementById("entrance-width-cm").value;
+  const heightCm = document.getElementById("entrance-height-cm").value;
 
-  entranceNext.addEventListener("click", function () {
-    entranceScreen.classList.add("hidden");
-    routeScreen.classList.remove("hidden");
-  });
+  if (widthCm === "" || heightCm === "") {
+    alert("勇者よ、まだ測り残しがあるぞ📏");
+    return;
+  }
+
+  entranceScreen.classList.add("hidden");
+  routeScreen.classList.remove("hidden");
+});
+  
 
 
   noCorner.addEventListener("change", function () {
