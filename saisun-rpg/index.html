@@ -151,7 +151,8 @@
   const startButton = document.getElementById("start-button");
   const startScreen = document.getElementById("start-screen");
   const measureCheckScreen = document.getElementById("measure-check-screen");
-  const measureNo = document.getElementById("measure-no");
+ const measureNo = document.getElementById("measure-no");
+const measureQuestion = document.getElementById("measure-question");
 const measureHelp = document.getElementById("measure-help");
 
   startButton.addEventListener("click", function () {
@@ -159,7 +160,7 @@ const measureHelp = document.getElementById("measure-help");
     measureCheckScreen.classList.remove("hidden");
   });
   measureNo.addEventListener("click", function () {
-  measureNo.classList.add("hidden");
+  measureQuestion.classList.add("hidden");
   measureHelp.classList.remove("hidden");
 });
 </script>
