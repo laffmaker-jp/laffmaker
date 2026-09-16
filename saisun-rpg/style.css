@@ -157,9 +157,11 @@ button {
 
   cursor: pointer;
 
-  box-shadow:
+ box-shadow:
   0 0 10px rgba(255, 20, 147, 0.30),
   inset 0 0 12px rgba(255, 20, 147, 0.07);
+}
+
 .title-rpg-image {
   width: clamp(100px, 28vw, 140px);
   height: auto;
