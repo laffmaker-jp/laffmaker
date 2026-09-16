@@ -510,7 +510,9 @@
 const measurementInputs = document.querySelectorAll(
   ".cm-input, .mm-input"
 );
-
+const washerScreen = document.getElementById("washer-screen");
+const washerNext = document.getElementById("washer-next");
+  
 measurementInputs.forEach(function (input) {
   input.addEventListener("input", function () {
     this.value = this.value.replace(/[^0-9]/g, "");
@@ -574,6 +576,31 @@ entranceNext.addEventListener("click", function () {
       cornerFields.classList.remove("hidden");
     }
   });
+const routeNext = document.getElementById("route-next");
+
+routeNext.addEventListener("click", function () {
+  const narrowCm = document.getElementById("route-narrow-cm").value;
+  const beforeCm = document.getElementById("route-before-cm").value;
+  const afterCm = document.getElementById("route-after-cm").value;
+  const diagonalCm = document.getElementById("route-diagonal-cm").value;
+
+  if (narrowCm === "") {
+    alert("勇者よ、最狭幅がまだ未測定だぞ📏");
+    return;
+  }
+
+  if (
+    !noCorner.checked &&
+    (beforeCm === "" || afterCm === "" || diagonalCm === "")
+  ) {
+    alert("勇者よ、曲がり角に測り残しがあるぞ📏");
+    return;
+  }
+
+  routeScreen.classList.add("hidden");
+  washerScreen.classList.remove("hidden");
+});
+  
 </script>
 </body>
 </html>
