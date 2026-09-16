@@ -929,10 +929,30 @@ const transaction = photoDB.transaction(
   });
   currentPhotoIndex++;
 
-  if (currentPhotoIndex >= photoDirections.length) {
-    alert("部屋の写真、6方向すべて回収完了！📸✨");
-    return;
-  }
+ if (currentPhotoIndex >= photoDirections.length) {
+  const transaction = photoDB.transaction(
+    "roomPhotos",
+    "readonly"
+  );
+
+  const store = transaction.objectStore("roomPhotos");
+  const countRequest = store.count();
+
+  countRequest.onsuccess = function () {
+    alert(
+      "部屋の写真、6方向すべて回収完了！📸✨\n" +
+      "保存済み：" + countRequest.result + "枚"
+    );
+  };
+
+  countRequest.onerror = function () {
+    alert(
+      "撮影は完了したけど、保存枚数を確認できなかったぞ📸"
+    );
+  };
+
+  return;
+}
 
   currentPhotoFile = null;
   roomPhotoInput.value = "";
