@@ -85,11 +85,17 @@
   const startButton = document.getElementById("start-button");
   const startScreen = document.getElementById("start-screen");
   const measureCheckScreen = document.getElementById("measure-check-screen");
+  const measureNo = document.getElementById("measure-no");
+const measureHelp = document.getElementById("measure-help");
 
   startButton.addEventListener("click", function () {
     startScreen.classList.add("hidden");
     measureCheckScreen.classList.remove("hidden");
   });
+  measureNo.addEventListener("click", function () {
+  measureNo.classList.add("hidden");
+  measureHelp.classList.remove("hidden");
+});
 </script>
 </body>
 </html>
