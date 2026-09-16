@@ -1030,12 +1030,15 @@ const transaction = photoDB.transaction(
   const store = transaction.objectStore("roomPhotos");
   const countRequest = store.count();
 
-  countRequest.onsuccess = function () {
-    alert(
-      "部屋の写真、6方向すべて回収完了！📸✨\n" +
-      "保存済み：" + countRequest.result + "枚"
-    );
-  };
+ countRequest.onsuccess = function () {
+  alert(
+    "部屋の写真、6方向すべて回収完了！📸✨\n" +
+    "保存済み：" + countRequest.result + "枚"
+  );
+
+  roomPhotoScreen.classList.add("hidden");
+  windowScreen.classList.remove("hidden");
+};
 
   countRequest.onerror = function () {
     alert(
