@@ -178,10 +178,11 @@ button {
 .check-text {
   margin-top: 24px;
 
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 600;
   line-height: 1.8;
 
-  color: #c7c7c7;
+  color: #ffffff;
 }
 
 .choice-buttons {
