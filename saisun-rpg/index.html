@@ -257,50 +257,66 @@
 <script>
   const startButton = document.getElementById("start-button");
   const startScreen = document.getElementById("start-screen");
+
   const measureCheckScreen = document.getElementById("measure-check-screen");
- const measureNo = document.getElementById("measure-no");
-const measureQuestion = document.getElementById("measure-question");
-const measureHelp = document.getElementById("measure-help");
+  const measureNo = document.getElementById("measure-no");
+  const measureQuestion = document.getElementById("measure-question");
+  const measureHelp = document.getElementById("measure-help");
   const measureYes = document.getElementById("measure-yes");
-const measureBorrowed = document.getElementById("measure-borrowed");
-const modeSelectScreen = document.getElementById("mode-select-screen");
+  const measureBorrowed = document.getElementById("measure-borrowed");
+
+  const modeSelectScreen = document.getElementById("mode-select-screen");
   const quickMode = document.getElementById("quick-mode");
-const entranceScreen = document.getElementById("entrance-screen");
-const entranceNext = document.getElementById("entrance-next");
-const routeScreen = document.getElementById("route-screen");
+
+  const entranceScreen = document.getElementById("entrance-screen");
+  const entranceNext = document.getElementById("entrance-next");
+
+  const routeScreen = document.getElementById("route-screen");
   const noCorner = document.getElementById("no-corner");
-const cornerFields = document.getElementById("corner-fields");
-  
+  const cornerFields = document.getElementById("corner-fields");
+
+
+  function goToModeSelect() {
+    measureCheckScreen.classList.add("hidden");
+    modeSelectScreen.classList.remove("hidden");
+  }
+
+
   startButton.addEventListener("click", function () {
     startScreen.classList.add("hidden");
- function goToModeSelect() {
-  measureCheckScreen.classList.add("hidden");
-  modeSelectScreen.classList.remove("hidden");
-}
+    measureCheckScreen.classList.remove("hidden");
+  });
 
-startButton.addEventListener("click", function () {
-  startScreen.classList.add("hidden");
-  measureCheckScreen.classList.remove("hidden");
-});
 
-measureYes.addEventListener("click", goToModeSelect);
-measureBorrowed.addEventListener("click", goToModeSelect);  
+  measureNo.addEventListener("click", function () {
+    measureQuestion.classList.add("hidden");
+    measureHelp.classList.remove("hidden");
+  });
 
-quickMode.addEventListener("click", function () {
-  modeSelectScreen.classList.add("hidden");
-  entranceScreen.classList.remove("hidden");
-});  
+
+  measureYes.addEventListener("click", goToModeSelect);
+  measureBorrowed.addEventListener("click", goToModeSelect);
+
+
+  quickMode.addEventListener("click", function () {
+    modeSelectScreen.classList.add("hidden");
+    entranceScreen.classList.remove("hidden");
+  });
+
+
   entranceNext.addEventListener("click", function () {
-  entranceScreen.classList.add("hidden");
-  routeScreen.classList.remove("hidden");
-});
-noCorner.addEventListener("change", function () {
-  if (noCorner.checked) {
-    cornerFields.classList.add("hidden");
-  } else {
-    cornerFields.classList.remove("hidden");
-  }
-});  
+    entranceScreen.classList.add("hidden");
+    routeScreen.classList.remove("hidden");
+  });
+
+
+  noCorner.addEventListener("change", function () {
+    if (noCorner.checked) {
+      cornerFields.classList.add("hidden");
+    } else {
+      cornerFields.classList.remove("hidden");
+    }
+  });
 </script>
 </body>
 </html>
