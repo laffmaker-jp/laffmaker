@@ -196,6 +196,8 @@ const measureHelp = document.getElementById("measure-help");
   const measureYes = document.getElementById("measure-yes");
 const measureBorrowed = document.getElementById("measure-borrowed");
 const modeSelectScreen = document.getElementById("mode-select-screen");
+  const quickMode = document.getElementById("quick-mode");
+const entranceScreen = document.getElementById("entrance-screen");
 
   startButton.addEventListener("click", function () {
     startScreen.classList.add("hidden");
@@ -212,6 +214,10 @@ measureBorrowed.addEventListener("click", goToModeSelect);
   measureQuestion.classList.add("hidden");
   measureHelp.classList.remove("hidden");
 });
+quickMode.addEventListener("click", function () {
+  modeSelectScreen.classList.add("hidden");
+  entranceScreen.classList.remove("hidden");
+});  
 </script>
 </body>
 </html>
