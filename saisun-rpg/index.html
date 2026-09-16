@@ -618,6 +618,8 @@ const measurementInputs = document.querySelectorAll(
 );
 const washerScreen = document.getElementById("washer-screen");
 const washerNext = document.getElementById("washer-next");
+const fridgeScreen = document.getElementById("fridge-screen");
+const fridgeNext = document.getElementById("fridge-next");
   
 measurementInputs.forEach(function (input) {
   input.addEventListener("input", function () {
@@ -725,7 +727,20 @@ washerNext.addEventListener("click", function () {
     return;
   }
 
-  alert("QUEST 04 CLEAR！⚔️");
+ washerScreen.classList.add("hidden");
+fridgeScreen.classList.remove("hidden");
+});
+fridgeNext.addEventListener("click", function () {
+  const widthCm = document.getElementById("fridge-width-cm").value;
+  const depthCm = document.getElementById("fridge-depth-cm").value;
+  const heightCm = document.getElementById("fridge-height-cm").value;
+
+  if (widthCm === "" || depthCm === "" || heightCm === "") {
+    alert("勇者よ、冷蔵庫置場に測り残しがあるぞ📏");
+    return;
+  }
+
+  alert("QUEST 05 CLEAR！⚔️");
 });
   
 </script>
