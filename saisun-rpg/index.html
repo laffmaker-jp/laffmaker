@@ -667,6 +667,92 @@
 
   </div>
 </section>
+
+ <!-- QUEST 07：窓・カーテン -->
+<section class="screen hidden" id="window-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">QUEST 07</p>
+
+    <h2 class="check-title">
+      窓を攻略せよ！🪟
+    </h2>
+
+    <p class="check-text">
+      カーテン選びで困らないように、<br>
+      窓まわりを測っておこう。
+    </p>
+
+    <div id="window-list">
+
+      <div class="window-item">
+        <p class="window-number">窓 1</p>
+
+        <div class="measure-fields">
+
+          <label class="measure-field">
+            <span>カーテンレールの幅</span>
+
+            <div class="measure-input-wrap">
+              <input
+                type="text"
+                class="cm-input window-width-cm"
+                inputmode="numeric"
+                maxlength="3"
+                placeholder="0"
+              >
+              <span>cm</span>
+
+              <input
+                type="text"
+                class="mm-input window-width-mm"
+                inputmode="numeric"
+                maxlength="1"
+                placeholder="0"
+              >
+              <span>mm</span>
+            </div>
+          </label>
+
+          <label class="measure-field">
+            <span>窓枠の下端 → レールまでの高さ</span>
+
+            <div class="measure-input-wrap">
+              <input
+                type="text"
+                class="cm-input window-height-cm"
+                inputmode="numeric"
+                maxlength="3"
+                placeholder="0"
+              >
+              <span>cm</span>
+
+              <input
+                type="text"
+                class="mm-input window-height-mm"
+                inputmode="numeric"
+                maxlength="1"
+                placeholder="0"
+              >
+              <span>mm</span>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+    </div>
+
+    <button class="sub-button" type="button" id="add-window">
+      ＋ 別の窓を追加する
+    </button>
+
+    <button class="main-button" type="button" id="window-next">
+      ▶ 窓の採寸を完了
+    </button>
+
+  </div>
+</section>   
     
   </main>
 <script>
