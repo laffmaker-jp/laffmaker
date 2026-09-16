@@ -696,6 +696,16 @@ const washerScreen = document.getElementById("washer-screen");
 const washerNext = document.getElementById("washer-next");
 const fridgeScreen = document.getElementById("fridge-screen");
 const fridgeNext = document.getElementById("fridge-next");
+ const roomPhotoScreen = document.getElementById("room-photo-screen");
+const roomPhotoInput = document.getElementById("room-photo-input");
+const takePhotoButton = document.getElementById("take-photo-button");
+const photoPreviewWrap = document.getElementById("photo-preview-wrap");
+const photoPreview = document.getElementById("photo-preview");
+const photoConfirmButtons = document.getElementById("photo-confirm-buttons");
+const retakePhotoButton = document.getElementById("retake-photo-button");
+const confirmPhotoButton = document.getElementById("confirm-photo-button");
+const photoProgress = document.getElementById("photo-progress");
+const photoDirection = document.getElementById("photo-direction"); 
   
 measurementInputs.forEach(function (input) {
   input.addEventListener("input", function () {
@@ -816,8 +826,8 @@ fridgeNext.addEventListener("click", function () {
     return;
   }
 
-  alert("QUEST 05 CLEAR！⚔️");
-});
+  fridgeScreen.classList.add("hidden");
+roomPhotoScreen.classList.remove("hidden");
   
 </script>
 </body>
