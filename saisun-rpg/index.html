@@ -232,44 +232,116 @@
       alt="廊下と曲がり角の測り方"
     >
 
-    <div class="measure-fields">
-
-      <label class="measure-field">
-        <span>最狭幅</span>
-        <div class="measure-input-wrap">
-          <input type="number" id="route-narrow" inputmode="decimal" placeholder="0">
-          <span>cm</span>
-        </div>
-      </label>
-<label class="no-corner-check">
-  <input type="checkbox" id="no-corner">
-  <span>曲がり角なし</span>
-</label>
-<div id="corner-fields">
+   <div class="measure-fields">
 
   <label class="measure-field">
-    <span>曲がる前の幅</span>
+    <span>最狭幅</span>
     <div class="measure-input-wrap">
-      <input type="number" id="route-before" inputmode="decimal" placeholder="0">
+      <input
+        type="text"
+        id="route-narrow-cm"
+        class="cm-input"
+        inputmode="numeric"
+        maxlength="3"
+        placeholder="0"
+      >
       <span>cm</span>
+
+      <input
+        type="text"
+        id="route-narrow-mm"
+        class="mm-input"
+        inputmode="numeric"
+        maxlength="1"
+        placeholder="0"
+      >
+      <span>mm</span>
     </div>
   </label>
 
-  <label class="measure-field">
-    <span>曲がった先の幅</span>
-    <div class="measure-input-wrap">
-      <input type="number" id="route-after" inputmode="decimal" placeholder="0">
-      <span>cm</span>
-    </div>
+  <label class="no-corner-check">
+    <input type="checkbox" id="no-corner">
+    <span>曲がり角なし</span>
   </label>
 
-  <label class="measure-field">
-    <span>角の対角寸法</span>
-    <div class="measure-input-wrap">
-      <input type="number" id="route-diagonal" inputmode="decimal" placeholder="0">
-      <span>cm</span>
-    </div>
-  </label>
+  <div id="corner-fields">
+
+    <label class="measure-field">
+      <span>曲がる前の幅</span>
+      <div class="measure-input-wrap">
+        <input
+          type="text"
+          id="route-before-cm"
+          class="cm-input"
+          inputmode="numeric"
+          maxlength="3"
+          placeholder="0"
+        >
+        <span>cm</span>
+
+        <input
+          type="text"
+          id="route-before-mm"
+          class="mm-input"
+          inputmode="numeric"
+          maxlength="1"
+          placeholder="0"
+        >
+        <span>mm</span>
+      </div>
+    </label>
+
+    <label class="measure-field">
+      <span>曲がった先の幅</span>
+      <div class="measure-input-wrap">
+        <input
+          type="text"
+          id="route-after-cm"
+          class="cm-input"
+          inputmode="numeric"
+          maxlength="3"
+          placeholder="0"
+        >
+        <span>cm</span>
+
+        <input
+          type="text"
+          id="route-after-mm"
+          class="mm-input"
+          inputmode="numeric"
+          maxlength="1"
+          placeholder="0"
+        >
+        <span>mm</span>
+      </div>
+    </label>
+
+    <label class="measure-field">
+      <span>角の対角寸法</span>
+      <div class="measure-input-wrap">
+        <input
+          type="text"
+          id="route-diagonal-cm"
+          class="cm-input"
+          inputmode="numeric"
+          maxlength="3"
+          placeholder="0"
+        >
+        <span>cm</span>
+
+        <input
+          type="text"
+          id="route-diagonal-mm"
+          class="mm-input"
+          inputmode="numeric"
+          maxlength="1"
+          placeholder="0"
+        >
+        <span>mm</span>
+      </div>
+    </label>
+
+  </div>
 
 </div>
 
