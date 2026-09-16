@@ -128,6 +128,63 @@
   </div>
 </section>   
 
+  <!-- QUEST 02：玄関 -->
+<section class="screen hidden" id="entrance-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">QUEST 02</p>
+
+    <h2 class="check-title">
+      玄関を攻略せよ！🚪
+    </h2>
+
+    <p class="check-text">
+      大型家具・家電の最初の関門。<br>
+      ここは測って帰ろう。
+    </p>
+
+    <img
+      class="measure-guide"
+      src="quest02_entrance.png"
+      alt="玄関の有効幅と有効高さの測り方"
+    >
+
+    <div class="measure-fields">
+
+      <label class="measure-field">
+        <span>有効幅</span>
+        <div class="measure-input-wrap">
+          <input
+            type="number"
+            id="entrance-width"
+            inputmode="decimal"
+            placeholder="0"
+          >
+          <span>cm</span>
+        </div>
+      </label>
+
+      <label class="measure-field">
+        <span>有効高さ</span>
+        <div class="measure-input-wrap">
+          <input
+            type="number"
+            id="entrance-height"
+            inputmode="decimal"
+            placeholder="0"
+          >
+          <span>cm</span>
+        </div>
+      </label>
+
+    </div>
+
+    <button class="main-button" type="button" id="entrance-next">
+      ▶ 次へ
+    </button>
+
+  </div>
+</section>  
   </main>
 <script>
   const startButton = document.getElementById("start-button");
