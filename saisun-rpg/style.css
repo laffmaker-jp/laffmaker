@@ -333,3 +333,56 @@ button {
 .fridge-title {
   font-size: 28px;
 }
+/* =========================
+   QUEST 06：部屋撮影
+========================= */
+
+.photo-quest {
+  width: 100%;
+  margin-top: 36px;
+}
+
+.photo-progress {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+
+  color: #ff1493;
+}
+
+.photo-direction {
+  margin-top: 18px;
+
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.photo-preview-wrap {
+  width: 100%;
+  margin-top: 28px;
+}
+
+.photo-preview {
+  display: block;
+
+  width: 100%;
+  max-height: 420px;
+
+  object-fit: contain;
+
+  border: 1px solid #555555;
+  border-radius: 14px;
+
+  background: #0c0c0c;
+}
+
+.photo-confirm-buttons {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.photo-confirm-buttons .main-button,
+.photo-confirm-buttons .sub-button {
+  margin-top: 14px;
+}
