@@ -208,3 +208,55 @@ button {
 
   cursor: pointer;
 }
+/* =========================
+   採寸入力
+========================= */
+
+.measure-guide {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  margin: 32px auto 0;
+  border-radius: 14px;
+}
+
+.measure-fields {
+  width: 100%;
+  margin-top: 32px;
+}
+
+.measure-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  margin-top: 16px;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.measure-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.measure-input-wrap input {
+  width: 110px;
+  min-height: 48px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #555555;
+  border-radius: 10px;
+
+  background: #0c0c0c;
+  color: #ffffff;
+
+  font-size: 18px;
+  font-weight: 700;
+  text-align: right;
+}
