@@ -149,35 +149,61 @@
       alt="玄関の有効幅と有効高さの測り方"
     >
 
-    <div class="measure-fields">
+   <div class="measure-fields">
 
-      <label class="measure-field">
-        <span>有効幅</span>
-        <div class="measure-input-wrap">
-          <input
-            type="number"
-            id="entrance-width"
-            inputmode="decimal"
-            placeholder="0"
-          >
-          <span>cm</span>
-        </div>
-      </label>
+  <label class="measure-field">
+    <span>有効幅</span>
 
-      <label class="measure-field">
-        <span>有効高さ</span>
-        <div class="measure-input-wrap">
-          <input
-            type="number"
-            id="entrance-height"
-            inputmode="decimal"
-            placeholder="0"
-          >
-          <span>cm</span>
-        </div>
-      </label>
+    <div class="measure-input-wrap">
+      <input
+        type="text"
+        id="entrance-width-cm"
+        class="cm-input"
+        inputmode="numeric"
+        maxlength="3"
+        placeholder="0"
+      >
+      <span>cm</span>
 
+      <input
+        type="text"
+        id="entrance-width-mm"
+        class="mm-input"
+        inputmode="numeric"
+        maxlength="1"
+        placeholder="0"
+      >
+      <span>mm</span>
     </div>
+  </label>
+
+  <label class="measure-field">
+    <span>有効高さ</span>
+
+    <div class="measure-input-wrap">
+      <input
+        type="text"
+        id="entrance-height-cm"
+        class="cm-input"
+        inputmode="numeric"
+        maxlength="3"
+        placeholder="0"
+      >
+      <span>cm</span>
+
+      <input
+        type="text"
+        id="entrance-height-mm"
+        class="mm-input"
+        inputmode="numeric"
+        maxlength="1"
+        placeholder="0"
+      >
+      <span>mm</span>
+    </div>
+  </label>
+
+</div>
 
     <button class="main-button" type="button" id="entrance-next">
       ▶ 次へ
