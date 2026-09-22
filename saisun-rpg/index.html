@@ -1339,6 +1339,17 @@ emergencyWindowSkip.addEventListener("click", function () {
  emergencyWindowScreen.classList.add("hidden");
 balconyScreen.classList.remove("hidden");
 });  
+
+balconyNext.addEventListener("click", function () {
+  const poleCm = document.getElementById("balcony-pole-cm").value;
+
+  if (!isMeasured(poleCm)) {
+    alert("勇者よ、物干し金物の間隔がまだ未測定だぞ📏");
+    return;
+  }
+
+  alert("ベランダ攻略完了！☀️✨");
+});
   
 </script>
 </body>
