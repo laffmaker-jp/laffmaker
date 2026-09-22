@@ -728,6 +728,84 @@
 
   </div>
 </section>   
+
+<!-- 緊急クエスト：窓まわり -->
+<section class="screen hidden" id="emergency-window-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">🚨 EMERGENCY QUEST</p>
+
+    <h2 class="check-title">
+      窓まわりを調査せよ！🪟
+    </h2>
+
+    <p class="check-text">
+      緊急クエスト発生！<br>
+      窓枠から左右の壁までの距離を測ろう。
+    </p>
+
+    <div class="measure-fields">
+
+      <label class="measure-field">
+        <span>窓枠 → 左壁</span>
+
+        <div class="measure-input-wrap">
+          <input
+            type="text"
+            id="window-left-cm"
+            class="cm-input"
+            inputmode="numeric"
+            maxlength="3"
+            placeholder="0"
+          >
+          <span>cm</span>
+
+          <input
+            type="text"
+            id="window-left-mm"
+            class="mm-input"
+            inputmode="numeric"
+            maxlength="1"
+            placeholder="0"
+          >
+          <span>mm</span>
+        </div>
+      </label>
+
+      <label class="measure-field">
+        <span>窓枠 → 右壁</span>
+
+        <div class="measure-input-wrap">
+          <input
+            type="text"
+            id="window-right-cm"
+            class="cm-input"
+            inputmode="numeric"
+            maxlength="3"
+            placeholder="0"
+          >
+          <span>cm</span>
+
+          <input
+            type="text"
+            id="window-right-mm"
+            class="mm-input"
+            inputmode="numeric"
+            maxlength="1"
+            placeholder="0"
+          >
+          <span>mm</span>
+        </div>
+      </label>
+
+    </div>
+
+    <button class="main-button" type="button" id="emergency-window-next">
+      ▶ 緊急クエスト完了
+    </button>
+
+  </div>
+</section>
     
   </main>
 <script>
