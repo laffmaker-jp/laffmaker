@@ -752,6 +752,10 @@
 const measurementInputs = document.querySelectorAll(
   ".cm-input, .mm-input"
 );
+function isMeasured(value) {
+  return value !== "" && Number(value) > 0;
+}
+  
 const washerScreen = document.getElementById("washer-screen");
 const washerNext = document.getElementById("washer-next");
 const fridgeScreen = document.getElementById("fridge-screen");
@@ -861,18 +865,22 @@ routeNext.addEventListener("click", function () {
   const afterCm = document.getElementById("route-after-cm").value;
   const diagonalCm = document.getElementById("route-diagonal-cm").value;
 
-  if (narrowCm === "") {
-    alert("勇者よ、最狭幅がまだ未測定だぞ📏");
-    return;
-  }
+if (!isMeasured(narrowCm)) {
+  alert("勇者よ、最狭幅がまだ未測定だぞ📏");
+  return;
+}
 
-  if (
-    !noCorner.checked &&
-    (beforeCm === "" || afterCm === "" || diagonalCm === "")
-  ) {
-    alert("勇者よ、曲がり角に測り残しがあるぞ📏");
-    return;
-  }
+if (
+  !noCorner.checked &&
+  (
+    !isMeasured(beforeCm) ||
+    !isMeasured(afterCm) ||
+    !isMeasured(diagonalCm)
+  )
+) {
+  alert("勇者よ、曲がり角に測り残しがあるぞ📏");
+  return;
+} 
 
   routeScreen.classList.add("hidden");
   washerScreen.classList.remove("hidden");
@@ -886,10 +894,14 @@ washerNext.addEventListener("click", function () {
     'input[name="drain-position"]:checked'
   );
 
-  if (widthCm === "" || depthCm === "" || faucetCm === "") {
-    alert("勇者よ、洗濯機置場に測り残しがあるぞ📏");
-    return;
-  }
+if (
+  !isMeasured(widthCm) ||
+  !isMeasured(depthCm) ||
+  !isMeasured(faucetCm)
+) {
+  alert("勇者よ、洗濯機置場に測り残しがあるぞ📏");
+  return;
+}
 
   if (!drainPosition) {
     alert("勇者よ、排水口の位置を選ぶのだ📏");
@@ -904,10 +916,14 @@ fridgeNext.addEventListener("click", function () {
   const depthCm = document.getElementById("fridge-depth-cm").value;
   const heightCm = document.getElementById("fridge-height-cm").value;
 
-  if (widthCm === "" || depthCm === "" || heightCm === "") {
-    alert("勇者よ、冷蔵庫置場に測り残しがあるぞ📏");
-    return;
-  }
+ if (
+  !isMeasured(widthCm) ||
+  !isMeasured(depthCm) ||
+  !isMeasured(heightCm)
+) {
+  alert("勇者よ、冷蔵庫置場に測り残しがあるぞ📏");
+  return;
+}
 
   fridgeScreen.classList.add("hidden");
 roomPhotoScreen.classList.remove("hidden");
@@ -1148,11 +1164,11 @@ windowNext.addEventListener("click", function () {
   for (const item of windowItems) {
     const widthCm = item.querySelector(".window-width-cm").value;
     const heightCm = item.querySelector(".window-height-cm").value;
-
-    if (widthCm === "" || heightCm === "") {
-      alert("勇者よ、窓に測り残しがあるぞ📏");
-      return;
-    }
+if (!isMeasured(widthCm) || !isMeasured(heightCm)) {
+  alert("勇者よ、窓に測り残しがあるぞ📏");
+  return;
+}
+ 
   }
 
   alert("窓の採寸、すべて完了！🪟✨");
