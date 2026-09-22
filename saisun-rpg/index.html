@@ -816,6 +816,58 @@
     
   </div>
 </section>
+
+<!-- QUEST 08：ベランダ -->
+<section class="screen hidden" id="balcony-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">QUEST 08</p>
+
+    <h2 class="check-title">
+      ベランダを攻略せよ！☀️
+    </h2>
+
+    <p class="check-text">
+      物干し竿選びで困らないように、<br>
+      左右の物干し金物の間隔を測っておこう。
+    </p>
+
+    <div class="measure-fields">
+
+      <label class="measure-field">
+        <span>物干し金物の間隔</span>
+
+        <div class="measure-input-wrap">
+          <input
+            type="text"
+            id="balcony-pole-cm"
+            class="cm-input"
+            inputmode="numeric"
+            maxlength="3"
+            placeholder="0"
+          >
+          <span>cm</span>
+
+          <input
+            type="text"
+            id="balcony-pole-mm"
+            class="mm-input"
+            inputmode="numeric"
+            maxlength="1"
+            placeholder="0"
+          >
+          <span>mm</span>
+        </div>
+      </label>
+
+    </div>
+
+    <button class="main-button" type="button" id="balcony-next">
+      ▶ 次へ
+    </button>
+
+  </div>
+</section>
     
   </main>
 <script>
@@ -866,6 +918,9 @@ const addWindowButton = document.getElementById("add-window");
 const windowNext = document.getElementById("window-next"); 
 const emergencyWindowScreen = document.getElementById("emergency-window-screen");
 const emergencyWindowNext = document.getElementById("emergency-window-next");
+const emergencyWindowSkip = document.getElementById("emergency-window-skip");
+const balconyScreen = document.getElementById("balcony-screen");
+const balconyNext = document.getElementById("balcony-next");
   
 let photoDB = null;
 
@@ -1276,11 +1331,13 @@ emergencyWindowNext.addEventListener("click", function () {
     return;
   }
 
-  alert("緊急クエストクリア！🚨✨");
+ emergencyWindowScreen.classList.add("hidden");
+balconyScreen.classList.remove("hidden");
 });
 
 emergencyWindowSkip.addEventListener("click", function () {
-  alert("緊急クエストをスキップしました📏");
+ emergencyWindowScreen.classList.add("hidden");
+balconyScreen.classList.remove("hidden");
 });  
   
 </script>
