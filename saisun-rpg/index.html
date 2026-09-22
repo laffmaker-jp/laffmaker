@@ -874,6 +874,31 @@
 
   </div>
 </section>
+
+<!-- 部屋攻略完了 -->
+<section class="screen hidden" id="room-complete-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">ROOM CLEAR ✨</p>
+
+    <h2 class="check-title">
+      この部屋の攻略完了！🎉
+    </h2>
+
+    <p class="check-text">
+      ほかにも採寸する部屋はある？
+    </p>
+
+    <button class="main-button" type="button" id="next-room-yes">
+      ▶ 次の部屋を攻略する
+    </button>
+
+    <button class="sub-button" type="button" id="next-room-no">
+      部屋はこれで全部
+    </button>
+
+  </div>
+</section>
     
   </main>
 <script>
@@ -927,6 +952,9 @@ const emergencyWindowNext = document.getElementById("emergency-window-next");
 const emergencyWindowSkip = document.getElementById("emergency-window-skip");
 const balconyScreen = document.getElementById("balcony-screen");
 const balconyNext = document.getElementById("balcony-next");
+const roomCompleteScreen = document.getElementById("room-complete-screen");
+const nextRoomYes = document.getElementById("next-room-yes");
+const nextRoomNo = document.getElementById("next-room-no");
   
 let photoDB = null;
 
@@ -1354,7 +1382,13 @@ balconyNext.addEventListener("click", function () {
     return;
   }
 
-  alert("ベランダ攻略完了！☀️✨");
+ balconyScreen.classList.add("hidden");
+roomCompleteScreen.classList.remove("hidden");
+});
+
+  nextRoomYes.addEventListener("click", function () {
+  roomCompleteScreen.classList.add("hidden");
+  roomPhotoScreen.classList.remove("hidden");
 });
   
 </script>
