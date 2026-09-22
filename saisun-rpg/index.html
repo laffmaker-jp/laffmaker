@@ -113,20 +113,7 @@
       今日の採寸スタイルを選ぼう。
     </p>
 
-    <div class="choice-buttons">
-
-      <button class="main-button" type="button" id="quick-mode">
-        ⚔️ サクッと採寸
-      </button>
-
-      <button class="sub-button" type="button" id="full-mode">
-        👑 しっかり採寸【魔王級】
-      </button>
-
-    </div>
-
-  </div>
-</section>   
+  
 
   <!-- QUEST 02：玄関 -->
 <section class="screen hidden" id="entrance-screen">
@@ -766,8 +753,7 @@
   const measureYes = document.getElementById("measure-yes");
   const measureBorrowed = document.getElementById("measure-borrowed");
 
-  const modeSelectScreen = document.getElementById("mode-select-screen");
-  const quickMode = document.getElementById("quick-mode");
+ 
 
   const entranceScreen = document.getElementById("entrance-screen");
   const entranceNext = document.getElementById("entrance-next");
@@ -834,11 +820,10 @@ measurementInputs.forEach(function (input) {
   });
 });
 
-  function goToModeSelect() {
-    measureCheckScreen.classList.add("hidden");
-    modeSelectScreen.classList.remove("hidden");
-  }
-
+ function goToEntrance() {
+  measureCheckScreen.classList.add("hidden");
+  entranceScreen.classList.remove("hidden");
+}
 
   startButton.addEventListener("click", function () {
     startScreen.classList.add("hidden");
@@ -851,15 +836,12 @@ measurementInputs.forEach(function (input) {
     measureHelp.classList.remove("hidden");
   });
 
+measureYes.addEventListener("click", goToEntrance);
+measureBorrowed.addEventListener("click", goToEntrance);
+ 
 
-  measureYes.addEventListener("click", goToModeSelect);
-  measureBorrowed.addEventListener("click", goToModeSelect);
 
-
-  quickMode.addEventListener("click", function () {
-    modeSelectScreen.classList.add("hidden");
-    entranceScreen.classList.remove("hidden");
-  });
+  
 
 entranceNext.addEventListener("click", function () {
   const widthCm = document.getElementById("entrance-width-cm").value;
