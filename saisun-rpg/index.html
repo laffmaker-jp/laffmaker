@@ -804,6 +804,10 @@
       ▶ 緊急クエスト完了
     </button>
 
+<button class="sub-button" type="button" id="emergency-window-skip">
+  今回はスキップ
+</button>
+    
   </div>
 </section>
     
@@ -823,7 +827,9 @@
 
   const entranceScreen = document.getElementById("entrance-screen");
   const entranceNext = document.getElementById("entrance-next");
+const emergencyWindowSkip = document.getElementById("emergency-window-skip");
 
+  
   const routeScreen = document.getElementById("route-screen");
   const noCorner = document.getElementById("no-corner");
   const cornerFields = document.getElementById("corner-fields");
@@ -1266,6 +1272,10 @@ emergencyWindowNext.addEventListener("click", function () {
 
   alert("緊急クエストクリア！🚨✨");
 });
+
+emergencyWindowSkip.addEventListener("click", function () {
+  alert("緊急クエストをスキップしました📏");
+});  
   
 </script>
 </body>
