@@ -839,10 +839,10 @@ entranceNext.addEventListener("click", function () {
   const widthCm = document.getElementById("entrance-width-cm").value;
   const heightCm = document.getElementById("entrance-height-cm").value;
 
-  if (widthCm === "" || heightCm === "") {
-    alert("勇者よ、まだ測り残しがあるぞ📏");
-    return;
-  }
+ if (!isMeasured(widthCm) || !isMeasured(heightCm)) {
+  alert("勇者よ、まだ測り残しがあるぞ📏");
+  return;
+}
 
   entranceScreen.classList.add("hidden");
   routeScreen.classList.remove("hidden");
