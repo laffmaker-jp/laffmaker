@@ -852,7 +852,9 @@ const photoDirection = document.getElementById("photo-direction");
 const windowList = document.getElementById("window-list");
 const addWindowButton = document.getElementById("add-window");
 const windowNext = document.getElementById("window-next"); 
-
+const emergencyWindowScreen = document.getElementById("emergency-window-screen");
+const emergencyWindowNext = document.getElementById("emergency-window-next");
+  
 let photoDB = null;
 
 const photoDBRequest = indexedDB.open("saisunRpgDB", 1);
@@ -1249,7 +1251,20 @@ if (!isMeasured(widthCm) || !isMeasured(heightCm)) {
  
   }
 
-  alert("窓の採寸、すべて完了！🪟✨");
+  windowScreen.classList.add("hidden");
+emergencyWindowScreen.classList.remove("hidden");
+});
+
+emergencyWindowNext.addEventListener("click", function () {
+  const leftCm = document.getElementById("window-left-cm").value;
+  const rightCm = document.getElementById("window-right-cm").value;
+
+  if (!isMeasured(leftCm) || !isMeasured(rightCm)) {
+    alert("勇者よ、窓まわりに測り残しがあるぞ📏");
+    return;
+  }
+
+  alert("緊急クエストクリア！🚨✨");
 });
   
 </script>
