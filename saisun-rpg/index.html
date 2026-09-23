@@ -750,6 +750,11 @@
       窓枠から左右の壁までの距離を測ろう。
     </p>
 
+<div id="emergency-window-list">
+
+  <div class="emergency-window-item">
+    <p class="window-number">窓 1</p>
+
     <div class="measure-fields">
 
       <label class="measure-field">
@@ -758,8 +763,7 @@
         <div class="measure-input-wrap">
           <input
             type="text"
-            id="window-left-cm"
-            class="cm-input"
+            class="cm-input emergency-left-cm"
             inputmode="numeric"
             maxlength="3"
             placeholder="0"
@@ -768,8 +772,7 @@
 
           <input
             type="text"
-            id="window-left-mm"
-            class="mm-input"
+            class="mm-input emergency-left-mm"
             inputmode="numeric"
             maxlength="1"
             placeholder="0"
@@ -784,8 +787,7 @@
         <div class="measure-input-wrap">
           <input
             type="text"
-            id="window-right-cm"
-            class="cm-input"
+            class="cm-input emergency-right-cm"
             inputmode="numeric"
             maxlength="3"
             placeholder="0"
@@ -794,8 +796,7 @@
 
           <input
             type="text"
-            id="window-right-mm"
-            class="mm-input"
+            class="mm-input emergency-right-mm"
             inputmode="numeric"
             maxlength="1"
             placeholder="0"
@@ -805,7 +806,14 @@
       </label>
 
     </div>
+  </div>
 
+</div>
+
+<button class="sub-button" type="button" id="add-emergency-window">
+  ＋ 別の窓を追加する
+</button>
+    
     <button class="main-button" type="button" id="emergency-window-next">
       ▶ 緊急クエスト完了
     </button>
@@ -1034,7 +1042,7 @@
 
     <p class="check-text">
       勇者よ、おつかれさま！<br>
-      これで「測っとけばよかった」とはおさらばだ📏✨
+      これで「測っとけばよかった」とはおさらば✨
     </p>
 
   </div>
@@ -1091,6 +1099,8 @@ const windowNext = document.getElementById("window-next");
 const emergencyWindowScreen = document.getElementById("emergency-window-screen");
 const emergencyWindowNext = document.getElementById("emergency-window-next");
 const emergencyWindowSkip = document.getElementById("emergency-window-skip");
+ const emergencyWindowList = document.getElementById("emergency-window-list");
+const addEmergencyWindowButton = document.getElementById("add-emergency-window"); 
 const balconyScreen = document.getElementById("balcony-screen");
 const balconyNext = document.getElementById("balcony-next");
 const roomCompleteScreen = document.getElementById("room-complete-screen");
@@ -1492,7 +1502,106 @@ newInputs.forEach(function (input) {
   });
 });
 });
+let emergencyWindowCount = 1;
 
+addEmergencyWindowButton.addEventListener("click", function () {
+  emergencyWindowCount++;
+
+  const item = document.createElement("div");
+  item.className = "emergency-window-item";
+
+  item.innerHTML = `
+    <p class="window-number">窓 ${emergencyWindowCount}</p>
+
+    <div class="measure-fields">
+
+      <label class="measure-field">
+        <span>窓枠 → 左壁</span>
+        <div class="measure-input-wrap">
+          <input
+            type="text"
+            class="cm-input emergency-left-cm"
+            inputmode="numeric"
+            maxlength="3"
+            placeholder="0"
+          >
+          <span>cm</span>
+
+          <input
+            type="text"
+            class="mm-input emergency-left-mm"
+            inputmode="numeric"
+            maxlength="1"
+            placeholder="0"
+          >
+          <span>mm</span>
+        </div>
+      </label>
+
+      <label class="measure-field">
+        <span>窓枠 → 右壁</span>
+        <div class="measure-input-wrap">
+          <input
+            type="text"
+            class="cm-input emergency-right-cm"
+            inputmode="numeric"
+            maxlength="3"
+            placeholder="0"
+          >
+          <span>cm</span>
+
+          <input
+            type="text"
+            class="mm-input emergency-right-mm"
+            inputmode="numeric"
+            maxlength="1"
+            placeholder="0"
+          >
+          <span>mm</span>
+        </div>
+      </label>
+
+    </div>
+
+    <button class="sub-button remove-emergency-window" type="button">
+      ✕ この窓を削除
+    </button>
+  `;
+
+  emergencyWindowList.appendChild(item);
+  const removeButton = item.querySelector(".remove-emergency-window");
+
+  removeButton.addEventListener("click", function () {
+    item.remove();
+
+    const items = emergencyWindowList.querySelectorAll(".emergency-window-item");
+
+    items.forEach(function (windowItem, index) {
+      windowItem.querySelector(".window-number").textContent =
+        "窓 " + (index + 1);
+    });
+
+    emergencyWindowCount = items.length;
+  });
+
+  const newInputs = item.querySelectorAll(".cm-input, .mm-input");
+
+  newInputs.forEach(function (input) {
+    input.addEventListener("input", function () {
+      this.value = this.value.replace(/[^0-9]/g, "");
+
+      if (this.classList.contains("cm-input")) {
+        this.value = this.value.slice(0, 3);
+      }
+
+      if (this.classList.contains("mm-input")) {
+        this.value = this.value.slice(0, 1);
+      }
+    });
+  });
+});
+  
+  
 windowNext.addEventListener("click", function () {
   const windowItems = windowList.querySelectorAll(".window-item");
 
@@ -1511,16 +1620,21 @@ emergencyWindowScreen.classList.remove("hidden");
 });
 
 emergencyWindowNext.addEventListener("click", function () {
-  const leftCm = document.getElementById("window-left-cm").value;
-  const rightCm = document.getElementById("window-right-cm").value;
+  const emergencyWindowItems =
+    emergencyWindowList.querySelectorAll(".emergency-window-item");
 
-  if (!isMeasured(leftCm) || !isMeasured(rightCm)) {
-    alert("勇者よ、窓まわりに測り残しがあるぞ📏");
-    return;
+  for (const item of emergencyWindowItems) {
+    const leftCm = item.querySelector(".emergency-left-cm").value;
+    const rightCm = item.querySelector(".emergency-right-cm").value;
+
+    if (!isMeasured(leftCm) || !isMeasured(rightCm)) {
+      alert("勇者よ、窓まわりに測り残しがあるぞ📏");
+      return;
+    }
   }
 
- emergencyWindowScreen.classList.add("hidden");
-balconyScreen.classList.remove("hidden");
+  emergencyWindowScreen.classList.add("hidden");
+  balconyScreen.classList.remove("hidden");
 });
 
 emergencyWindowSkip.addEventListener("click", function () {
@@ -1566,10 +1680,24 @@ firstWindowInputs.forEach(function (input) {
   input.value = "";
 });  
  windowCount = 1;   
-    document.getElementById("window-left-cm").value = "";
-document.getElementById("window-left-mm").value = "";
-document.getElementById("window-right-cm").value = "";
-document.getElementById("window-right-mm").value = "";
+  const emergencyWindowItems =
+  emergencyWindowList.querySelectorAll(".emergency-window-item");
+
+emergencyWindowItems.forEach(function (item, index) {
+  if (index > 0) {
+    item.remove();
+  }
+});
+
+const firstEmergencyInputs = emergencyWindowList.querySelectorAll(
+  ".emergency-window-item:first-child input"
+);
+
+firstEmergencyInputs.forEach(function (input) {
+  input.value = "";
+});
+
+emergencyWindowCount = 1;
    document.getElementById("balcony-pole-cm").value = "";
 document.getElementById("balcony-pole-mm").value = ""; 
     roomCompleteScreen.classList.add("hidden");
