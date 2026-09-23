@@ -570,7 +570,7 @@
 <section class="screen hidden" id="room-photo-screen">
   <div class="screen-inner">
 
-    <p class="quest-label">QUEST 06</p>
+    <p class="quest-label" id="room-number-label">ROOM 1</p>
 
     <h2 class="check-title">
       部屋を記録せよ！📸
@@ -943,6 +943,7 @@ const retakePhotoButton = document.getElementById("retake-photo-button");
 const confirmPhotoButton = document.getElementById("confirm-photo-button");
 const photoProgress = document.getElementById("photo-progress");
 const photoDirection = document.getElementById("photo-direction"); 
+  const roomNumberLabel = document.getElementById("room-number-label");
  const windowScreen = document.getElementById("window-screen");
 const windowList = document.getElementById("window-list");
 const addWindowButton = document.getElementById("add-window");
@@ -1120,7 +1121,7 @@ const photoDirections = [
 
 let currentPhotoIndex = 0;
 let currentPhotoFile = null;
-
+let currentRoomNumber = 1;
 
 // 「写真を撮る」
 takePhotoButton.addEventListener("click", function () {
@@ -1182,10 +1183,12 @@ const transaction = photoDB.transaction(
   const store = transaction.objectStore("roomPhotos");
 
   store.add({
+    roomNumber: currentRoomNumber,
     direction: photoDirections[currentPhotoIndex],
     photo: currentPhotoFile,
     createdAt: new Date().toISOString()
   });
+  
   currentPhotoIndex++;
 
  if (currentPhotoIndex >= photoDirections.length) {
@@ -1387,7 +1390,38 @@ roomCompleteScreen.classList.remove("hidden");
 });
 
   nextRoomYes.addEventListener("click", function () {
-  roomCompleteScreen.classList.add("hidden");
+ currentRoomNumber++;
+    roomNumberLabel.textContent = "ROOM " + currentRoomNumber;
+    currentPhotoIndex = 0;
+    photoProgress.textContent = "1 / " + photoDirections.length;
+photoDirection.textContent = photoDirections[0];
+    currentPhotoFile = null;
+roomPhotoInput.value = "";
+photoPreview.removeAttribute("src");
+    photoPreviewWrap.classList.add("hidden");
+photoConfirmButtons.classList.add("hidden");
+takePhotoButton.classList.remove("hidden");
+ const windowItems = windowList.querySelectorAll(".window-item");   
+    windowItems.forEach(function (item, index) {
+  if (index > 0) {
+    item.remove();
+  }
+});
+  const firstWindowInputs = windowList.querySelectorAll(
+  ".window-item:first-child input"
+);
+
+firstWindowInputs.forEach(function (input) {
+  input.value = "";
+});  
+ windowCount = 1;   
+    document.getElementById("window-left-cm").value = "";
+document.getElementById("window-left-mm").value = "";
+document.getElementById("window-right-cm").value = "";
+document.getElementById("window-right-mm").value = "";
+   document.getElementById("balcony-pole-cm").value = "";
+document.getElementById("balcony-pole-mm").value = ""; 
+    roomCompleteScreen.classList.add("hidden");
   roomPhotoScreen.classList.remove("hidden");
 });
   
