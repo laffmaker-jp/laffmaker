@@ -386,3 +386,15 @@ button {
 .photo-confirm-buttons .sub-button {
   margin-top: 14px;
 }
+/* GAME CLEAR */
+.game-clear-screen {
+  padding: 0;
+  overflow: hidden;
+}
+
+.game-clear-image {
+  display: block;
+  width: 100%;
+  height: 100svh;
+  object-fit: cover;
+}
