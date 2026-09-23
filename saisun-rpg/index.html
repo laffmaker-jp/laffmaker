@@ -1022,6 +1022,23 @@
 
   </div>
 </section>
+<!-- GAME CLEAR -->
+<section class="screen hidden" id="game-clear-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">GAME CLEAR ✨</p>
+
+    <h2 class="check-title">
+      採寸の旅、攻略完了！🎉
+    </h2>
+
+    <p class="check-text">
+      勇者よ、おつかれさま！<br>
+      これで「測っとけばよかった」とはおさらばだ📏✨
+    </p>
+
+  </div>
+</section>
     
   </main>
 <script>
@@ -1086,7 +1103,7 @@ const stairsNoCorner = document.getElementById("stairs-no-corner");
 const finalCheckScreen = document.getElementById("final-check-screen");
 const finalCheckReview = document.getElementById("final-check-review");
 const finalCheckComplete = document.getElementById("final-check-complete");
-
+const gameClearScreen = document.getElementById("game-clear-screen");
 
 
   
@@ -1602,8 +1619,14 @@ stairsSkip.addEventListener("click", function () {
   stairsScreen.classList.add("hidden");
   finalCheckScreen.classList.remove("hidden");
 });
-
-
+finalCheckReview.addEventListener("click", function () {
+  finalCheckScreen.classList.add("hidden");
+  nextRoomYes.click();
+});
+finalCheckComplete.addEventListener("click", function () {
+  finalCheckScreen.classList.add("hidden");
+  gameClearScreen.classList.remove("hidden");
+});
 
 
   
