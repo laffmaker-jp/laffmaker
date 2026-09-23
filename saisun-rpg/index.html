@@ -899,6 +899,124 @@
 
   </div>
 </section>
+
+<!-- QUEST 09：階段 -->
+<section class="screen hidden" id="stairs-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">QUEST 09</p>
+
+    <h2 class="check-title">
+      階段を攻略せよ！🪜
+    </h2>
+
+    <p class="check-text">
+      大型家具を運ぶとき、階段は難関ポイント。<br>
+      幅だけじゃなく、天井の高さもチェックしよう。
+    </p>
+
+    <div class="measure-fields">
+
+      <label class="measure-field">
+        <span>最狭幅</span>
+        <div class="measure-input-wrap">
+          <input type="text" id="stairs-narrow-cm" class="cm-input" inputmode="numeric" maxlength="3" placeholder="0">
+          <span>cm</span>
+          <input type="text" id="stairs-narrow-mm" class="mm-input" inputmode="numeric" maxlength="1" placeholder="0">
+          <span>mm</span>
+        </div>
+      </label>
+
+      <label class="measure-field">
+        <span>天井までの高さ</span>
+        <div class="measure-input-wrap">
+          <input type="text" id="stairs-height-cm" class="cm-input" inputmode="numeric" maxlength="3" placeholder="0">
+          <span>cm</span>
+          <input type="text" id="stairs-height-mm" class="mm-input" inputmode="numeric" maxlength="1" placeholder="0">
+          <span>mm</span>
+        </div>
+      </label>
+
+    </div>
+
+    <label class="no-corner-check">
+      <input type="checkbox" id="stairs-no-corner">
+      <span>曲がり角なし</span>
+    </label>
+
+    <div id="stairs-corner-fields">
+
+      <div class="measure-fields">
+
+        <label class="measure-field">
+          <span>曲がる前の幅</span>
+          <div class="measure-input-wrap">
+            <input type="text" id="stairs-before-cm" class="cm-input" inputmode="numeric" maxlength="3" placeholder="0">
+            <span>cm</span>
+            <input type="text" id="stairs-before-mm" class="mm-input" inputmode="numeric" maxlength="1" placeholder="0">
+            <span>mm</span>
+          </div>
+        </label>
+
+        <label class="measure-field">
+          <span>曲がった先の幅</span>
+          <div class="measure-input-wrap">
+            <input type="text" id="stairs-after-cm" class="cm-input" inputmode="numeric" maxlength="3" placeholder="0">
+            <span>cm</span>
+            <input type="text" id="stairs-after-mm" class="mm-input" inputmode="numeric" maxlength="1" placeholder="0">
+            <span>mm</span>
+          </div>
+        </label>
+
+        <label class="measure-field">
+          <span>角の対角寸法</span>
+          <div class="measure-input-wrap">
+            <input type="text" id="stairs-diagonal-cm" class="cm-input" inputmode="numeric" maxlength="3" placeholder="0">
+            <span>cm</span>
+            <input type="text" id="stairs-diagonal-mm" class="mm-input" inputmode="numeric" maxlength="1" placeholder="0">
+            <span>mm</span>
+          </div>
+        </label>
+
+      </div>
+    </div>
+
+    <button class="main-button" type="button" id="stairs-next">
+      ▶ 階段攻略完了
+    </button>
+
+    <button class="sub-button" type="button" id="stairs-skip">
+      階段なし
+    </button>
+
+  </div>
+</section>
+<!-- FINAL CHECK -->
+<section class="screen hidden" id="final-check-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">FINAL CHECK</p>
+
+   <h2 class="check-title">
+  ほかに部屋はない？🏠
+</h2>
+
+   <p class="check-text">
+  冒険終了まであと少し！<br>
+  「あ、ここにも部屋あった！」はない？
+</p>
+
+   <button class="main-button" type="button" id="final-check-review">
+  🏠 もう1部屋攻略する
+</button>
+
+    
+   <button class="sub-button" type="button" id="final-check-complete">
+  ✨ これで全部！
+</button>
+
+  </div>
+</section>
     
   </main>
 <script>
@@ -956,6 +1074,16 @@ const balconyNext = document.getElementById("balcony-next");
 const roomCompleteScreen = document.getElementById("room-complete-screen");
 const nextRoomYes = document.getElementById("next-room-yes");
 const nextRoomNo = document.getElementById("next-room-no");
+const stairsScreen = document.getElementById("stairs-screen");
+const stairsNext = document.getElementById("stairs-next");
+const stairsSkip = document.getElementById("stairs-skip");
+const stairsNoCorner = document.getElementById("stairs-no-corner");
+const finalCheckScreen = document.getElementById("final-check-screen");
+const finalCheckReview = document.getElementById("final-check-review");
+const finalCheckComplete = document.getElementById("final-check-complete");
+
+
+
   
 let photoDB = null;
 
@@ -1025,9 +1153,9 @@ entranceNext.addEventListener("click", function () {
   alert("勇者よ、まだ測り残しがあるぞ📏");
   return;
 }
-
-  entranceScreen.classList.add("hidden");
-  routeScreen.classList.remove("hidden");
+entranceScreen.classList.add("hidden");
+routeScreen.classList.remove("hidden");
+  
 });
   
 
@@ -1063,9 +1191,9 @@ if (
   alert("勇者よ、曲がり角に測り残しがあるぞ📏");
   return;
 } 
-
-  routeScreen.classList.add("hidden");
-  washerScreen.classList.remove("hidden");
+routeScreen.classList.add("hidden");
+washerScreen.classList.remove("hidden");
+  
 });
 washerNext.addEventListener("click", function () {
   const widthCm = document.getElementById("washer-width-cm").value;
@@ -1123,6 +1251,7 @@ let currentPhotoIndex = 0;
 let currentPhotoFile = null;
 let currentRoomNumber = 1;
 
+  
 // 「写真を撮る」
 takePhotoButton.addEventListener("click", function () {
   roomPhotoInput.click();
@@ -1424,6 +1553,54 @@ document.getElementById("balcony-pole-mm").value = "";
     roomCompleteScreen.classList.add("hidden");
   roomPhotoScreen.classList.remove("hidden");
 });
+nextRoomNo.addEventListener("click", function () {
+  roomCompleteScreen.classList.add("hidden");
+  stairsScreen.classList.remove("hidden");
+});
+const stairsCornerFields = document.getElementById("stairs-corner-fields");
+
+stairsNoCorner.addEventListener("change", function () {
+  if (stairsNoCorner.checked) {
+    stairsCornerFields.classList.add("hidden");
+  } else {
+    stairsCornerFields.classList.remove("hidden");
+  }
+});
+stairsNext.addEventListener("click", function () {
+  const narrowCm = document.getElementById("stairs-narrow-cm").value;
+  const heightCm = document.getElementById("stairs-height-cm").value;
+  const beforeCm = document.getElementById("stairs-before-cm").value;
+  const afterCm = document.getElementById("stairs-after-cm").value;
+  const diagonalCm = document.getElementById("stairs-diagonal-cm").value;
+
+  if (!isMeasured(narrowCm) || !isMeasured(heightCm)) {
+    alert("勇者よ、階段の幅か天井高がまだ未測定だぞ📏");
+    return;
+  }
+
+  if (
+    !stairsNoCorner.checked &&
+    (
+      !isMeasured(beforeCm) ||
+      !isMeasured(afterCm) ||
+      !isMeasured(diagonalCm)
+    )
+  ) {
+    alert("勇者よ、階段の曲がり角に測り残しがあるぞ📏");
+    return;
+  }
+
+   stairsScreen.classList.add("hidden");
+  finalCheckScreen.classList.remove("hidden");
+});
+stairsSkip.addEventListener("click", function () {
+  stairsScreen.classList.add("hidden");
+  finalCheckScreen.classList.remove("hidden");
+});
+
+
+
+
   
 </script>
 </body>
