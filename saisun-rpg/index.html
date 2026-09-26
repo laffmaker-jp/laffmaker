@@ -1113,7 +1113,14 @@ const finalCheckReview = document.getElementById("final-check-review");
 const finalCheckComplete = document.getElementById("final-check-complete");
 const gameClearScreen = document.getElementById("game-clear-screen");
 
-
+const measurementData = {
+  entrance: {},
+  route: {},
+  washer: {},
+  fridge: {},
+  rooms: [],
+  stairs: {}
+};
   
 let photoDB = null;
 
@@ -1183,6 +1190,14 @@ entranceNext.addEventListener("click", function () {
   alert("勇者よ、まだ測り残しがあるぞ📏");
   return;
 }
+
+  measurementData.entrance = {
+  widthCm: document.getElementById("entrance-width-cm").value,
+  widthMm: document.getElementById("entrance-width-mm").value,
+  heightCm: document.getElementById("entrance-height-cm").value,
+  heightMm: document.getElementById("entrance-height-mm").value
+};
+  
 entranceScreen.classList.add("hidden");
 routeScreen.classList.remove("hidden");
   
@@ -1221,6 +1236,19 @@ if (
   alert("勇者よ、曲がり角に測り残しがあるぞ📏");
   return;
 } 
+
+measurementData.route = {
+  narrowCm: document.getElementById("route-narrow-cm").value,
+  narrowMm: document.getElementById("route-narrow-mm").value,
+  noCorner: noCorner.checked,
+  beforeCm: document.getElementById("route-before-cm").value,
+  beforeMm: document.getElementById("route-before-mm").value,
+  afterCm: document.getElementById("route-after-cm").value,
+  afterMm: document.getElementById("route-after-mm").value,
+  diagonalCm: document.getElementById("route-diagonal-cm").value,
+  diagonalMm: document.getElementById("route-diagonal-mm").value
+};
+  
 routeScreen.classList.add("hidden");
 washerScreen.classList.remove("hidden");
   
@@ -1248,11 +1276,25 @@ if (
     return;
   }
 
+measurementData.washer = {
+  skipped: false,
+  widthCm: document.getElementById("washer-width-cm").value,
+  widthMm: document.getElementById("washer-width-mm").value,
+  depthCm: document.getElementById("washer-depth-cm").value,
+  depthMm: document.getElementById("washer-depth-mm").value,
+  faucetCm: document.getElementById("washer-faucet-cm").value,
+  faucetMm: document.getElementById("washer-faucet-mm").value,
+  drainPosition: drainPosition.value
+};
+  
  washerScreen.classList.add("hidden");
 fridgeScreen.classList.remove("hidden");
 });
  washerSkip.addEventListener("click", function () {
-  washerScreen.classList.add("hidden");
+ measurementData.washer = {
+  skipped: true
+};
+   washerScreen.classList.add("hidden");
   fridgeScreen.classList.remove("hidden");
 }); 
 fridgeNext.addEventListener("click", function () {
@@ -1269,6 +1311,12 @@ fridgeNext.addEventListener("click", function () {
   return;
 }
 
+ measurementData.fridge = {
+  widthCm: document.getElementById("fridge-width-cm").value,
+  depthCm: document.getElementById("fridge-depth-cm").value,
+  heightCm: document.getElementById("fridge-height-cm").value
+}; 
+  
   fridgeScreen.classList.add("hidden");
 roomPhotoScreen.classList.remove("hidden");
   });
