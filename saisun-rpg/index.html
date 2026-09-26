@@ -568,6 +568,30 @@
 
   </div>
 </section>
+
+<!-- 共用・設備 RESULT -->
+<section class="screen hidden" id="common-result-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">RESULT</p>
+
+    <h2 class="check-title">
+      共用・設備編クリア！✨
+    </h2>
+
+    <p class="check-text">
+      ここまでの採寸結果を確認しよう。
+    </p>
+
+    <div id="common-result-content"></div>
+
+    <button class="main-button" type="button" id="common-result-next">
+      ▶ ROOM攻略へ
+    </button>
+
+  </div>
+</section>
+    
 <!-- QUEST 06：部屋の写真 -->
 <section class="screen hidden" id="room-photo-screen">
   <div class="screen-inner">
@@ -1079,6 +1103,9 @@ const washerNext = document.getElementById("washer-next");
  const washerSkip = document.getElementById("washer-skip"); 
 const fridgeScreen = document.getElementById("fridge-screen");
 const fridgeNext = document.getElementById("fridge-next");
+ const commonResultScreen = document.getElementById("common-result-screen");
+const commonResultContent = document.getElementById("common-result-content");
+const commonResultNext = document.getElementById("common-result-next"); 
  const roomPhotoScreen = document.getElementById("room-photo-screen");
 const roomPhotoInput = document.getElementById("room-photo-input");
 const takePhotoButton = document.getElementById("take-photo-button");
@@ -1318,8 +1345,28 @@ fridgeNext.addEventListener("click", function () {
 }; 
   
   fridgeScreen.classList.add("hidden");
-roomPhotoScreen.classList.remove("hidden");
+  showCommonResult();
+commonResultScreen.classList.remove("hidden");
   });
+  function showCommonResult() {
+  commonResultContent.innerHTML = `
+    <p>
+      🚪 玄関 有効幅：
+      ${measurementData.entrance.widthCm}cm
+      ${measurementData.entrance.widthMm}mm
+    </p>
+
+    <p>
+      🚪 玄関 有効高さ：
+      ${measurementData.entrance.heightCm}cm
+      ${measurementData.entrance.heightMm}mm
+    </p>
+  `;
+}
+  commonResultNext.addEventListener("click", function () {
+  commonResultScreen.classList.add("hidden");
+  roomPhotoScreen.classList.remove("hidden");
+});
 const photoDirections = [
   "⬆️ 上を撮影",
   "⬇️ 下を撮影",
