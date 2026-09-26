@@ -457,7 +457,9 @@
     <button class="main-button" type="button" id="washer-next">
       ▶ 次へ
     </button>
-
+<button class="sub-button" type="button" id="washer-skip">
+  洗濯機置場なし
+</button>
   </div>
 </section>
 <!-- QUEST 05：冷蔵庫置場 -->
@@ -1074,6 +1076,7 @@ function isMeasured(value) {
   
 const washerScreen = document.getElementById("washer-screen");
 const washerNext = document.getElementById("washer-next");
+ const washerSkip = document.getElementById("washer-skip"); 
 const fridgeScreen = document.getElementById("fridge-screen");
 const fridgeNext = document.getElementById("fridge-next");
  const roomPhotoScreen = document.getElementById("room-photo-screen");
@@ -1248,6 +1251,10 @@ if (
  washerScreen.classList.add("hidden");
 fridgeScreen.classList.remove("hidden");
 });
+ washerSkip.addEventListener("click", function () {
+  washerScreen.classList.add("hidden");
+  fridgeScreen.classList.remove("hidden");
+}); 
 fridgeNext.addEventListener("click", function () {
   const widthCm = document.getElementById("fridge-width-cm").value;
   const depthCm = document.getElementById("fridge-depth-cm").value;
