@@ -1065,7 +1065,11 @@ const measurementInputs = document.querySelectorAll(
   ".cm-input, .mm-input"
 );
 function isMeasured(value) {
-  return value !== "" && Number(value) > 0;
+  return (
+    value !== "" &&
+    !value.startsWith("0") &&
+    Number(value) > 0
+  );
 }
   
 const washerScreen = document.getElementById("washer-screen");
