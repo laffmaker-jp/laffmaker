@@ -585,6 +585,8 @@
 
     <div id="common-result-content"></div>
 
+
+    
     <button class="main-button" type="button" id="common-result-next">
       ▶ ROOM攻略へ
     </button>
@@ -1106,6 +1108,7 @@ const fridgeNext = document.getElementById("fridge-next");
  const commonResultScreen = document.getElementById("common-result-screen");
 const commonResultContent = document.getElementById("common-result-content");
 const commonResultNext = document.getElementById("common-result-next"); 
+ 
  const roomPhotoScreen = document.getElementById("room-photo-screen");
 const roomPhotoInput = document.getElementById("room-photo-input");
 const takePhotoButton = document.getElementById("take-photo-button");
@@ -1148,6 +1151,8 @@ const measurementData = {
   rooms: [],
   stairs: {}
 };
+
+let commonEditMode = null;
   
 let photoDB = null;
 
@@ -1226,7 +1231,14 @@ entranceNext.addEventListener("click", function () {
 };
   
 entranceScreen.classList.add("hidden");
-routeScreen.classList.remove("hidden");
+
+if (commonEditMode === "entrance") {
+  commonEditMode = null;
+  showCommonResult();
+  commonResultScreen.classList.remove("hidden");
+} else {
+  routeScreen.classList.remove("hidden");
+}
   
 });
   
@@ -1277,7 +1289,14 @@ measurementData.route = {
 };
   
 routeScreen.classList.add("hidden");
-washerScreen.classList.remove("hidden");
+
+if (commonEditMode === "route") {
+  commonEditMode = null;
+  showCommonResult();
+  commonResultScreen.classList.remove("hidden");
+} else {
+  washerScreen.classList.remove("hidden");
+}
   
 });
 washerNext.addEventListener("click", function () {
@@ -1315,15 +1334,30 @@ measurementData.washer = {
 };
   
  washerScreen.classList.add("hidden");
-fridgeScreen.classList.remove("hidden");
-});
- washerSkip.addEventListener("click", function () {
- measurementData.washer = {
-  skipped: true
-};
-   washerScreen.classList.add("hidden");
+
+if (commonEditMode === "washer") {
+  commonEditMode = null;
+  showCommonResult();
+  commonResultScreen.classList.remove("hidden");
+} else {
   fridgeScreen.classList.remove("hidden");
-}); 
+}
+});
+washerSkip.addEventListener("click", function () {
+  measurementData.washer = {
+    skipped: true
+  };
+
+  washerScreen.classList.add("hidden");
+
+  if (commonEditMode === "washer") {
+    commonEditMode = null;
+    showCommonResult();
+    commonResultScreen.classList.remove("hidden");
+  } else {
+    fridgeScreen.classList.remove("hidden");
+  }
+});
 fridgeNext.addEventListener("click", function () {
   const widthCm = document.getElementById("fridge-width-cm").value;
   const depthCm = document.getElementById("fridge-depth-cm").value;
@@ -1338,14 +1372,22 @@ fridgeNext.addEventListener("click", function () {
   return;
 }
 
- measurementData.fridge = {
+measurementData.fridge = {
   widthCm: document.getElementById("fridge-width-cm").value,
+  widthMm: document.getElementById("fridge-width-mm").value,
   depthCm: document.getElementById("fridge-depth-cm").value,
-  heightCm: document.getElementById("fridge-height-cm").value
-}; 
+  depthMm: document.getElementById("fridge-depth-mm").value,
+  heightCm: document.getElementById("fridge-height-cm").value,
+  heightMm: document.getElementById("fridge-height-mm").value
+};
   
   fridgeScreen.classList.add("hidden");
-  showCommonResult();
+
+if (commonEditMode === "fridge") {
+  commonEditMode = null;
+}
+
+showCommonResult();
 commonResultScreen.classList.remove("hidden");
   });
   function showCommonResult() {
@@ -1361,8 +1403,125 @@ commonResultScreen.classList.remove("hidden");
       ${measurementData.entrance.heightCm}cm
       ${measurementData.entrance.heightMm}mm
     </p>
+    <p>
+    <button class="sub-button" type="button" id="edit-entrance">
+  ↩ 玄関を修正
+</button>
+  📦 搬入ルート 最狭幅：
+  ${measurementData.route.narrowCm}cm
+  ${measurementData.route.narrowMm}mm
+</p>
+<p>
+  ↪️ 曲がり角：
+  ${measurementData.route.noCorner ? "なし" : "あり"}
+</p>
+${!measurementData.route.noCorner ? `
+  <p>
+    ↪️ 曲がる前の幅：
+    ${measurementData.route.beforeCm}cm
+    ${measurementData.route.beforeMm}mm
+  </p>
+
+  <p>
+    ↪️ 曲がった先の幅：
+    ${measurementData.route.afterCm}cm
+    ${measurementData.route.afterMm}mm
+  </p>
+
+  <p>
+    📐 角の対角寸法：
+    ${measurementData.route.diagonalCm}cm
+    ${measurementData.route.diagonalMm}mm
+  </p> 
+` : ""}
+<button class="sub-button" type="button" id="edit-route">
+  ↩ 搬入ルートを修正
+</button>
+${measurementData.washer.skipped ? `
+  <p>
+    🧺 洗濯機置場：なし
+  </p>
+` : `
+  <p>
+    🧺 防水パンの幅：
+    ${measurementData.washer.widthCm}cm
+    ${measurementData.washer.widthMm}mm
+  </p>
+
+  <p>
+    🧺 防水パンの奥行：
+    ${measurementData.washer.depthCm}cm
+    ${measurementData.washer.depthMm}mm
+  </p>
+
+  <p>
+    🚰 蛇口までの高さ：
+    ${measurementData.washer.faucetCm}cm
+    ${measurementData.washer.faucetMm}mm
+  </p>
+  <p>
+  💧 排水口の位置：
+  ${
+    measurementData.washer.drainPosition === "left" ? "左" :
+    measurementData.washer.drainPosition === "center" ? "中央" :
+    measurementData.washer.drainPosition === "right" ? "右" :
+    "その他"
+  }
+</p>
+
+`}
+<button class="sub-button" type="button" id="edit-washer">
+  ↩ 洗濯機置場を修正
+</button>
+<p>
+  🧊 冷蔵庫置場の幅：
+  ${measurementData.fridge.widthCm}cm
+  ${measurementData.fridge.widthMm}mm
+</p>
+
+<p>
+  🧊 冷蔵庫置場の奥行：
+  ${measurementData.fridge.depthCm}cm
+  ${measurementData.fridge.depthMm}mm
+</p>
+
+<p>
+  🧊 冷蔵庫置場の高さ：
+  ${measurementData.fridge.heightCm}cm
+  ${measurementData.fridge.heightMm}mm
+</p>
+<button class="sub-button" type="button" id="edit-fridge">
+  ↩ 冷蔵庫置場を修正
+</button>
   `;
 }
+commonResultContent.addEventListener("click", function (event) {
+  if (event.target.id === "edit-entrance") {
+    commonEditMode = "entrance";
+
+    commonResultScreen.classList.add("hidden");
+    entranceScreen.classList.remove("hidden");
+  }
+  if (event.target.id === "edit-route") {
+  commonEditMode = "route";
+
+  commonResultScreen.classList.add("hidden");
+  routeScreen.classList.remove("hidden");
+}
+  if (event.target.id === "edit-washer") {
+  commonEditMode = "washer";
+
+  commonResultScreen.classList.add("hidden");
+  washerScreen.classList.remove("hidden");
+}
+  if (event.target.id === "edit-fridge") {
+  commonEditMode = "fridge";
+
+  commonResultScreen.classList.add("hidden");
+  fridgeScreen.classList.remove("hidden");
+}
+});
+  
   commonResultNext.addEventListener("click", function () {
   commonResultScreen.classList.add("hidden");
   roomPhotoScreen.classList.remove("hidden");
