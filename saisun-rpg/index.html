@@ -568,7 +568,26 @@
 
   </div>
 </section>
+<!-- ROOM RESULT -->
+<section class="screen hidden" id="room-result-screen">
+  <div class="screen-inner">
+    <p class="quest-label">RESULT</p>
 
+    <h2 class="check-title" id="room-result-title">
+      ROOM攻略完了！✨
+    </h2>
+
+    <p class="check-text">
+      この部屋の採寸結果を確認しよう。
+    </p>
+
+    <div id="room-result-content"></div>
+
+    <button class="main-button" type="button" id="room-result-next">
+      ▶ 次へ
+    </button>
+  </div>
+</section>
 <!-- 共用・設備 RESULT -->
 <section class="screen hidden" id="common-result-screen">
   <div class="screen-inner">
@@ -1108,7 +1127,10 @@ const fridgeNext = document.getElementById("fridge-next");
  const commonResultScreen = document.getElementById("common-result-screen");
 const commonResultContent = document.getElementById("common-result-content");
 const commonResultNext = document.getElementById("common-result-next"); 
- 
+ const roomResultScreen = document.getElementById("room-result-screen");
+const roomResultTitle = document.getElementById("room-result-title");
+const roomResultContent = document.getElementById("room-result-content");
+const roomResultNext = document.getElementById("room-result-next");
  const roomPhotoScreen = document.getElementById("room-photo-screen");
 const roomPhotoInput = document.getElementById("room-photo-input");
 const takePhotoButton = document.getElementById("take-photo-button");
@@ -1153,7 +1175,12 @@ const measurementData = {
 };
 
 let commonEditMode = null;
-  
+ let currentRoomData = {
+  windows: [],
+  emergencyWindows: [],
+  emergencySkipped: false,
+  balcony: {}
+}; 
 let photoDB = null;
 
 const photoDBRequest = indexedDB.open("saisunRpgDB", 1);
@@ -1234,6 +1261,7 @@ entranceScreen.classList.add("hidden");
 
 if (commonEditMode === "entrance") {
   commonEditMode = null;
+
   showCommonResult();
   commonResultScreen.classList.remove("hidden");
 } else {
@@ -1390,6 +1418,50 @@ if (commonEditMode === "fridge") {
 showCommonResult();
 commonResultScreen.classList.remove("hidden");
   });
+
+function showRoomResult() {
+  const roomData =
+    measurementData.rooms[measurementData.rooms.length - 1];
+
+  roomResultTitle.textContent =
+    "ROOM " + roomData.roomNumber + " 攻略完了！✨";
+
+  roomResultContent.innerHTML = `
+    ${roomData.windows.map(function (windowData, index) {
+      return `
+        <p>
+          🪟 窓 ${index + 1}：
+          幅 ${windowData.widthCm}cm ${windowData.widthMm}mm /
+          高さ ${windowData.heightCm}cm ${windowData.heightMm}mm
+        </p>
+      `;
+    }).join("")}
+
+    ${roomData.emergencySkipped ? `
+      <p>
+        ⚡ 緊急クエスト：スキップ
+      </p>
+    ` : roomData.emergencyWindows.map(function (windowData, index) {
+      return `
+        <p>
+          ⚡ 窓 ${index + 1}まわり：
+          左 ${windowData.leftCm}cm ${windowData.leftMm}mm /
+          右 ${windowData.rightCm}cm ${windowData.rightMm}mm
+        </p>
+      `;
+    }).join("")}
+
+    <p>
+      🌤️ 物干し金物の間隔：
+      ${roomData.balcony.poleCm}cm
+      ${roomData.balcony.poleMm}mm
+    </p>
+  `;
+}
+roomResultNext.addEventListener("click", function () {
+  roomResultScreen.classList.add("hidden");
+  roomCompleteScreen.classList.remove("hidden");
+});  
   function showCommonResult() {
   commonResultContent.innerHTML = `
     <p>
@@ -1870,7 +1942,18 @@ if (!isMeasured(widthCm) || !isMeasured(heightCm)) {
 }
  
   }
+  }
 
+  currentRoomData.windows = Array.from(windowItems).map(function (item) {
+    return {
+      widthCm: item.querySelector(".window-width-cm").value,
+      widthMm: item.querySelector(".window-width-mm").value,
+      heightCm: item.querySelector(".window-height-cm").value,
+      heightMm: item.querySelector(".window-height-mm").value
+    };
+  });
+
+  windowScreen.classList.add("hidden");
   windowScreen.classList.add("hidden");
 emergencyWindowScreen.classList.remove("hidden");
 });
@@ -1888,15 +1971,27 @@ emergencyWindowNext.addEventListener("click", function () {
       return;
     }
   }
+currentRoomData.emergencyWindows = Array.from(emergencyWindowItems).map(function (item) {
+  return {
+    leftCm: item.querySelector(".emergency-left-cm").value,
+    leftMm: item.querySelector(".emergency-left-mm").value,
+    rightCm: item.querySelector(".emergency-right-cm").value,
+    rightMm: item.querySelector(".emergency-right-mm").value
+  };
+});
 
+currentRoomData.emergencySkipped = false;
   emergencyWindowScreen.classList.add("hidden");
   balconyScreen.classList.remove("hidden");
 });
 
 emergencyWindowSkip.addEventListener("click", function () {
- emergencyWindowScreen.classList.add("hidden");
-balconyScreen.classList.remove("hidden");
-});  
+  currentRoomData.emergencyWindows = [];
+  currentRoomData.emergencySkipped = true;
+
+  emergencyWindowScreen.classList.add("hidden");
+  balconyScreen.classList.remove("hidden");
+}); 
 
 balconyNext.addEventListener("click", function () {
   const poleCm = document.getElementById("balcony-pole-cm").value;
@@ -1905,12 +2000,29 @@ balconyNext.addEventListener("click", function () {
     alert("勇者よ、物干し金物の間隔がまだ未測定だぞ📏");
     return;
   }
-
+currentRoomData.balcony = {
+  poleCm: document.getElementById("balcony-pole-cm").value,
+  poleMm: document.getElementById("balcony-pole-mm").value
+};
+  measurementData.rooms.push({
+  roomNumber: currentRoomNumber,
+  windows: currentRoomData.windows,
+  emergencyWindows: currentRoomData.emergencyWindows,
+  emergencySkipped: currentRoomData.emergencySkipped,
+  balcony: currentRoomData.balcony
+});
  balconyScreen.classList.add("hidden");
-roomCompleteScreen.classList.remove("hidden");
+showRoomResult();
+roomResultScreen.classList.remove("hidden");
 });
 
   nextRoomYes.addEventListener("click", function () {
+     currentRoomData = {
+    windows: [],
+    emergencyWindows: [],
+    emergencySkipped: false,
+    balcony: {}
+  };
  currentRoomNumber++;
     roomNumberLabel.textContent = "ROOM " + currentRoomNumber;
     currentPhotoIndex = 0;
