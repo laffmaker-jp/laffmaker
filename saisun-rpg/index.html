@@ -1080,6 +1080,28 @@
 
   </div>
 </section>
+    <!-- FINAL RESULT -->
+<section class="screen hidden" id="final-result-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">FINAL RESULT</p>
+
+    <h2 class="check-title">
+      冒険の記録を確認しよう！📜
+    </h2>
+
+    <p class="check-text">
+      最後に、すべての採寸結果を確認しよう。
+    </p>
+
+    <div id="final-result-content"></div>
+
+    <button class="main-button" type="button" id="final-result-complete">
+      ✨ この内容で冒険完了！
+    </button>
+
+  </div>
+</section>
 <!-- GAME CLEAR -->
 <section class="screen hidden game-clear-screen" id="game-clear-screen">
   <img
@@ -1168,6 +1190,9 @@ const stairsNoCorner = document.getElementById("stairs-no-corner");
 const finalCheckScreen = document.getElementById("final-check-screen");
 const finalCheckReview = document.getElementById("final-check-review");
 const finalCheckComplete = document.getElementById("final-check-complete");
+ const finalResultScreen = document.getElementById("final-result-screen");
+const finalResultContent = document.getElementById("final-result-content");
+const finalResultComplete = document.getElementById("final-result-complete"); 
 const gameClearScreen = document.getElementById("game-clear-screen");
 
 const measurementData = {
@@ -1575,6 +1600,184 @@ roomResultNext.addEventListener("click", function () {
   roomResultScreen.classList.add("hidden");
   roomCompleteScreen.classList.remove("hidden");
 });  
+  function showFinalResult() {
+  finalResultContent.innerHTML = `
+    <p>
+      🚪 玄関 有効幅：
+      ${measurementData.entrance.widthCm}cm
+      ${measurementData.entrance.widthMm}mm
+    </p>
+
+    <p>
+      🚪 玄関 有効高さ：
+      ${measurementData.entrance.heightCm}cm
+      ${measurementData.entrance.heightMm}mm
+    </p>
+
+    <p>
+      📦 搬入ルート 最狭幅：
+      ${measurementData.route.narrowCm}cm
+      ${measurementData.route.narrowMm}mm
+    </p>
+    <p>
+  ↪️ 曲がり角：
+  ${measurementData.route.noCorner ? "なし" : "あり"}
+</p>
+
+${!measurementData.route.noCorner ? `
+  <p>
+    ↪️ 曲がる前の幅：
+    ${measurementData.route.beforeCm}cm
+    ${measurementData.route.beforeMm}mm
+  </p>
+
+  <p>
+    ↪️ 曲がった先の幅：
+    ${measurementData.route.afterCm}cm
+    ${measurementData.route.afterMm}mm
+  </p>
+
+  <p>
+    📐 角の対角寸法：
+    ${measurementData.route.diagonalCm}cm
+    ${measurementData.route.diagonalMm}mm
+  </p>
+` : ""}
+${measurementData.washer.skipped ? `
+  <p>
+    🧺 洗濯機置場：なし
+  </p>
+` : `
+  <p>
+    🧺 防水パンの幅：
+    ${measurementData.washer.widthCm}cm
+    ${measurementData.washer.widthMm}mm
+  </p>
+
+  <p>
+    🧺 防水パンの奥行：
+    ${measurementData.washer.depthCm}cm
+    ${measurementData.washer.depthMm}mm
+  </p>
+
+  <p>
+    🚰 蛇口までの高さ：
+    ${measurementData.washer.faucetCm}cm
+    ${measurementData.washer.faucetMm}mm
+  </p>
+
+  <p>
+    💧 排水口の位置：
+    ${
+      measurementData.washer.drainPosition === "left" ? "左" :
+      measurementData.washer.drainPosition === "center" ? "中央" :
+      measurementData.washer.drainPosition === "right" ? "右" :
+      "その他"
+    }
+  </p>
+`}
+<p>
+  🧊 冷蔵庫置場の幅：
+  ${measurementData.fridge.widthCm}cm
+  ${measurementData.fridge.widthMm}mm
+</p>
+
+<p>
+  🧊 冷蔵庫置場の奥行：
+  ${measurementData.fridge.depthCm}cm
+  ${measurementData.fridge.depthMm}mm
+</p>
+
+<p>
+  🧊 冷蔵庫置場の高さ：
+  ${measurementData.fridge.heightCm}cm
+  ${measurementData.fridge.heightMm}mm
+</p>
+${measurementData.rooms.map(function (roomData) {
+  return `
+    <h3>
+      🏠 ROOM ${roomData.roomNumber}
+    </h3>
+
+    ${roomData.windows.map(function (windowData, index) {
+      return `
+        <p>
+          🪟 窓 ${index + 1}：
+          幅 ${windowData.widthCm}cm ${windowData.widthMm}mm /
+          高さ ${windowData.heightCm}cm ${windowData.heightMm}mm
+        </p>
+      `;
+    }).join("")}
+    ${roomData.emergencySkipped ? `
+  <p>
+    ⚡ 緊急クエスト：スキップ
+  </p>
+` : roomData.emergencyWindows.map(function (windowData, index) {
+  return `
+    <p>
+      ⚡ 窓 ${index + 1}まわり：
+      左 ${windowData.leftCm}cm ${windowData.leftMm}mm /
+      右 ${windowData.rightCm}cm ${windowData.rightMm}mm
+    </p>
+  `;
+}).join("")}
+${roomData.balcony.skipped ? `
+  <p>
+    🌤️ ベランダ：なし
+  </p>
+` : `
+  <p>
+    🌤️ 物干し金物の間隔：
+    ${roomData.balcony.poleCm}cm
+    ${roomData.balcony.poleMm}mm
+  </p>
+`}
+  `;
+}).join("")}
+${measurementData.stairs.skipped ? `
+  <p>
+    🪜 階段：なし
+  </p>
+` : `
+  <p>
+    🪜 階段 最狭幅：
+    ${measurementData.stairs.narrowCm}cm
+    ${measurementData.stairs.narrowMm}mm
+  </p>
+
+  <p>
+    📏 階段 天井までの高さ：
+    ${measurementData.stairs.heightCm}cm
+    ${measurementData.stairs.heightMm}mm
+  </p>
+
+  <p>
+    ↪️ 曲がり角：
+    ${measurementData.stairs.noCorner ? "なし" : "あり"}
+  </p>
+
+  ${!measurementData.stairs.noCorner ? `
+    <p>
+      ↪️ 曲がる前の幅：
+      ${measurementData.stairs.beforeCm}cm
+      ${measurementData.stairs.beforeMm}mm
+    </p>
+
+    <p>
+      ↪️ 曲がった先の幅：
+      ${measurementData.stairs.afterCm}cm
+      ${measurementData.stairs.afterMm}mm
+    </p>
+
+    <p>
+      📐 角の対角寸法：
+      ${measurementData.stairs.diagonalCm}cm
+      ${measurementData.stairs.diagonalMm}mm
+    </p>
+  ` : ""}
+`}
+  `;
+}
   function showCommonResult() {
   commonResultContent.innerHTML = `
     <p>
@@ -2331,7 +2534,23 @@ stairsNext.addEventListener("click", function () {
     alert("勇者よ、階段の曲がり角に測り残しがあるぞ📏");
     return;
   }
-
+measurementData.stairs = {
+  skipped: false,
+  narrowCm: document.getElementById("stairs-narrow-cm").value,
+  narrowMm: document.getElementById("stairs-narrow-mm").value,
+  heightCm: document.getElementById("stairs-height-cm").value,
+  heightMm: document.getElementById("stairs-height-mm").value,
+  noCorner: stairsNoCorner.checked,
+  beforeCm: document.getElementById("stairs-before-cm").value,
+  beforeMm: document.getElementById("stairs-before-mm").value,
+  afterCm: document.getElementById("stairs-after-cm").value,
+  afterMm: document.getElementById("stairs-after-mm").value,
+  diagonalCm: document.getElementById("stairs-diagonal-cm").value,
+  diagonalMm: document.getElementById("stairs-diagonal-mm").value
+};
+  measurementData.stairs = {
+  skipped: true
+};
    stairsScreen.classList.add("hidden");
   finalCheckScreen.classList.remove("hidden");
 });
@@ -2345,7 +2564,7 @@ finalCheckReview.addEventListener("click", function () {
 });
 finalCheckComplete.addEventListener("click", function () {
   finalCheckScreen.classList.add("hidden");
-  gameClearScreen.classList.remove("hidden");
+  finalResultScreen.classList.remove("hidden");
 });
 
 
