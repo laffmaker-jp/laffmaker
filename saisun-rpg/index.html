@@ -1206,6 +1206,7 @@ const measurementData = {
 
 let commonEditMode = null;
   let roomEditMode = null;
+  let stairsEditMode = false;
  let currentRoomData = {
   windows: [],
   emergencyWindows: [],
@@ -1778,6 +1779,14 @@ ${measurementData.stairs.skipped ? `
 `}
   `;
 }
+  finalResultContent.addEventListener("click", function (event) {
+  if (event.target.id === "edit-final-stairs") {
+    stairsEditMode = true;
+
+    finalResultScreen.classList.add("hidden");
+    stairsScreen.classList.remove("hidden");
+  }
+});
   function showCommonResult() {
   commonResultContent.innerHTML = `
     <p>
@@ -2551,12 +2560,28 @@ measurementData.stairs = {
   measurementData.stairs = {
   skipped: true
 };
-   stairsScreen.classList.add("hidden");
+  stairsScreen.classList.add("hidden");
+
+if (stairsEditMode) {
+  stairsEditMode = false;
+
+  showFinalResult();
+  finalResultScreen.classList.remove("hidden");
+} else {
   finalCheckScreen.classList.remove("hidden");
+}
 });
 stairsSkip.addEventListener("click", function () {
-  stairsScreen.classList.add("hidden");
+stairsScreen.classList.add("hidden");
+
+if (stairsEditMode) {
+  stairsEditMode = false;
+
+  showFinalResult();
+  finalResultScreen.classList.remove("hidden");
+} else {
   finalCheckScreen.classList.remove("hidden");
+}
 });
 finalCheckReview.addEventListener("click", function () {
   finalCheckScreen.classList.add("hidden");
@@ -2564,7 +2589,9 @@ finalCheckReview.addEventListener("click", function () {
 });
 finalCheckComplete.addEventListener("click", function () {
   finalCheckScreen.classList.add("hidden");
-
+<button class="sub-button" type="button" id="edit-final-stairs">
+  ↩ 階段を修正
+</button>
   showFinalResult();
 
   finalResultScreen.classList.remove("hidden");
