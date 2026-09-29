@@ -925,6 +925,9 @@
 
     <button class="main-button" type="button" id="balcony-next">
       ▶ 次へ
+      <button class="sub-button" type="button" id="balcony-skip">
+  🌤️ ベランダなし
+</button>
     </button>
 
   </div>
@@ -1154,6 +1157,7 @@ const emergencyWindowSkip = document.getElementById("emergency-window-skip");
 const addEmergencyWindowButton = document.getElementById("add-emergency-window"); 
 const balconyScreen = document.getElementById("balcony-screen");
 const balconyNext = document.getElementById("balcony-next");
+  const balconySkip = document.getElementById("balcony-skip");
 const roomCompleteScreen = document.getElementById("room-complete-screen");
 const nextRoomYes = document.getElementById("next-room-yes");
 const nextRoomNo = document.getElementById("next-room-no");
@@ -1494,11 +1498,17 @@ function showRoomResult() {
       `;
     }).join("")}
 
-    <p>
-      🌤️ 物干し金物の間隔：
-      ${roomData.balcony.poleCm}cm
-      ${roomData.balcony.poleMm}mm
-    </p>
+   ${roomData.balcony.skipped ? `
+  <p>
+    🌤️ ベランダ：なし
+  </p>
+` : `
+  <p>
+    🌤️ 物干し金物の間隔：
+    ${roomData.balcony.poleCm}cm
+    ${roomData.balcony.poleMm}mm
+  </p>
+`}
   `;
 }
 roomResultNext.addEventListener("click", function () {
@@ -2059,6 +2069,24 @@ showRoomResult();
 roomResultScreen.classList.remove("hidden");
 });
 
+  balconySkip.addEventListener("click", function () {
+  currentRoomData.balcony = {
+    skipped: true
+  };
+
+  measurementData.rooms.push({
+    roomNumber: currentRoomNumber,
+    windows: currentRoomData.windows,
+    emergencyWindows: currentRoomData.emergencyWindows,
+    emergencySkipped: currentRoomData.emergencySkipped,
+    balcony: currentRoomData.balcony
+  });
+
+  balconyScreen.classList.add("hidden");
+  showRoomResult();
+  roomResultScreen.classList.remove("hidden");
+});
+  
   nextRoomYes.addEventListener("click", function () {
      currentRoomData = {
     windows: [],
