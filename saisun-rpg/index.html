@@ -580,7 +580,7 @@
     <p class="check-text">
       この部屋の採寸結果を確認しよう。
     </p>
-
+<div id="room-result-photos"></div>
     <div id="room-result-content"></div>
 
     <button class="main-button" type="button" id="room-result-next">
@@ -1130,6 +1130,7 @@ const commonResultNext = document.getElementById("common-result-next");
  const roomResultScreen = document.getElementById("room-result-screen");
 const roomResultTitle = document.getElementById("room-result-title");
 const roomResultContent = document.getElementById("room-result-content");
+  const roomResultPhotos = document.getElementById("room-result-photos");
 const roomResultNext = document.getElementById("room-result-next");
  const roomPhotoScreen = document.getElementById("room-photo-screen");
 const roomPhotoInput = document.getElementById("room-photo-input");
@@ -1419,9 +1420,51 @@ showCommonResult();
 commonResultScreen.classList.remove("hidden");
   });
 
+function showRoomResultPhotos(roomNumber) {
+  roomResultPhotos.innerHTML = "";
+
+  if (!photoDB) {
+    roomResultPhotos.innerHTML =
+      "<p>📸 写真を読み込めませんでした。</p>";
+    return;
+  }
+
+  const transaction = photoDB.transaction(
+    "roomPhotos",
+    "readonly"
+  );
+
+  const store = transaction.objectStore("roomPhotos");
+  const request = store.getAll();
+
+  request.onsuccess = function () {
+    const roomPhotos = request.result.filter(function (photoData) {
+      return photoData.roomNumber === roomNumber;
+    });
+
+    roomPhotos.forEach(function (photoData) {
+      const photoUrl = URL.createObjectURL(photoData.photo);
+
+      const photoItem = document.createElement("div");
+
+      photoItem.innerHTML = `
+        <p>${photoData.direction}</p>
+        <img
+          src="${photoUrl}"
+          alt="${photoData.direction}"
+          style="width:100%; height:auto; border-radius:14px; margin-top:8px;"
+        >
+      `;
+
+      roomResultPhotos.appendChild(photoItem);
+    });
+  };
+}
+  
 function showRoomResult() {
   const roomData =
     measurementData.rooms[measurementData.rooms.length - 1];
+  showRoomResultPhotos(roomData.roomNumber);
 
   roomResultTitle.textContent =
     "ROOM " + roomData.roomNumber + " 攻略完了！✨";
