@@ -2564,10 +2564,15 @@ finalCheckReview.addEventListener("click", function () {
 });
 finalCheckComplete.addEventListener("click", function () {
   finalCheckScreen.classList.add("hidden");
+
+  showFinalResult();
+
   finalResultScreen.classList.remove("hidden");
 });
-
-
+finalResultComplete.addEventListener("click", function () {
+  finalResultScreen.classList.add("hidden");
+  gameClearScreen.classList.remove("hidden");
+});
   
 </script>
 </body>
