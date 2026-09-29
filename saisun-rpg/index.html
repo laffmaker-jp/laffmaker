@@ -928,7 +928,7 @@
       <button class="sub-button" type="button" id="balcony-skip">
   🌤️ ベランダなし
 </button>
-    </button>
+    
 
   </div>
 </section>
@@ -1503,6 +1503,10 @@ function showRoomResult() {
       `;
     }).join("")}
 
+<button class="sub-button" type="button" id="edit-room-emergency">
+  ↩ 窓まわりを修正
+</button>
+
    ${roomData.balcony.skipped ? `
   <p>
     🌤️ ベランダ：なし
@@ -1523,6 +1527,12 @@ function showRoomResult() {
     roomResultScreen.classList.add("hidden");
     windowScreen.classList.remove("hidden");
   }
+    if (event.target.id === "edit-room-emergency") {
+  roomEditMode = "emergency";
+
+  roomResultScreen.classList.add("hidden");
+  emergencyWindowScreen.classList.remove("hidden");
+}
 });
 roomResultNext.addEventListener("click", function () {
   roomResultScreen.classList.add("hidden");
@@ -2059,8 +2069,24 @@ currentRoomData.emergencyWindows = Array.from(emergencyWindowItems).map(function
 });
 
 currentRoomData.emergencySkipped = false;
-  emergencyWindowScreen.classList.add("hidden");
-  balconyScreen.classList.remove("hidden");
+
+emergencyWindowScreen.classList.add("hidden");
+
+if (roomEditMode === "emergency") {
+  const roomData =
+    measurementData.rooms[measurementData.rooms.length - 1];
+
+  roomData.emergencyWindows = currentRoomData.emergencyWindows;
+  roomData.emergencySkipped = false;
+
+  roomEditMode = null;
+
+  showRoomResult();
+  roomResultScreen.classList.remove("hidden");
+  return;
+}
+
+balconyScreen.classList.remove("hidden");
 });
 
 emergencyWindowSkip.addEventListener("click", function () {
@@ -2068,8 +2094,23 @@ emergencyWindowSkip.addEventListener("click", function () {
   currentRoomData.emergencySkipped = true;
 
   emergencyWindowScreen.classList.add("hidden");
+
+  if (roomEditMode === "emergency") {
+    const roomData =
+      measurementData.rooms[measurementData.rooms.length - 1];
+
+    roomData.emergencyWindows = [];
+    roomData.emergencySkipped = true;
+
+    roomEditMode = null;
+
+    showRoomResult();
+    roomResultScreen.classList.remove("hidden");
+    return;
+  }
+
   balconyScreen.classList.remove("hidden");
-}); 
+});
 
 balconyNext.addEventListener("click", function () {
   const poleCm = document.getElementById("balcony-pole-cm").value;
