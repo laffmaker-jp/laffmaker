@@ -2562,9 +2562,7 @@ measurementData.stairs = {
   diagonalCm: document.getElementById("stairs-diagonal-cm").value,
   diagonalMm: document.getElementById("stairs-diagonal-mm").value
 };
-  measurementData.stairs = {
-  skipped: true
-};
+ 
   stairsScreen.classList.add("hidden");
 
 if (stairsEditMode) {
@@ -2577,6 +2575,9 @@ if (stairsEditMode) {
 }
 });
 stairsSkip.addEventListener("click", function () {
+    measurementData.stairs = {
+    skipped: true
+  };
 stairsScreen.classList.add("hidden");
 
 if (stairsEditMode) {
