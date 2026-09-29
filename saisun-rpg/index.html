@@ -1452,13 +1452,16 @@ function showRoomResultPhotos(roomNumber) {
 
       const photoItem = document.createElement("div");
 
-     photoItem.innerHTML = `
-  <p>${photoData.direction}</p>
+    photoItem.innerHTML = `
   <img
     src="${photoUrl}"
     alt="${photoData.direction}"
     style="width:100%; height:auto; border-radius:14px; margin-top:8px;"
   >
+
+  <p style="margin-top:12px;">
+    ${photoData.direction}
+  </p>
 
   <button
     class="sub-button"
