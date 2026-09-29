@@ -1481,7 +1481,10 @@ function showRoomResultPhotos(roomNumber) {
   }
 
   editingPhotoId = Number(button.dataset.photoId);
+const directionText =
+  button.parentElement.querySelector("p").textContent;
 
+photoDirection.textContent = directionText;
   roomResultScreen.classList.add("hidden");
   roomPhotoScreen.classList.remove("hidden");
 
