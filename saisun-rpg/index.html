@@ -1452,20 +1452,41 @@ function showRoomResultPhotos(roomNumber) {
 
       const photoItem = document.createElement("div");
 
-      photoItem.innerHTML = `
-        <p>${photoData.direction}</p>
-        <img
-          src="${photoUrl}"
-          alt="${photoData.direction}"
-          style="width:100%; height:auto; border-radius:14px; margin-top:8px;"
-        >
-      `;
+     photoItem.innerHTML = `
+  <p>${photoData.direction}</p>
+  <img
+    src="${photoUrl}"
+    alt="${photoData.direction}"
+    style="width:100%; height:auto; border-radius:14px; margin-top:8px;"
+  >
+
+  <button
+    class="sub-button"
+    type="button"
+    data-photo-id="${photoData.id}"
+  >
+    ↩ この写真を撮り直す
+  </button>
+`;
 
       roomResultPhotos.appendChild(photoItem);
     });
   };
 }
-  
+ roomResultPhotos.addEventListener("click", function (event) {
+  const button = event.target.closest("[data-photo-id]");
+
+  if (!button) {
+    return;
+  }
+
+  editingPhotoId = Number(button.dataset.photoId);
+
+  roomResultScreen.classList.add("hidden");
+  roomPhotoScreen.classList.remove("hidden");
+
+  roomPhotoInput.click();
+}); 
 function showRoomResult() {
   const roomData =
     measurementData.rooms[measurementData.rooms.length - 1];
@@ -1696,7 +1717,7 @@ const photoDirections = [
 let currentPhotoIndex = 0;
 let currentPhotoFile = null;
 let currentRoomNumber = 1;
-
+let editingPhotoId = null;
   
 // 「写真を撮る」
 takePhotoButton.addEventListener("click", function () {
@@ -1756,7 +1777,36 @@ const transaction = photoDB.transaction(
 );
 
   const store = transaction.objectStore("roomPhotos");
+if (editingPhotoId !== null) {
+  const getRequest = store.get(editingPhotoId);
 
+  getRequest.onsuccess = function () {
+  const photoData = getRequest.result;
+
+  photoData.photo = currentPhotoFile;
+  photoData.createdAt = new Date().toISOString();
+
+  const putRequest = store.put(photoData);
+
+  putRequest.onsuccess = function () {
+    editingPhotoId = null;
+    currentPhotoFile = null;
+    roomPhotoInput.value = "";
+
+    photoPreview.removeAttribute("src");
+    photoPreviewWrap.classList.add("hidden");
+    photoConfirmButtons.classList.add("hidden");
+    takePhotoButton.classList.remove("hidden");
+
+    roomPhotoScreen.classList.add("hidden");
+
+    showRoomResult();
+    roomResultScreen.classList.remove("hidden");
+  };
+};
+
+  return;
+}
   store.add({
     roomNumber: currentRoomNumber,
     direction: photoDirections[currentPhotoIndex],
