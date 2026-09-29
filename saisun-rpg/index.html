@@ -1180,6 +1180,7 @@ const measurementData = {
 };
 
 let commonEditMode = null;
+  let roomEditMode = null;
  let currentRoomData = {
   windows: [],
   emergencyWindows: [],
@@ -1481,9 +1482,13 @@ function showRoomResult() {
           幅 ${windowData.widthCm}cm ${windowData.widthMm}mm /
           高さ ${windowData.heightCm}cm ${windowData.heightMm}mm
         </p>
+     
       `;
     }).join("")}
-
+   
+ <button class="sub-button" type="button" id="edit-room-window">
+  ↩ 窓を修正
+</button>
     ${roomData.emergencySkipped ? `
       <p>
         ⚡ 緊急クエスト：スキップ
@@ -1511,6 +1516,14 @@ function showRoomResult() {
 `}
   `;
 }
+  roomResultContent.addEventListener("click", function (event) {
+  if (event.target.id === "edit-room-window") {
+    roomEditMode = "window";
+
+    roomResultScreen.classList.add("hidden");
+    windowScreen.classList.remove("hidden");
+  }
+});
 roomResultNext.addEventListener("click", function () {
   roomResultScreen.classList.add("hidden");
   roomCompleteScreen.classList.remove("hidden");
@@ -2006,8 +2019,20 @@ if (!isMeasured(widthCm) || !isMeasured(heightCm)) {
     };
   });
 
+ 
   windowScreen.classList.add("hidden");
-  windowScreen.classList.add("hidden");
+
+if (roomEditMode === "window") {
+  measurementData.rooms[measurementData.rooms.length - 1].windows =
+    currentRoomData.windows;
+
+  roomEditMode = null;
+
+  showRoomResult();
+  roomResultScreen.classList.remove("hidden");
+  return;
+}
+
 emergencyWindowScreen.classList.remove("hidden");
 });
 
