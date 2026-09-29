@@ -1517,6 +1517,9 @@ function showRoomResult() {
     ${roomData.balcony.poleCm}cm
     ${roomData.balcony.poleMm}mm
   </p>
+  <button class="sub-button" type="button" id="edit-room-balcony">
+  ↩ ベランダを修正
+</button>
 `}
   `;
 }
@@ -1532,6 +1535,12 @@ function showRoomResult() {
 
   roomResultScreen.classList.add("hidden");
   emergencyWindowScreen.classList.remove("hidden");
+}
+    if (event.target.id === "edit-room-balcony") {
+  roomEditMode = "balcony";
+
+  roomResultScreen.classList.add("hidden");
+  balconyScreen.classList.remove("hidden");
 }
 });
 roomResultNext.addEventListener("click", function () {
@@ -2123,6 +2132,17 @@ currentRoomData.balcony = {
   poleCm: document.getElementById("balcony-pole-cm").value,
   poleMm: document.getElementById("balcony-pole-mm").value
 };
+  if (roomEditMode === "balcony") {
+  measurementData.rooms[measurementData.rooms.length - 1].balcony =
+    currentRoomData.balcony;
+
+  roomEditMode = null;
+
+  balconyScreen.classList.add("hidden");
+  showRoomResult();
+  roomResultScreen.classList.remove("hidden");
+  return;
+}
   measurementData.rooms.push({
   roomNumber: currentRoomNumber,
   windows: currentRoomData.windows,
@@ -2139,7 +2159,17 @@ roomResultScreen.classList.remove("hidden");
   currentRoomData.balcony = {
     skipped: true
   };
+if (roomEditMode === "balcony") {
+  measurementData.rooms[measurementData.rooms.length - 1].balcony =
+    currentRoomData.balcony;
 
+  roomEditMode = null;
+
+  balconyScreen.classList.add("hidden");
+  showRoomResult();
+  roomResultScreen.classList.remove("hidden");
+  return;
+}
   measurementData.rooms.push({
     roomNumber: currentRoomNumber,
     windows: currentRoomData.windows,
