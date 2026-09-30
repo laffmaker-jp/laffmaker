@@ -1504,22 +1504,7 @@ function showRoomResultPhotos(roomNumber) {
     photos.forEach(function (photoData) {
   const photoUrl = URL.createObjectURL(photoData.photo);
 
-  const photoItem = document.createElement("div");
-
-  photoItem.innerHTML = `
-    <p>ROOM ${photoData.roomNumber}｜${photoData.direction}</p>
-
-    <img
-      src="${photoUrl}"
-      alt="${photoData.direction}"
-      style="width:100%; height:auto; border-radius:14px; margin-top:8px;"
-    >
-  `;
-
-  recordPhotos.appendChild(photoItem);
-});
-};
-}
+  
   request.onsuccess = function () {
     const roomPhotos = request.result.filter(function (photoData) {
       return photoData.roomNumber === roomNumber;
@@ -1570,7 +1555,27 @@ function showRoomResultPhotos(roomNumber) {
 
   const store = transaction.objectStore("roomPhotos");
   const request = store.getAll();
-}
+request.onsuccess = function () {
+  const photos = request.result;
+  photos.forEach(function (photoData) {
+  const photoUrl = URL.createObjectURL(photoData.photo);
+
+  const photoItem = document.createElement("div");
+
+  photoItem.innerHTML = `
+    <p>ROOM ${photoData.roomNumber}｜${photoData.direction}</p>
+
+    <img
+      src="${photoUrl}"
+      alt="${photoData.direction}"
+      style="width:100%; height:auto; border-radius:14px; margin-top:8px;"
+    >
+  `;
+
+  recordPhotos.appendChild(photoItem);
+});
+};
+    }
  roomResultPhotos.addEventListener("click", function (event) {
   const button = event.target.closest("[data-photo-id]");
 
