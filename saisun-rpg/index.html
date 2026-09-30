@@ -1499,10 +1499,7 @@ function showRoomResultPhotos(roomNumber) {
 
   const store = transaction.objectStore("roomPhotos");
   const request = store.getAll();
-  request.onsuccess = function () {
-  const photos = request.result;
-    photos.forEach(function (photoData) {
-  const photoUrl = URL.createObjectURL(photoData.photo);
+ 
 
   
   request.onsuccess = function () {
