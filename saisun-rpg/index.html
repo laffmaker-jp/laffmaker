@@ -1114,6 +1114,29 @@
 </button>
 </section>
 
+<!-- 冒険の記録 -->
+<section class="screen hidden" id="record-screen">
+  <div class="screen-inner">
+
+    <p class="quest-label">ADVENTURE RECORD</p>
+
+    <h2 class="check-title">
+      冒険の記録📜
+    </h2>
+
+    <p class="check-text">
+      採寸の旅で集めた記録を持ち帰ろう。
+    </p>
+
+    <div id="record-content"></div>
+
+    <button class="main-button" type="button" id="share-record">
+      📤 共有する
+    </button>
+
+  </div>
+</section>
+    
 </main>
 <script>
   const startButton = document.getElementById("start-button");
@@ -1197,7 +1220,10 @@ const finalCheckComplete = document.getElementById("final-check-complete");
 const finalResultContent = document.getElementById("final-result-content");
 const finalResultComplete = document.getElementById("final-result-complete"); 
 const gameClearScreen = document.getElementById("game-clear-screen");
-
+const receiveRecord = document.getElementById("receive-record");
+const recordScreen = document.getElementById("record-screen");
+const recordContent = document.getElementById("record-content");
+  
 const measurementData = {
   entrance: {},
   route: {},
@@ -2607,7 +2633,13 @@ finalResultComplete.addEventListener("click", function () {
   finalResultScreen.classList.add("hidden");
   gameClearScreen.classList.remove("hidden");
 });
-  
+receiveRecord.addEventListener("click", function () {
+  recordContent.innerHTML = finalResultContent.innerHTML;
+  recordContent.querySelector("#edit-final-stairs")?.remove();
+
+  gameClearScreen.classList.add("hidden");
+  recordScreen.classList.remove("hidden");
+});
 </script>
 </body>
 </html>
