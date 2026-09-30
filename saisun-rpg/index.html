@@ -1129,6 +1129,7 @@
     </p>
 
     <div id="record-content"></div>
+    <div id="record-photos"></div>
 
     <button class="main-button" type="button" id="share-record">
       📤 共有する
@@ -1223,6 +1224,7 @@ const gameClearScreen = document.getElementById("game-clear-screen");
 const receiveRecord = document.getElementById("receive-record");
 const recordScreen = document.getElementById("record-screen");
 const recordContent = document.getElementById("record-content");
+  const recordPhotos = document.getElementById("record-photos");
 const shareRecord = document.getElementById("share-record");
   
 const measurementData = {
@@ -1497,7 +1499,27 @@ function showRoomResultPhotos(roomNumber) {
 
   const store = transaction.objectStore("roomPhotos");
   const request = store.getAll();
+  request.onsuccess = function () {
+  const photos = request.result;
+    photos.forEach(function (photoData) {
+  const photoUrl = URL.createObjectURL(photoData.photo);
 
+  const photoItem = document.createElement("div");
+
+  photoItem.innerHTML = `
+    <p>ROOM ${photoData.roomNumber}｜${photoData.direction}</p>
+
+    <img
+      src="${photoUrl}"
+      alt="${photoData.direction}"
+      style="width:100%; height:auto; border-radius:14px; margin-top:8px;"
+    >
+  `;
+
+  recordPhotos.appendChild(photoItem);
+});
+};
+}
   request.onsuccess = function () {
     const roomPhotos = request.result.filter(function (photoData) {
       return photoData.roomNumber === roomNumber;
@@ -1531,6 +1553,23 @@ function showRoomResultPhotos(roomNumber) {
       roomResultPhotos.appendChild(photoItem);
     });
   };
+}
+  function showRecordPhotos() {
+  recordPhotos.innerHTML = "";
+
+  if (!photoDB) {
+    recordPhotos.innerHTML =
+      "<p>📸 写真を読み込めませんでした。</p>";
+    return;
+  }
+
+  const transaction = photoDB.transaction(
+    "roomPhotos",
+    "readonly"
+  );
+
+  const store = transaction.objectStore("roomPhotos");
+  const request = store.getAll();
 }
  roomResultPhotos.addEventListener("click", function (event) {
   const button = event.target.closest("[data-photo-id]");
@@ -2637,7 +2676,7 @@ finalResultComplete.addEventListener("click", function () {
 receiveRecord.addEventListener("click", function () {
   recordContent.innerHTML = finalResultContent.innerHTML;
   recordContent.querySelector("#edit-final-stairs")?.remove();
-
+showRecordPhotos();
   gameClearScreen.classList.add("hidden");
   recordScreen.classList.remove("hidden");
 });
