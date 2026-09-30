@@ -398,3 +398,12 @@ button {
   height: 100svh;
   object-fit: cover;
 }
+.game-clear-receive {
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  max-width: 420px;
+  z-index: 2;
+}
