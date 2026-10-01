@@ -2761,14 +2761,36 @@ testRequest.onsuccess = async function () {
       const photoData = roomPhotos[index];
 
       const imageData = await new Promise(function (resolve) {
-        const reader = new FileReader();
+  const imageUrl = URL.createObjectURL(photoData.photo);
+  const img = new Image();
 
-        reader.onload = function () {
-          resolve(reader.result);
-        };
+  img.onload = function () {
+    const canvas = document.createElement("canvas");
 
-        reader.readAsDataURL(photoData.photo);
-      });
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    const normalizedImage = canvas.toDataURL(
+      "image/jpeg",
+      0.9
+    );
+
+    URL.revokeObjectURL(imageUrl);
+    resolve(normalizedImage);
+  };
+
+  img.src = imageUrl;
+});
 
       const col = index % 2;
       const row = Math.floor(index / 2);
