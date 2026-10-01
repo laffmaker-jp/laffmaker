@@ -2688,7 +2688,7 @@ showRecordPhotos();
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF();
 
-  pdf.text("SAISUN RPG TEST", 20, 20);
+  pdf.text(shareText, 20, 20);
   pdf.save("saisun-rpg-test.pdf");
 
   return;
