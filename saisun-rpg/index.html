@@ -2707,8 +2707,15 @@ pdf.addFont("NotoSansJP-Regular.ttf", "NotoSansJP", "normal");
 pdf.setFont("NotoSansJP");
 
 
-    pdf.text("採寸RPG 冒険の記録", 20, 20);
-pdf.save("saisun-rpg-japanese-test.pdf");
+   pdf.setFontSize(14);
+pdf.text("採寸RPG 冒険の記録", 20, 20);
+
+pdf.setFontSize(10);
+
+const resultLines = pdf.splitTextToSize(shareText, 170);
+pdf.text(resultLines, 20, 32);
+
+pdf.save("saisun-rpg-result-test.pdf");
 return;
   if (!photoDB) {
     alert("写真を読み込めませんでした。");
