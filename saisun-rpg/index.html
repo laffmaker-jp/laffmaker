@@ -2708,7 +2708,7 @@ showRecordPhotos();
         ? blob
         : new File(
             [blob],
-            `room-${photoData.roomNumber}-${index + 1}.jpg`,
+            `ROOM${photoData.roomNumber}_${photoData.direction}.jpg`,
             { type: blob.type || "image/jpeg" }
           );
     });
