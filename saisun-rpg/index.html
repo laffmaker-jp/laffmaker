@@ -2715,7 +2715,37 @@ pdf.setFontSize(10);
 const resultLines = pdf.splitTextToSize(shareText, 170);
 pdf.text(resultLines, 20, 32);
 
-pdf.save("saisun-rpg-result-test.pdf");
+if (!photoDB) {
+  alert("写真を読み込めませんでした。");
+  return;
+}
+
+const testTransaction = photoDB.transaction(
+  "roomPhotos",
+  "readonly"
+);
+
+const testStore = testTransaction.objectStore("roomPhotos");
+const testRequest = testStore.getAll();
+
+testRequest.onsuccess = function () {
+  const testPhotos = testRequest.result;
+
+  if (testPhotos.length === 0) {
+    alert("写真がありません。");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function () {
+    pdf.addImage(reader.result, "JPEG", 20, 100, 80, 60);
+    pdf.save("saisun-rpg-photo-test.pdf");
+  };
+
+  reader.readAsDataURL(testPhotos[0].photo);
+};
+
 return;
   if (!photoDB) {
     alert("写真を読み込めませんでした。");
