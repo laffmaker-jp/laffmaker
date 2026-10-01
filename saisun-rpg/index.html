@@ -2685,12 +2685,67 @@ showRecordPhotos();
   shareRecord.addEventListener("click", async function () {
   const shareText = recordContent.innerText;
 
-  if (navigator.share) {
-    await navigator.share({
-      title: "採寸RPG📏 冒険の記録",
-      text: shareText
-    });
+  if (!photoDB) {
+    alert("写真を読み込めませんでした。");
+    return;
   }
+
+  const transaction = photoDB.transaction(
+    "roomPhotos",
+    "readonly"
+  );
+
+  const store = transaction.objectStore("roomPhotos");
+  const request = store.getAll();
+
+  request.onsuccess = async function () {
+    const photos = request.result;
+
+    const files = photos.map(function (photoData, index) {
+      const blob = photoData.photo;
+
+      return blob instanceof File
+        ? blob
+        : new File(
+            [blob],
+            `room-${photoData.roomNumber}-${index + 1}.jpg`,
+            { type: blob.type || "image/jpeg" }
+          );
+    });
+
+    const shareData = {
+      title: "採寸RPG📏 冒険の記録",
+      text: shareText,
+      files: files
+    };
+
+        if (
+      navigator.share &&
+      navigator.canShare &&
+      navigator.canShare({ files: files })
+    ) {
+      try {
+        await navigator.share(shareData);
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          alert("共有できませんでした。");
+        }
+      }
+    } else if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "採寸RPG📏 冒険の記録",
+          text: shareText
+        });
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          alert("共有できませんでした。");
+        }
+      }
+    } else {
+      alert("このブラウザでは共有機能を使えません。");
+    }
+  };
 });
 </script>
 </body>
