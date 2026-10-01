@@ -2736,47 +2736,67 @@ testRequest.onsuccess = function () {
     return;
   }
 
-const room1Photos = testPhotos.filter(function (photoData) {
-  return photoData.roomNumber === 1;
-});
+testRequest.onsuccess = async function () {
+  const testPhotos = testRequest.result;
 
-pdf.addPage();
-pdf.setFontSize(14);
-pdf.text("ROOM 1　写真記録", 20, 20);
+  if (testPhotos.length === 0) {
+    alert("写真がありません。");
+    return;
+  }
 
-let loadedCount = 0;
+  const roomNumbers = [
+    ...new Set(
+      testPhotos.map(function (photoData) {
+        return photoData.roomNumber;
+      })
+    )
+  ].sort(function (a, b) {
+    return a - b;
+  });
 
-room1Photos.forEach(function (photoData, index) {
-  const reader = new FileReader();
+  for (const roomNumber of roomNumbers) {
+    const roomPhotos = testPhotos.filter(function (photoData) {
+      return photoData.roomNumber === roomNumber;
+    });
 
-  reader.onload = function () {
-    const col = index % 2;
-    const row = Math.floor(index / 2);
+    pdf.addPage();
+    pdf.setFontSize(14);
+    pdf.text(`ROOM ${roomNumber}　写真記録`, 20, 20);
 
-    const x = 15 + col * 95;
-    const y = 35 + row * 80;
+    for (let index = 0; index < roomPhotos.length; index++) {
+      const photoData = roomPhotos[index];
 
-    pdf.setFontSize(9);
-    pdf.text(photoData.direction, x, y);
+      const imageData = await new Promise(function (resolve) {
+        const reader = new FileReader();
 
-    pdf.addImage(
-      reader.result,
-      "JPEG",
-      x,
-      y + 4,
-      85,
-      65
-    );
+        reader.onload = function () {
+          resolve(reader.result);
+        };
 
-    loadedCount++;
+        reader.readAsDataURL(photoData.photo);
+      });
 
-    if (loadedCount === room1Photos.length) {
-      pdf.save("saisun-rpg-room1-test.pdf");
+      const col = index % 2;
+      const row = Math.floor(index / 2);
+
+      const x = 15 + col * 95;
+      const y = 35 + row * 80;
+
+      pdf.setFontSize(9);
+      pdf.text(photoData.direction, x, y);
+
+      pdf.addImage(
+        imageData,
+        "JPEG",
+        x,
+        y + 4,
+        85,
+        65
+      );
     }
-  };
+  }
 
-  reader.readAsDataURL(photoData.photo);
-});  
+  pdf.save("saisun-rpg-all-rooms-test.pdf");
 };
 
 return;
