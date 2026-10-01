@@ -2692,7 +2692,9 @@ const pdf = new jsPDF();
 
 const canvas = await html2canvas(recordContent, {
   scale: 2,
-  backgroundColor: "#ffffff"
+  backgroundColor: "#ffffff",
+  useCORS: true,
+  foreignObjectRendering: true
 });
 
 const imageData = canvas.toDataURL("image/jpeg", 0.9);
