@@ -2728,13 +2728,7 @@ const testTransaction = photoDB.transaction(
 const testStore = testTransaction.objectStore("roomPhotos");
 const testRequest = testStore.getAll();
 
-testRequest.onsuccess = function () {
-  const testPhotos = testRequest.result;
 
-  if (testPhotos.length === 0) {
-    alert("写真がありません。");
-    return;
-  }
 
 testRequest.onsuccess = async function () {
   const testPhotos = testRequest.result;
