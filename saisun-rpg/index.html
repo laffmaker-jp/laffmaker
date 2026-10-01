@@ -2690,7 +2690,21 @@ showRecordPhotos();
    const { jsPDF } = window.jspdf;
 const pdf = new jsPDF();
 
+const fontResponse = await fetch("NotoSansJP-Regular.ttf");
+const fontBuffer = await fontResponse.arrayBuffer();
 
+let binary = "";
+const bytes = new Uint8Array(fontBuffer);
+
+for (let i = 0; i < bytes.length; i++) {
+  binary += String.fromCharCode(bytes[i]);
+}
+
+const fontBase64 = btoa(binary);
+
+pdf.addFileToVFS("NotoSansJP-Regular.ttf", fontBase64);
+pdf.addFont("NotoSansJP-Regular.ttf", "NotoSansJP", "normal");
+pdf.setFont("NotoSansJP");
     
   if (!photoDB) {
     alert("写真を読み込めませんでした。");
