@@ -2790,7 +2790,32 @@ testRequest.onsuccess = async function () {
     }
   }
 
-  pdf.save("saisun-rpg-all-rooms-test.pdf");
+ const pdfBlob = pdf.output("blob");
+
+const pdfFile = new File(
+  [pdfBlob],
+  "採寸RPG_冒険の記録.pdf",
+  { type: "application/pdf" }
+);
+
+if (
+  navigator.share &&
+  navigator.canShare &&
+  navigator.canShare({ files: [pdfFile] })
+) {
+  try {
+    await navigator.share({
+      title: "採寸RPG📏 冒険の記録",
+      files: [pdfFile]
+    });
+  } catch (error) {
+    if (error.name !== "AbortError") {
+      alert("PDFを共有できませんでした。");
+    }
+  }
+} else {
+  pdf.save("採寸RPG_冒険の記録.pdf");
+}
 };
 
 return;
