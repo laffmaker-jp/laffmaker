@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+ 
 </head>
 
 <body>
@@ -2690,19 +2690,7 @@ showRecordPhotos();
    const { jsPDF } = window.jspdf;
 const pdf = new jsPDF();
 
-const canvas = await html2canvas(recordContent, {
-  scale: 2,
-  backgroundColor: "#ffffff",
-  useCORS: true,
-  foreignObjectRendering: true
-});
 
-const imageData = canvas.toDataURL("image/jpeg", 0.9);
-
-pdf.addImage(imageData, "JPEG", 10, 10, 190, 0);
-pdf.save("saisun-rpg-test.pdf");
-
-return; 
     
   if (!photoDB) {
     alert("写真を読み込めませんでした。");
