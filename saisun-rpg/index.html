@@ -2736,14 +2736,47 @@ testRequest.onsuccess = function () {
     return;
   }
 
+const room1Photos = testPhotos.filter(function (photoData) {
+  return photoData.roomNumber === 1;
+});
+
+pdf.addPage();
+pdf.setFontSize(14);
+pdf.text("ROOM 1　写真記録", 20, 20);
+
+let loadedCount = 0;
+
+room1Photos.forEach(function (photoData, index) {
   const reader = new FileReader();
 
   reader.onload = function () {
-    pdf.addImage(reader.result, "JPEG", 20, 100, 80, 60);
-    pdf.save("saisun-rpg-photo-test.pdf");
+    const col = index % 2;
+    const row = Math.floor(index / 2);
+
+    const x = 15 + col * 95;
+    const y = 35 + row * 80;
+
+    pdf.setFontSize(9);
+    pdf.text(photoData.direction, x, y);
+
+    pdf.addImage(
+      reader.result,
+      "JPEG",
+      x,
+      y + 4,
+      85,
+      65
+    );
+
+    loadedCount++;
+
+    if (loadedCount === room1Photos.length) {
+      pdf.save("saisun-rpg-room1-test.pdf");
+    }
   };
 
-  reader.readAsDataURL(testPhotos[0].photo);
+  reader.readAsDataURL(photoData.photo);
+});  
 };
 
 return;
