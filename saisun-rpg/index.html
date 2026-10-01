@@ -2685,7 +2685,13 @@ showRecordPhotos();
 });
   shareRecord.addEventListener("click", async function () {
   const shareText = recordContent.innerText;
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
 
+  pdf.text("SAISUN RPG TEST", 20, 20);
+  pdf.save("saisun-rpg-test.pdf");
+
+  return;
   if (!photoDB) {
     alert("写真を読み込めませんでした。");
     return;
