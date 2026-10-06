@@ -2721,13 +2721,12 @@ pdf.addFont("NotoSansJP-Regular.ttf", "NotoSansJP", "normal");
 pdf.setFont("NotoSansJP");
 
 
-   pdf.setFontSize(14);
-pdf.text("採寸RPG 冒険の記録", 20, 20);
+   pdf.setFontSize(18);
+pdf.text("冒険報告書", 105, 18, {
+  align: "center"
+});
 
-pdf.setFontSize(10);
 
-const resultLines = pdf.splitTextToSize(shareText, 170);
-pdf.text(resultLines, 20, 32);
 
 if (!photoDB) {
   alert("写真を読み込めませんでした。");
