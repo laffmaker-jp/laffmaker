@@ -2759,7 +2759,7 @@ pdf.setFont("NotoSansJP");
 
 
    pdf.setFontSize(18);
-pdf.text("冒険報告書", 105, 18, {
+pdf.text("冒険報告書", 110, 18, {
   align: "center"
 });
 
@@ -2792,17 +2792,13 @@ pdf.text(
 );  
 
  // 1ページ目：搬入経路の羊皮紙
-pdf.setDrawColor(120, 90, 50);
-pdf.setFillColor(245, 232, 195);
-
-pdf.roundedRect(
+pdf.addImage(
+  parchmentImage,
+  "PNG",
   108,
   30,
   90,
-  72,
-  3,
-  3,
-  "FD"
+  72
 );
 
  pdf.setTextColor(60, 45, 30);
@@ -2844,17 +2840,13 @@ if (!measurementData.route.noCorner) {
 }   
 
 // 1ページ目：洗濯機置場の羊皮紙
-pdf.setDrawColor(120, 90, 50);
-pdf.setFillColor(245, 232, 195);
-
-pdf.roundedRect(
+pdf.addImage(
+  parchmentImage,
+  "PNG",
   12,
   108,
   90,
-  72,
-  3,
-  3,
-  "FD"
+  72
 );
 
 pdf.setTextColor(60, 45, 30);
@@ -2898,18 +2890,14 @@ if (measurementData.washer.skipped) {
   );
 }
 
- // 1ページ目：冷蔵庫置場の羊皮紙
-pdf.setDrawColor(120, 90, 50);
-pdf.setFillColor(245, 232, 195);
-
-pdf.roundedRect(
+// 1ページ目：冷蔵庫置場の羊皮紙
+pdf.addImage(
+  parchmentImage,
+  "PNG",
   108,
   108,
   90,
-  72,
-  3,
-  3,
-  "FD"
+  72
 );
 
  pdf.setTextColor(60, 45, 30);
@@ -2937,18 +2925,14 @@ pdf.text(
   151
 );
 
- // 1ページ目：階段の羊皮紙
-pdf.setDrawColor(120, 90, 50);
-pdf.setFillColor(245, 232, 195);
-
-pdf.roundedRect(
+// 1ページ目：階段の羊皮紙
+pdf.addImage(
+  parchmentImage,
+  "PNG",
   12,
   186,
   90,
-  99,
-  3,
-  3,
-  "FD"
+  99
 );
 
 pdf.setTextColor(60, 45, 30);
