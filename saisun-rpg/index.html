@@ -1289,10 +1289,20 @@ measurementInputs.forEach(function (input) {
   entranceScreen.classList.remove("hidden");
 }
 
-  startButton.addEventListener("click", function () {
-    startScreen.classList.add("hidden");
-    measureCheckScreen.classList.remove("hidden");
-  });
+ startButton.addEventListener("click", function () {
+  if (photoDB) {
+    const transaction = photoDB.transaction(
+      "roomPhotos",
+      "readwrite"
+    );
+
+    const store = transaction.objectStore("roomPhotos");
+    store.clear();
+  }
+
+  startScreen.classList.add("hidden");
+  measureCheckScreen.classList.remove("hidden");
+});
 
 
   measureNo.addEventListener("click", function () {
