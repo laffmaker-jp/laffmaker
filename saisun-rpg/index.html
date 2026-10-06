@@ -2783,13 +2783,13 @@ pdf.setFontSize(10);
 pdf.text(
   `有効幅　${measurementData.entrance.widthCm}cm ${measurementData.entrance.widthMm}mm`,
   25,
-  60
+  58
 );
 
 pdf.text(
   `有効高さ　${measurementData.entrance.heightCm}cm ${measurementData.entrance.heightMm}mm`,
   25,
-  70
+  66
 );
  // 1ページ目：搬入経路の羊皮紙
 pdf.addImage(
@@ -2811,32 +2811,32 @@ pdf.setFontSize(9);
 pdf.text(
   `最狭幅　${measurementData.route.narrowCm}cm ${measurementData.route.narrowMm}mm`,
   121,
-  60
+  58
 );
 
 pdf.text(
   `曲がり角　${measurementData.route.noCorner ? "なし" : "あり"}`,
   121,
-  69
+  66
 );
 
 if (!measurementData.route.noCorner) {
   pdf.text(
     `曲がる前　${measurementData.route.beforeCm}cm ${measurementData.route.beforeMm}mm`,
     121,
-    78
+    74
   );
 
   pdf.text(
     `曲がった先　${measurementData.route.afterCm}cm ${measurementData.route.afterMm}mm`,
     121,
-    87
+    82
   );
 
   pdf.text(
     `対角寸法　${measurementData.route.diagonalCm}cm ${measurementData.route.diagonalMm}mm`,
     121,
-    96
+    90
   );
 }
    
@@ -2851,7 +2851,7 @@ pdf.addImage(
   72
 );
 
-pdf.setTextColor(60, 45, 30);
+
 
 pdf.setTextColor(60, 45, 30);
 
@@ -2861,24 +2861,24 @@ pdf.text("洗濯機置場", 25, 128);
 pdf.setFontSize(9);
 
 if (measurementData.washer.skipped) {
-  pdf.text("洗濯機置場　なし", 25, 138);
+  pdf.text("洗濯機置場　なし", 25, 136);
 } else {
   pdf.text(
     `防水パン幅　${measurementData.washer.widthCm}cm ${measurementData.washer.widthMm}mm`,
     25,
-    138
+    136
   );
 
   pdf.text(
     `防水パン奥行　${measurementData.washer.depthCm}cm ${measurementData.washer.depthMm}mm`,
     25,
-    147
+    144
   );
 
   pdf.text(
     `蛇口高さ　${measurementData.washer.faucetCm}cm ${measurementData.washer.faucetMm}mm`,
     25,
-    156
+    152
   );
 
   const drainText =
@@ -2887,9 +2887,8 @@ if (measurementData.washer.skipped) {
     measurementData.washer.drainPosition === "right" ? "右" :
     "その他";
 
-  pdf.text(`排水口　${drainText}`, 25, 165);
+  pdf.text(`排水口　${drainText}`, 25, 160);
 }
-
   
 
 // 1ページ目：冷蔵庫置場の羊皮紙
@@ -2914,19 +2913,19 @@ pdf.setFontSize(9);
 pdf.text(
   `幅　${measurementData.fridge.widthCm}cm ${measurementData.fridge.widthMm}mm`,
   121,
-  138
+  136
 );
 
 pdf.text(
   `奥行　${measurementData.fridge.depthCm}cm ${measurementData.fridge.depthMm}mm`,
   121,
-  147
+  144
 );
 
 pdf.text(
   `高さ　${measurementData.fridge.heightCm}cm ${measurementData.fridge.heightMm}mm`,
   121,
-  156
+  152
 );
 // 1ページ目：階段の羊皮紙
 pdf.addImage(
@@ -2941,23 +2940,23 @@ pdf.addImage(
 pdf.setTextColor(60, 45, 30);
 
 pdf.setFontSize(13);
-pdf.text("階段", 25, 206);
+pdf.text("階段", 25, 210);
 
 pdf.setFontSize(9);
 
 if (measurementData.stairs.skipped) {
-  pdf.text("階段　なし", 25, 216);
+  pdf.text("階段　なし", 25, 218);
 } else {
   pdf.text(
     `最狭幅　${measurementData.stairs.narrowCm}cm ${measurementData.stairs.narrowMm}mm`,
     25,
-    216
+    218
   );
 
   pdf.text(
     `天井までの高さ　${measurementData.stairs.heightCm}cm ${measurementData.stairs.heightMm}mm`,
     25,
-    225
+    226
   );
 
   pdf.text(
@@ -2970,19 +2969,19 @@ if (measurementData.stairs.skipped) {
     pdf.text(
       `曲がる前　${measurementData.stairs.beforeCm}cm ${measurementData.stairs.beforeMm}mm`,
       25,
-      243
+      242
     );
 
     pdf.text(
       `曲がった先　${measurementData.stairs.afterCm}cm ${measurementData.stairs.afterMm}mm`,
       25,
-      252
+      250
     );
 
     pdf.text(
       `対角寸法　${measurementData.stairs.diagonalCm}cm ${measurementData.stairs.diagonalMm}mm`,
       25,
-      261
+      258
     );
   }
 }
