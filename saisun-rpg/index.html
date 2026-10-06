@@ -2822,35 +2822,34 @@ pdf.setFontSize(9);
 pdf.text(
   `最狭幅　${measurementData.route.narrowCm}cm ${measurementData.route.narrowMm}mm`,
   121,
-  58
+  57
 );
 
 pdf.text(
   `曲がり角　${measurementData.route.noCorner ? "なし" : "あり"}`,
   121,
-  66
+  64
 );
 
 if (!measurementData.route.noCorner) {
   pdf.text(
     `曲がる前　${measurementData.route.beforeCm}cm ${measurementData.route.beforeMm}mm`,
     121,
-    74
+    71
   );
 
   pdf.text(
     `曲がった先　${measurementData.route.afterCm}cm ${measurementData.route.afterMm}mm`,
     121,
-    82
+    78
   );
 
   pdf.text(
     `対角寸法　${measurementData.route.diagonalCm}cm ${measurementData.route.diagonalMm}mm`,
     121,
-    90
+    85
   );
 }
-   
 
 // 1ページ目：洗濯機置場の羊皮紙
 pdf.addImage(
