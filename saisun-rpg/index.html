@@ -2726,7 +2726,37 @@ pdf.text("冒険報告書", 105, 18, {
   align: "center"
 });
 
+// 1ページ目：玄関の羊皮紙
+pdf.setDrawColor(120, 90, 50);
+pdf.setFillColor(245, 232, 195);
 
+pdf.roundedRect(
+  12,   // x
+  30,   // y
+  90,   // 幅
+  72,   // 高さ
+  3,    // 角丸 x
+  3,    // 角丸 y
+  "FD"
+);
+
+  pdf.setTextColor(60, 45, 30);
+
+pdf.setFontSize(13);
+pdf.text("玄関", 18, 42);
+
+pdf.setFontSize(10);
+pdf.text(
+  `有効幅　${measurementData.entrance.widthCm}cm ${measurementData.entrance.widthMm}mm`,
+  18,
+  55
+);
+
+pdf.text(
+  `有効高さ　${measurementData.entrance.heightCm}cm ${measurementData.entrance.heightMm}mm`,
+  18,
+  65
+);  
 
 if (!photoDB) {
   alert("写真を読み込めませんでした。");
