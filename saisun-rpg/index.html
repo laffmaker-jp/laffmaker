@@ -2730,7 +2730,18 @@ const parchmentImage = await new Promise(function (resolve) {
   reader.readAsDataURL(parchmentBlob);
 });
 
-    
+ const youhishiResponse = await fetch("youhishi.png");
+const youhishiBlob = await youhishiResponse.blob();
+
+const youhishiImage = await new Promise(function (resolve) {
+  const reader = new FileReader();
+
+  reader.onload = function () {
+    resolve(reader.result);
+  };
+
+  reader.readAsDataURL(youhishiBlob);
+});   
     
 pdf.addImage(
   boardImage,
@@ -3067,17 +3078,13 @@ pdf.text(`ROOM ${roomNumber}　冒険記録`, 105, 16, {
 });
 
 // ROOM採寸データ用：右側の縦長羊皮紙
-pdf.setDrawColor(120, 90, 50);
-pdf.setFillColor(245, 232, 195);
-
-pdf.roundedRect(
+pdf.addImage(
+  youhishiImage,
+  "PNG",
   150,
   24,
   48,
-  260,
-  3,
-  3,
-  "FD"
+  260
 );
 
     
