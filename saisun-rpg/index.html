@@ -2704,6 +2704,28 @@ const pdf = new jsPDF({
   format: "a4"
 });
 
+ const boardResponse = await fetch("board.png");
+const boardBlob = await boardResponse.blob();
+
+const boardImage = await new Promise(function (resolve) {
+  const reader = new FileReader();
+
+  reader.onload = function () {
+    resolve(reader.result);
+  };
+
+  reader.readAsDataURL(boardBlob);
+});   
+
+pdf.addImage(
+  boardImage,
+  "PNG",
+  0,
+  0,
+  210,
+  297
+);    
+
 const fontResponse = await fetch("NotoSansJP-Regular.ttf");
 const fontBuffer = await fontResponse.arrayBuffer();
 
@@ -3031,7 +3053,14 @@ testRequest.onsuccess = async function () {
     });
 
     pdf.addPage();
-
+pdf.addImage(
+  boardImage,
+  "PNG",
+  0,
+  0,
+  210,
+  297
+);
 pdf.setTextColor(60, 45, 30);
 
 pdf.setFontSize(16);
