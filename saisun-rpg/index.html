@@ -2967,6 +2967,29 @@ if (measurementData.stairs.skipped) {
   }
 }
 
+// 1ページ目：LAFFGIRL
+const takaraResponse = await fetch("takara.png");
+const takaraBlob = await takaraResponse.blob();
+
+const takaraImage = await new Promise(function (resolve) {
+  const reader = new FileReader();
+
+  reader.onload = function () {
+    resolve(reader.result);
+  };
+
+  reader.readAsDataURL(takaraBlob);
+});    
+
+ pdf.addImage(
+  takaraImage,
+  "PNG",
+  108,
+  190,
+  88,
+  88
+);
+
     
 
 if (!photoDB) {
@@ -3008,8 +3031,96 @@ testRequest.onsuccess = async function () {
     });
 
     pdf.addPage();
-    pdf.setFontSize(14);
-    pdf.text(`ROOM ${roomNumber}　写真記録`, 20, 20);
+
+pdf.setTextColor(60, 45, 30);
+
+pdf.setFontSize(16);
+pdf.text(`ROOM ${roomNumber}　冒険記録`, 105, 16, {
+  align: "center"
+});
+
+// ROOM採寸データ用の羊皮紙
+pdf.setDrawColor(120, 90, 50);
+pdf.setFillColor(245, 232, 195);
+
+pdf.roundedRect(
+  12,
+  24,
+  186,
+  96,
+  3,
+  3,
+  "FD"
+);
+
+const roomData = measurementData.rooms.find(function (room) {
+  return room.roomNumber === roomNumber;
+});
+
+pdf.setTextColor(60, 45, 30);
+
+pdf.setFontSize(12);
+pdf.text("窓", 18, 36);
+
+pdf.setFontSize(9);
+
+let roomTextY = 47;
+
+roomData.windows.forEach(function (windowData, index) {
+  pdf.text(
+    `窓${index + 1}　幅 ${windowData.widthCm}cm ${windowData.widthMm}mm　高さ ${windowData.heightCm}cm ${windowData.heightMm}mm`,
+    18,
+    roomTextY
+  );
+
+  roomTextY += 9;
+});
+
+ roomTextY += 3;
+
+pdf.setFontSize(12);
+pdf.text("緊急窓まわり", 18, roomTextY);
+
+roomTextY += 11;
+pdf.setFontSize(9);
+
+if (roomData.emergencySkipped) {
+  pdf.text("なし", 18, roomTextY);
+  roomTextY += 9;
+} else {
+  roomData.emergencyWindows.forEach(function (emergencyData, index) {
+    pdf.text(
+      `窓${index + 1}　左 ${emergencyData.leftCm}cm ${emergencyData.leftMm}mm　右 ${emergencyData.rightCm}cm ${emergencyData.rightMm}mm`,
+      18,
+      roomTextY
+    );
+
+    roomTextY += 9;
+  });
+}
+
+  roomTextY += 3;
+
+pdf.setFontSize(12);
+pdf.text("ベランダ", 18, roomTextY);
+
+roomTextY += 11;
+pdf.setFontSize(9);
+
+if (roomData.balcony.skipped) {
+  pdf.text("なし", 18, roomTextY);
+  roomTextY += 9;
+} else {
+  pdf.text(
+    `物干し金具の間隔　${roomData.balcony.poleCm}cm ${roomData.balcony.poleMm}mm`,
+    18,
+    roomTextY
+  );
+
+  roomTextY += 9;
+}
+
+    
 
     for (let index = 0; index < roomPhotos.length; index++) {
       const photoData = roomPhotos[index];
@@ -3047,22 +3158,22 @@ testRequest.onsuccess = async function () {
 });
 
       const col = index % 2;
-      const row = Math.floor(index / 2);
+const row = Math.floor(index / 2);
 
-      const x = 15 + col * 95;
-      const y = 35 + row * 80;
+const x = 15 + col * 92;
+const y = 128 + row * 52;
 
-      pdf.setFontSize(9);
-      pdf.text(photoData.direction, x, y);
+pdf.setFontSize(8);
+pdf.text(photoData.direction, x, y);
 
-      pdf.addImage(
-        imageData,
-        "JPEG",
-        x,
-        y + 4,
-        85,
-        65
-      );
+pdf.addImage(
+  imageData,
+  "JPEG",
+  x,
+  y + 3,
+  85,
+  45
+);
     }
   }
 
