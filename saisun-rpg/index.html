@@ -2743,14 +2743,7 @@ const youhishiImage = await new Promise(function (resolve) {
   reader.readAsDataURL(youhishiBlob);
 });   
     
-pdf.addImage(
-  youhishiImage,
-  "PNG",
-  144,
-  24,
-  54,
-  260
-);
+
 
 const fontResponse = await fetch("NotoSansJP-Regular.ttf");
 const fontBuffer = await fontResponse.arrayBuffer();
