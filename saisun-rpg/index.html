@@ -2776,19 +2776,19 @@ pdf.addImage(
   pdf.setTextColor(60, 45, 30);
 
 pdf.setFontSize(13);
-pdf.text("玄関", 22, 47);
+pdf.text("玄関", 25, 50);
 
 pdf.setFontSize(10);
 pdf.text(
   `有効幅　${measurementData.entrance.widthCm}cm ${measurementData.entrance.widthMm}mm`,
   22,
-  60
+  57
 );
 
 pdf.text(
   `有効高さ　${measurementData.entrance.heightCm}cm ${measurementData.entrance.heightMm}mm`,
   22,
-  70
+  67
 );
  // 1ページ目：搬入経路の羊皮紙
 pdf.addImage(
