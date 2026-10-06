@@ -2717,6 +2717,21 @@ const boardImage = await new Promise(function (resolve) {
   reader.readAsDataURL(boardBlob);
 });   
 
+const parchmentResponse = await fetch("parchment1.png");
+const parchmentBlob = await parchmentResponse.blob();
+
+const parchmentImage = await new Promise(function (resolve) {
+  const reader = new FileReader();
+
+  reader.onload = function () {
+    resolve(reader.result);
+  };
+
+  reader.readAsDataURL(parchmentBlob);
+});
+
+    
+    
 pdf.addImage(
   boardImage,
   "PNG",
@@ -2749,17 +2764,13 @@ pdf.text("冒険報告書", 105, 18, {
 });
 
 // 1ページ目：玄関の羊皮紙
-pdf.setDrawColor(120, 90, 50);
-pdf.setFillColor(245, 232, 195);
-
-pdf.roundedRect(
-  12,   // x
-  30,   // y
-  90,   // 幅
-  72,   // 高さ
-  3,    // 角丸 x
-  3,    // 角丸 y
-  "FD"
+pdf.addImage(
+  parchmentImage,
+  "PNG",
+  12,
+  30,
+  90,
+  72
 );
 
   pdf.setTextColor(60, 45, 30);
