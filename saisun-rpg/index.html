@@ -2697,8 +2697,12 @@ showRecordPhotos();
   shareRecord.addEventListener("click", async function () {
   const shareText = recordContent.innerText;
 
-   const { jsPDF } = window.jspdf;
-const pdf = new jsPDF();
+ const { jsPDF } = window.jspdf;
+const pdf = new jsPDF({
+  orientation: "portrait",
+  unit: "mm",
+  format: "a4"
+});
 
 const fontResponse = await fetch("NotoSansJP-Regular.ttf");
 const fontBuffer = await fontResponse.arrayBuffer();
