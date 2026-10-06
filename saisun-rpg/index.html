@@ -2744,13 +2744,13 @@ const youhishiImage = await new Promise(function (resolve) {
 });   
     
 pdf.addImage(
-  boardImage,
+  youhishiImage,
   "PNG",
-  0,
-  0,
-  210,
-  297
-);    
+  144,
+  24,
+  54,
+  260
+);
 
 const fontResponse = await fetch("NotoSansJP-Regular.ttf");
 const fontBuffer = await fontResponse.arrayBuffer();
