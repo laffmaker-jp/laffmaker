@@ -3098,10 +3098,8 @@ pdf.setTextColor(60, 45, 30);
 
 pdf.setFontSize(12);
 pdf.text("窓", 156, 36);
-
 pdf.setFontSize(8);
-
-let roomTextY = 47;
+let roomTextY = 43;
 
 roomData.windows.forEach(function (windowData, index) {
   pdf.text(
@@ -3136,7 +3134,7 @@ roomData.windows.forEach(function (windowData, index) {
 pdf.setFontSize(11);
 pdf.text("緊急窓まわり", 156, roomTextY);
 
-roomTextY += 9;
+roomTextY += 7;
 pdf.setFontSize(8);
 
 if (roomData.emergencySkipped) {
@@ -3180,7 +3178,7 @@ pdf.setFontSize(8);
 
 if (roomData.balcony.skipped) {
   pdf.text("なし", 156, roomTextY);
-  roomTextY += 9;
+  roomTextY += 7;
 } else {
   pdf.text(
     "物干し金具の間隔",
