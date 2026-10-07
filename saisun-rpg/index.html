@@ -2762,8 +2762,19 @@ pdf.addFileToVFS("NotoSansJP-Regular.ttf", fontBase64);
 pdf.addFont("NotoSansJP-Regular.ttf", "NotoSansJP", "normal");
 pdf.setFont("NotoSansJP");
 
+// 1ページ目：木のボード背景
+pdf.addImage(
+  boardImage,
+  "PNG",
+  0,
+  0,
+  210,
+  297
+);
 
-   pdf.setFontSize(18);
+pdf.setTextColor(60, 45, 30);
+
+pdf.setFontSize(18);
 pdf.text("冒険報告書", 110, 18, {
   align: "center"
 });
@@ -3074,9 +3085,9 @@ pdf.text(`ROOM ${roomNumber}　冒険記録`, 105, 16, {
 pdf.addImage(
   youhishiImage,
   "PNG",
-  150,
+  144,
   24,
-  48,
+  54,
   260
 );
 
@@ -3102,33 +3113,32 @@ roomData.windows.forEach(function (windowData, index) {
     roomTextY
   );
 
-  roomTextY += 6;
+roomTextY += 5;
 
-  pdf.text(
-    `幅 ${windowData.widthCm}cm ${windowData.widthMm}mm`,
-    156,
-    roomTextY
-  );
+pdf.text(
+  `幅 ${windowData.widthCm}cm ${windowData.widthMm}mm`,
+  156,
+  roomTextY
+);
 
-  roomTextY += 6;
+roomTextY += 5;
 
-  pdf.text(
-    `高さ ${windowData.heightCm}cm ${windowData.heightMm}mm`,
-    156,
-    roomTextY
-  );
+pdf.text(
+  `高さ ${windowData.heightCm}cm ${windowData.heightMm}mm`,
+  156,
+  roomTextY
+);
 
-  roomTextY += 9;
-});
+roomTextY += 7;
 
     
 
- roomTextY += 3;
+roomTextY += 1;
 
 pdf.setFontSize(11);
 pdf.text("緊急窓まわり", 156, roomTextY);
 
-roomTextY += 7;
+roomTextY += 6;
 pdf.setFontSize(8);
 
 if (roomData.emergencySkipped) {
@@ -3142,32 +3152,29 @@ if (roomData.emergencySkipped) {
       roomTextY
     );
 
-    roomTextY += 6;
+   roomTextY += 5;
 
-    pdf.text(
-      `左 ${emergencyData.leftCm}cm ${emergencyData.leftMm}mm`,
-      156,
-      roomTextY
-    );
+pdf.text(
+  `左 ${emergencyData.leftCm}cm ${emergencyData.leftMm}mm`,
+  156,
+  roomTextY
+);
 
-    roomTextY += 6;
+roomTextY += 5;
 
-    pdf.text(
-      `右 ${emergencyData.rightCm}cm ${emergencyData.rightMm}mm`,
-      156,
-      roomTextY
-    );
+pdf.text(
+  `右 ${emergencyData.rightCm}cm ${emergencyData.rightMm}mm`,
+  156,
+  roomTextY
+);
 
-    roomTextY += 9;
-  });
-}
-
- roomTextY += 3;
+roomTextY += 7;
+ roomTextY += 1;
 
 pdf.setFontSize(11);
 pdf.text("ベランダ", 156, roomTextY);
 
-roomTextY += 9;
+roomTextY += 6;
 pdf.setFontSize(8);
 
 if (roomData.balcony.skipped) {
@@ -3180,7 +3187,7 @@ if (roomData.balcony.skipped) {
     roomTextY
   );
 
-  roomTextY += 6;
+ roomTextY += 5;
 
   pdf.text(
     `${roomData.balcony.poleCm}cm ${roomData.balcony.poleMm}mm`,
