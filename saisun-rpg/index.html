@@ -2718,6 +2718,20 @@ const boardImage = await new Promise(function (resolve) {
   reader.readAsDataURL(boardBlob);
 });   
 
+// タイトル用：金属プレート
+const pureResponse = await fetch("pure.png");
+const pureBlob = await pureResponse.blob();
+
+const pureImage = await new Promise(function (resolve) {
+  const reader = new FileReader();
+
+  reader.onload = function () {
+    resolve(reader.result);
+  };
+
+  reader.readAsDataURL(pureBlob);
+});    
+
 const parchmentResponse = await fetch("parchment1.png");
 const parchmentBlob = await parchmentResponse.blob();
 
@@ -2771,11 +2785,19 @@ pdf.addImage(
   210,
   297
 );
-
-pdf.setTextColor(60, 45, 30);
+// 1ページ目：タイトルプレート
+pdf.addImage(
+  pureImage,
+  "PNG",
+  55,
+  6,
+  100,
+  18
+);
+pdf.setTextColor(210, 215, 220);
 
 pdf.setFontSize(18);
-pdf.text("冒険報告書", 110, 18, {
+pdf.text("冒険報告書", 105, 18, {
   align: "center"
 });
 
@@ -3074,10 +3096,21 @@ pdf.addImage(
   210,
   297
 );
-pdf.setTextColor(60, 45, 30);
+
+// ROOMページ：タイトルプレート
+pdf.addImage(
+  pureImage,
+  "PNG",
+  55,
+  6,
+  100,
+  18
+);
+
+pdf.setTextColor(210, 215, 220);
 
 pdf.setFontSize(16);
-pdf.text(`ROOM ${roomNumber}　冒険記録`, 105, 16, {
+pdf.text(`ROOM ${roomNumber}　冒険記録`, 105, 18, {
   align: "center"
 });
 
