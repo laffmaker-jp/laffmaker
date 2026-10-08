@@ -2819,13 +2819,13 @@ pdf.text("玄関", 25, 50);
 pdf.setFontSize(10);
 
 pdf.text(
-  `有効幅　${measurementData.entrance.widthCm}cm ${measurementData.entrance.widthMm}mm`,
+ `有効幅　${measurementData.entrance.widthCm}cm${measurementData.entrance.widthMm !== "" ? ` ${measurementData.entrance.widthMm}mm` : ""}`,
   25,
   58
 );
 
 pdf.text(
-  `有効高さ　${measurementData.entrance.heightCm}cm ${measurementData.entrance.heightMm}mm`,
+`有効高さ　${measurementData.entrance.heightCm}cm${measurementData.entrance.heightMm !== "" ? ` ${measurementData.entrance.heightMm}mm` : ""}`,
   25,
   66
 );
@@ -2847,7 +2847,7 @@ pdf.text("搬入経路", 121, 50);
 pdf.setFontSize(9);
 
 pdf.text(
-  `最狭幅　${measurementData.route.narrowCm}cm ${measurementData.route.narrowMm}mm`,
+  `最狭幅　${measurementData.route.narrowCm}cm${measurementData.route.narrowMm !== "" ? ` ${measurementData.route.narrowMm}mm` : ""}`,
   121,
   57
 );
@@ -2860,19 +2860,19 @@ pdf.text(
 
 if (!measurementData.route.noCorner) {
   pdf.text(
-    `曲がる前　${measurementData.route.beforeCm}cm ${measurementData.route.beforeMm}mm`,
+`曲がる前　${measurementData.route.beforeCm}cm${measurementData.route.beforeMm !== "" ? ` ${measurementData.route.beforeMm}mm` : ""}`,
     121,
     71
   );
 
   pdf.text(
-    `曲がった先　${measurementData.route.afterCm}cm ${measurementData.route.afterMm}mm`,
+`曲がった先　${measurementData.route.afterCm}cm${measurementData.route.afterMm !== "" ? ` ${measurementData.route.afterMm}mm` : ""}`,
     121,
     78
   );
 
   pdf.text(
-    `対角寸法　${measurementData.route.diagonalCm}cm ${measurementData.route.diagonalMm}mm`,
+`対角寸法　${measurementData.route.diagonalCm}cm${measurementData.route.diagonalMm !== "" ? ` ${measurementData.route.diagonalMm}mm` : ""}`,
     121,
     85
   );
@@ -2901,19 +2901,19 @@ if (measurementData.washer.skipped) {
   pdf.text("洗濯機置場　なし", 25, 136);
 } else {
   pdf.text(
-    `防水パン幅　${measurementData.washer.widthCm}cm ${measurementData.washer.widthMm}mm`,
+ `防水パン幅　${measurementData.washer.widthCm}cm${measurementData.washer.widthMm !== "" ? ` ${measurementData.washer.widthMm}mm` : ""}`,
     25,
     136
   );
 
   pdf.text(
-    `防水パン奥行　${measurementData.washer.depthCm}cm ${measurementData.washer.depthMm}mm`,
+`防水パン奥行　${measurementData.washer.depthCm}cm${measurementData.washer.depthMm !== "" ? ` ${measurementData.washer.depthMm}mm` : ""}`,
     25,
     144
   );
 
   pdf.text(
-    `蛇口高さ　${measurementData.washer.faucetCm}cm ${measurementData.washer.faucetMm}mm`,
+    `蛇口高さ　${measurementData.washer.faucetCm}cm${measurementData.washer.faucetMm !== "" ? ` ${measurementData.washer.faucetMm}mm` : ""}`,
     25,
     152
   );
@@ -2948,19 +2948,19 @@ pdf.text("冷蔵庫置場", 121, 128);
 pdf.setFontSize(9);
 
 pdf.text(
-  `幅　${measurementData.fridge.widthCm}cm ${measurementData.fridge.widthMm}mm`,
+ `幅　${measurementData.fridge.widthCm}cm${measurementData.fridge.widthMm !== "" ? ` ${measurementData.fridge.widthMm}mm` : ""}`,
   121,
   136
 );
 
 pdf.text(
-  `奥行　${measurementData.fridge.depthCm}cm ${measurementData.fridge.depthMm}mm`,
+  `奥行　${measurementData.fridge.depthCm}cm${measurementData.fridge.depthMm !== "" ? ` ${measurementData.fridge.depthMm}mm` : ""}`,
   121,
   144
 );
 
 pdf.text(
-  `高さ　${measurementData.fridge.heightCm}cm ${measurementData.fridge.heightMm}mm`,
+  `高さ　${measurementData.fridge.heightCm}cm${measurementData.fridge.heightMm !== "" ? ` ${measurementData.fridge.heightMm}mm` : ""}`,
   121,
   152
 );
@@ -2985,13 +2985,13 @@ if (measurementData.stairs.skipped) {
   pdf.text("階段　なし", 25, 218);
 } else {
   pdf.text(
-    `最狭幅　${measurementData.stairs.narrowCm}cm ${measurementData.stairs.narrowMm}mm`,
+   `最狭幅　${measurementData.stairs.narrowCm}cm${measurementData.stairs.narrowMm !== "" ? ` ${measurementData.stairs.narrowMm}mm` : ""}`,
     25,
     218
   );
 
   pdf.text(
-    `天井までの高さ　${measurementData.stairs.heightCm}cm ${measurementData.stairs.heightMm}mm`,
+   `天井までの高さ　${measurementData.stairs.heightCm}cm${measurementData.stairs.heightMm !== "" ? ` ${measurementData.stairs.heightMm}mm` : ""}`,
     25,
     226
   );
@@ -3004,19 +3004,19 @@ if (measurementData.stairs.skipped) {
 
   if (!measurementData.stairs.noCorner) {
     pdf.text(
-      `曲がる前　${measurementData.stairs.beforeCm}cm ${measurementData.stairs.beforeMm}mm`,
+     `曲がる前　${measurementData.stairs.beforeCm}cm${measurementData.stairs.beforeMm !== "" ? ` ${measurementData.stairs.beforeMm}mm` : ""}`,
       25,
       242
     );
 
     pdf.text(
-      `曲がった先　${measurementData.stairs.afterCm}cm ${measurementData.stairs.afterMm}mm`,
+     `曲がった先　${measurementData.stairs.afterCm}cm${measurementData.stairs.afterMm !== "" ? ` ${measurementData.stairs.afterMm}mm` : ""}`,
       25,
       250
     );
 
     pdf.text(
-      `対角寸法　${measurementData.stairs.diagonalCm}cm ${measurementData.stairs.diagonalMm}mm`,
+      `対角寸法　${measurementData.stairs.diagonalCm}cm${measurementData.stairs.diagonalMm !== "" ? ` ${measurementData.stairs.diagonalMm}mm` : ""}`,
       25,
       258
     );
@@ -3135,30 +3135,29 @@ pdf.setTextColor(60, 45, 30);
 pdf.setTextColor(60, 45, 30);
 
 pdf.setFontSize(12);
-pdf.text("窓", 156, 36);
+pdf.text("窓", 159, 42);
 pdf.setFontSize(8);
-let roomTextY = 43;
+let roomTextY = 49;
 
 roomData.windows.forEach(function (windowData, index) {
   pdf.text(
     `窓${index + 1}`,
-    156,
+    159,
     roomTextY
   );
 
 roomTextY += 5;
 
 pdf.text(
-  `幅 ${windowData.widthCm}cm ${windowData.widthMm}mm`,
-  156,
+  `幅 ${windowData.widthCm}cm${windowData.widthMm !== "" ? ` ${windowData.widthMm}mm` : ""}`,
+  159,
   roomTextY
 );
-
 roomTextY += 5;
 
 pdf.text(
-  `高さ ${windowData.heightCm}cm ${windowData.heightMm}mm`,
-  156,
+ `高さ ${windowData.heightCm}cm${windowData.heightMm !== "" ? ` ${windowData.heightMm}mm` : ""}`,
+  159,
   roomTextY
 );
 
@@ -3169,35 +3168,35 @@ roomTextY += 7;
 roomTextY += 1;
 
 pdf.setFontSize(11);
-pdf.text("緊急窓まわり", 156, roomTextY);
+pdf.text("緊急窓まわり", 159, roomTextY);
 
 roomTextY += 6;
 pdf.setFontSize(8);
 
 if (roomData.emergencySkipped) {
-  pdf.text("なし", 156, roomTextY);
+  pdf.text("なし", 159, roomTextY);
   roomTextY += 9;
 } else {
   roomData.emergencyWindows.forEach(function (emergencyData, index) {
     pdf.text(
       `窓${index + 1}`,
-      156,
+      159,
       roomTextY
     );
 
    roomTextY += 5;
 
 pdf.text(
-  `左 ${emergencyData.leftCm}cm ${emergencyData.leftMm}mm`,
-  156,
+ `左 ${emergencyData.leftCm}cm${emergencyData.leftMm !== "" ? ` ${emergencyData.leftMm}mm` : ""}`,
+  159,
   roomTextY
 );
 
 roomTextY += 5;
 
 pdf.text(
-  `右 ${emergencyData.rightCm}cm ${emergencyData.rightMm}mm`,
-  156,
+ `右 ${emergencyData.rightCm}cm${emergencyData.rightMm !== "" ? ` ${emergencyData.rightMm}mm` : ""}`,
+  159,
   roomTextY
 );
 
@@ -3207,26 +3206,26 @@ roomTextY += 7;
  roomTextY += 1;
 
 pdf.setFontSize(11);
-pdf.text("ベランダ", 156, roomTextY);
+pdf.text("ベランダ", 159, roomTextY);
 
 roomTextY += 6;
 pdf.setFontSize(8);
 
 if (roomData.balcony.skipped) {
-  pdf.text("なし", 156, roomTextY);
+  pdf.text("なし", 159, roomTextY);
   roomTextY += 7;
 } else {
   pdf.text(
     "物干し金具の間隔",
-    156,
+    159,
     roomTextY
   );
 
  roomTextY += 5;
 
   pdf.text(
-    `${roomData.balcony.poleCm}cm ${roomData.balcony.poleMm}mm`,
-    156,
+    `${roomData.balcony.poleCm}cm${roomData.balcony.poleMm !== "" ? ` ${roomData.balcony.poleMm}mm` : ""}`,
+    159,
     roomTextY
   );
 
