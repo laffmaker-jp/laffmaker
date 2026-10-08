@@ -3135,9 +3135,9 @@ pdf.setTextColor(60, 45, 30);
 pdf.setTextColor(60, 45, 30);
 
 pdf.setFontSize(12);
-pdf.text("窓", 159, 42);
+pdf.text("窓",159,47);
 pdf.setFontSize(8);
-let roomTextY = 49;
+let roomTextY = 54;
 
 roomData.windows.forEach(function (windowData, index) {
   pdf.text(
@@ -3274,6 +3274,7 @@ const row = Math.floor(index / 2);
 const x = 12 + col * 68;
 const y = 30 + row * 84;
 
+pdf.setTextColor(255,255,255);
 pdf.setFontSize(8);
 pdf.text(photoData.direction, x, y);
 
